@@ -12,6 +12,7 @@ echo
 echo UPATE AND UPGRADE
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install restic
 echo
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
@@ -35,10 +36,10 @@ else
   echo; echo INSTALL gpg
   apt install gpg -y
 fi
-echo; echo CLONE https://github.com/abraxas678/start.git; echo
+echo; echo CLONE https://github.com/abraxas678/start2.git; echo
 cd $HOME
 sleep 2
-git clone https://github.com/abraxas678/start.git
+git clone https://github.com/abraxas678/start2.git
 echo
 echo "gpg -a --export-secret-keys [key-id] >key.asc"
 echo "gpg --import"
@@ -101,7 +102,7 @@ echo; echo; echo "INSTALL KEEPASSXC"
 echo
 mykeepass="n"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
-read -n 1 -t 20 mykeepass
+read -n 1 -t 40 mykeepass
 #printf "${BLUE3}"
 if [[ $mykeepass = "y" ]]; then
 sudo add-apt-repository ppa:phoerious/keepassxc -y
