@@ -137,6 +137,9 @@ fi
 pip install apprise
 pip install paho-mqtt
 ############################
+############################ DOCKER
+apt-get install docker.io docker-compose -y
+############################
 echo
 brewsetup="n"
 echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
