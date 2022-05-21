@@ -49,6 +49,10 @@ read me
 echo
 cd $HOME
 cd start2
+echo
+eho $PWD
+echo
+sleep 2
 echo; echo GPG DECRYPT RCLONESETUP; echo
 echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
 echo
