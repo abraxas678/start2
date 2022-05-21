@@ -184,5 +184,6 @@ if [[ $myrestore = "y" ]]
 then
   restic -r rclone:gd:restic restore $myscreenshot --target .
 fi
+rm -rf $HOME/start
 echo zsh
 echo DONE
