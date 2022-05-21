@@ -38,9 +38,6 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
   echo; echo "SETUP GD ON RCLONE"
   rclone config
 fi
-echo
-echo SETUP GPG MANUALLY VIA OD VAULT
-echo
 rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
@@ -50,6 +47,12 @@ else
   echo; echo INSTALL gpg
   sleep 2
   apt install gpg -y
+  echo
+  echo SETUP GPG MANUALLY VIA OD VAULT
+  echo gpg --import
+  echo
+  echo BUTTON
+  read me
 fi
 echo; echo CLONE https://github.com/abraxas678/start2.git; echo
 cd $HOME
