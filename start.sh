@@ -12,7 +12,7 @@ echo
 echo UPATE AND UPGRADE
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install restic
+sudo apt-get install restic python3-pip -y
 echo
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
@@ -133,8 +133,9 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep 1
 fi
-
-
+############################ PIP INSTALLS
+pip install apprise
+############################
 echo
 brewsetup="n"
 echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
