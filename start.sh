@@ -6,7 +6,7 @@ clear
 #if [[ $delstart = "y" ]]
 #then
 #  cd $HOME
-#  rm -rf start
+#  rm -rf 
 #fi
 echo
 echo UPATE AND UPGRADE
@@ -48,7 +48,7 @@ echo BUTTON
 read me
 echo
 cd $HOME
-cd start
+cd start2
 echo; echo GPG DECRYPT RCLONESETUP; echo
 echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
 echo
@@ -155,11 +155,11 @@ echo AUTOREMOVE
 echo
 sudo apt autoremove -y
 
-cp $HOME/start/dotfiles/.zshrc $HOME/
-cp $HOME/start/dotfiles/.p10k.zsh $HOME/
-cp $HOME/start/dotfiles/.taskrc $HOME/
-cp $HOME/start/dotfiles/pcc $HOME/bin
-mv $HOME/start/dotfiles/bin/* $HOME/bin/
+cp $HOME/start2/dotfiles/.zshrc $HOME/
+cp $HOME/start2/dotfiles/.p10k.zsh $HOME/
+cp $HOME/start2/dotfiles/.taskrc $HOME/
+cp $HOME/start2/dotfiles/pcc $HOME/bin
+mv $HOME/start2/dotfiles/bin/* $HOME/bin/
 
 
 echo
