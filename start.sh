@@ -171,6 +171,15 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep 1
 fi
+############################ NTFY
+curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
+sudo apt install apt-transport-https
+sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
+    > /etc/apt/sources.list.d/archive.heckel.io.list"  
+sudo apt update
+sudo apt install ntfy
+sudo systemctl enable ntfy
+sudo systemctl start ntfy
 ############################ PIP INSTALLS
 pip install apprise
 pip install paho-mqtt
