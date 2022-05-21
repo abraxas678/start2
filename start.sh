@@ -125,6 +125,21 @@ echo
 sleep 2
 ##########################################rclone copy gdsec:dotfiles ./dotfiles -Pv --skip-links --fast-list
 #git clone git@github.com:abraxas678/dotfiles.git
+echo
+##########################################  RESTIC
+restic -r rclone:gd:restic snapshots
+echo
+echo "Which snapshot do you wish to restore?"
+echo
+printf ">>> "; read mysnapshot
+myrestore="n"
+echo; echo "restore to $PWD, correct? (y/n)"; 
+read -n 1 myrestore
+if [[ $myrestore = "y" ]]
+then
+  restic -r rclone:gd:restic restore $mysnapshot --target .
+fi
+########################################## KEEPASSXC
 echo; echo; echo "INSTALL KEEPASSXC"
 echo
 mykeepass="n"
@@ -195,21 +210,6 @@ mv $HOME/start2/dotfiles/bin/* $HOME/bin/
 echo
 rm -rf $HOME/start
 rm -rf $HME/start2
-echo
-##########################################  RESTIC
-restic -r rclone:gd:restic snapshots
-echo
-echo "Which snapshot do you wish to restore?"
-echo
-printf ">>> "; read mysnapshot
-myrestore="n"
-echo; echo "restore to $PWD, correct? (y/n)"; 
-read -n 1 myrestore
-if [[ $myrestore = "y" ]]
-then
-  restic -r rclone:gd:restic restore $mysnapshot --target .
-fi
-##########################################
 echo
 echo EXEC ZSH
 sleep 2
