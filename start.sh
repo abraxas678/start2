@@ -192,25 +192,27 @@ cp $HOME/start2/dotfiles/.p10k.zsh $HOME/
 cp $HOME/start2/dotfiles/.taskrc $HOME/
 cp $HOME/start2/dotfiles/pcc $HOME/bin
 mv $HOME/start2/dotfiles/bin/* $HOME/bin/
-
-
 echo
-echo EXEC ZSH
+rm -rf $HOME/start
+rm -rf $HME/start2
 echo
-exec zsh
-echo
+##########################################  RESTIC
 restic -r rclone:gd:restic snapshots
 echo
-echo "Which snapshot do you wishh to restore?"
+echo "Which snapshot do you wish to restore?"
 echo
-printf ">>> "; read myscreenshot
+printf ">>> "; read mysnapshot
 myrestore="n"
 echo; echo "restore to $PWD, correct? (y/n)"; 
 read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
-  restic -r rclone:gd:restic restore $myscreenshot --target .
+  restic -r rclone:gd:restic restore $mysnapshot --target .
 fi
-rm -rf $HOME/start
-echo zsh
+##########################################
+echo
+echo EXEC ZSH
+sleep 2
+echo
+exec zsh
 echo DONE
