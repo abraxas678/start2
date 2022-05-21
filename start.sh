@@ -170,3 +170,17 @@ echo
 echo EXEC ZSH
 echo
 exec zsh
+echo
+restic -r rclone:gd:restic snapshots
+echo
+echo "Which snapshot do you wishh to restore?"
+echo
+printf ">>> "; read myscreenshot
+myrestore="n"
+echo; echo "restore to $PWD, correct? (y/n)"; 
+read -n 1 myrestore
+if [[ $myrestore = "y" ]]
+then
+  restic -r rclone:gd:restic restore $myscreenshot --target .
+fi
+echo DONE
