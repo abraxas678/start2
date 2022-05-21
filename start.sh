@@ -10,8 +10,10 @@ clear
 #fi
 echo
 echo UPATE AND UPGRADE
+echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
+echo; echo "sudo apt-get install restic python3-pip -y" 
 sudo apt-get install restic python3-pip -y
 echo
 echo INSTALL ZSH
@@ -26,8 +28,10 @@ echo
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
   echo; echo RCLONE INSTALLED
+  sleep 2
 else
   echo; echo INSTALL RCLONE
+  sleep 2
   apt install rclone -y
 fi
 if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
@@ -41,8 +45,10 @@ rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
   echo; echo gpg INSTALLED
+  sleep 2
 else
   echo; echo INSTALL gpg
+  sleep 2
   apt install gpg -y
 fi
 echo; echo CLONE https://github.com/abraxas678/start2.git; echo
@@ -59,21 +65,32 @@ echo
 cd $HOME
 cd start2
 echo
-eho $PWD
+echo $PWD
 echo
 sleep 2
-echo; echo GPG DECRYPT RCLONESETUP; echo
-echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+echo "rlone.conf SIZE: $rclonesize"
 echo
-sleep 2
-gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
-sudo chmod +x *.sh
-echo; echo RCLONESETUP; echo
-echo BUTTON
-read me
-./rclonesetup.sh
-rm rclonesetup.sh
+if [[ $rclonesize -lt 3000 ]]
+then
+  echo; echo GPG DECRYPT RCLONESETUP; echo
+  echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+  echo
+  sleep 2
+  gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+  sudo chmod +x *.sh
+  echo; echo RCLONESETUP; echo
+  echo BUTTON
+  read me
+  ./rclonesetup.sh
+  rm rclonesetup.sh
+fi
 echo
+sshresult=$(ssh -T git@github.com)
+if [[ $sshresult = *"successfully authenticated"* ]]
+then
+  echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"
+else
 echo SHH SETUP
 echo "rclone copy gd:/sec/start/id_rsa.asc . -P"
 echo
@@ -89,6 +106,9 @@ echo; echo "SHH FOLDER RIGHTS"; echo
 sudo chown abraxas678:100 $HOME -R
 sudo chmod 700 -R $HOME
 mv id_rsa $HOME/.ssh
+fi
+echo
+echo STARTING SSH AGENT; echo
 eval `ssh-agent -s`
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
