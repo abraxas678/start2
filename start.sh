@@ -14,6 +14,15 @@ echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install restic python3-pip -y
 echo
+echo INSTALL ZSH
+echo; cd $HOME
+sudo apt install -y zsh php
+echo; echo INSTALL OH MY ZSH
+sleep 2; echo
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+curl -L git.io/antigen > antigen.zsh
+echo
+echo
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
   echo; echo RCLONE INSTALLED
@@ -93,15 +102,6 @@ echo
 sleep 2
 ##########################################rclone copy gdsec:dotfiles ./dotfiles -Pv --skip-links --fast-list
 #git clone git@github.com:abraxas678/dotfiles.git
-echo
-echo INSTALL ZSH
-echo; cd $HOME
-sudo apt install -y zsh php
-echo; echo INSTALL OH MY ZSH
-sleep 2; echo
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -L git.io/antigen > antigen.zsh
-echo
 echo; echo; echo "INSTALL KEEPASSXC"
 echo
 mykeepass="n"
