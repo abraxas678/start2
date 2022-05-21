@@ -135,6 +135,7 @@ if [[ $myfonts = "y" ]]; then
 fi
 ############################ PIP INSTALLS
 pip install apprise
+pip install paho-mqtt
 ############################
 echo
 brewsetup="n"
