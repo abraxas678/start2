@@ -133,11 +133,13 @@ echo "Which snapshot do you wish to restore?"
 echo
 printf ">>> "; read mysnapshot
 myrestore="n"
+echo
+echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"
 echo; echo "restore to $PWD, correct? (y/n)"; 
 read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
-  restic -r rclone:gd:restic restore $mysnapshot --target .
+  restic -r rclone:gd:restic restore $mysnapshot --target $PWD
 fi
 ########################################## KEEPASSXC
 echo; echo; echo "INSTALL KEEPASSXC"
