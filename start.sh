@@ -28,99 +28,102 @@ echo "[3] CLONE REPOSITORY"; sleep 2
 ###############################################################################  [3]
 cd $HOME
 sleep 2
-git clone https://github.com/abraxas678/start2.git
+git clone https://github.com/abraxas678/start2.git; echo
+############################################################# weg
 
 
-
-echo "[5] setup GPG encryption"; sleep 2
+#echo "[5] setup GPG encryption"; sleep 2
 ##########################################  [5]
-echo
-echo "gpg -a --export-secret-keys [key-id] >key.asc"
-echo "gpg --import"
-echo
-if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
-then
-  echo; echo gpg INSTALLED
-  sleep 2
-else
-  echo; echo INSTALL gpg
-  sleep 2
-  apt install gpg -y
-  echo
+#echo
+#echo "gpg -a --export-secret-keys [key-id] >key.asc"
+#echo "gpg --import"
+#echo
+
+
+#if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
+#then
+#  echo; echo gpg INSTALLED
+#  sleep 2
+#else
+#  echo; echo INSTALL gpg
+#  sleep 2
+#  apt install gpg -y
+#  echo
   #echo SETUP GPG MANUALLY VIA OD VAULT
   #echo gpg --import
-  echo
-  echo "gpg -a --export-secret-keys [key-id] >key.asc"
-  echo "gpg --import"
-  echo
-  echo rko files to gd:sec please
-  echo
-  echo START IMPORT
-  read me
-  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
-  gpg --import ./tempinstall/rko-p*
-  rm -f ./tempinstall/rko-p*
-  echo; echo REMOVE rko files from gd:sec now; echo
-  echo; echo BUTTON
-  read me
-fi
+#  echo
+#  echo "gpg -a --export-secret-keys [key-id] >key.asc"
+#  echo "gpg --import"
+#  echo
+#  echo rko files to gd:sec please
+#  echo
+#  echo START IMPORT
+#  read me
+#  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
+#  gpg --import ./tempinstall/rko-p*
+#  rm -f ./tempinstall/rko-p*
+#  echo; echo REMOVE rko files from gd:sec now; echo
+#  echo; echo BUTTON
+#  read me
+#fi
+############################################################################ weg nach oben
 echo
 echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
-echo "GPG"; echo; sleep 1
+echo "GPG"; echo; sleep 2
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
-  echo; echo GPG_INSTALLED=1; echo; sleep 1
+  echo GPG_INSTALLED=1; sleep 2
   GPG_INSTALLED=1
    if [[ $(gpg --list-keys) = *"amdamdes@mymails.cc"* ]]
    then
-     echo "GPG_KEYS=1"; sleep1
+     echo "GPG_KEYS=1"; sleep 2
      GPG_KEYS=1
    else
-     echo "GPG_KEYS=0"; sleep 1
+     echo "GPG_KEYS=0"; sleep 2
      GPG_KEYS=0
    fi
 else
-  echo "GPG_INSTALLED=0"; sleep 1
-  echo "GPG_KEYS=0"; sleep 1
+  echo "GPG_INSTALLED=0"; sleep 2
+  echo "GPG_KEYS=0"; sleep 2
   GPG_INSTALLED=0
   GPG_KEYS=0
 fi
-echo; echo "RCLONE"; echo; sleep 1
+echo; echo "RCLONE"; echo; sleep 2
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
-  echo "RCLONE_INSTALL=1"
+  echo "RCLONE_INSTALL=1"; sleep 2
   RCLONE_INSTALL=1
   if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
-    echo "RCLONE_CONFIG=0"
+    echo "RCLONE_CONFIG=0"; sleep 2
     RCLONE_CONFIG=0
   else
-    echo "RCLONE_CONFIG=1"
+    echo "RCLONE_CONFIG=1"; sleep 2
     RCLONE_CONFIG=1
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-    echo "rlone.conf SIZE: $rclonesize"
-    echo
+    #echo "rlone.conf SIZE: $rclonesize"
+    #echo
     if [[ $rclonesize -lt 3000 ]]
     then
       if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
       then
-        echo "RCLONE_GD=1"
+        echo "RCLONE_GD=1"; sleep 2
         RCLONE_GD=1
       else
-        echo "RCLONE_GD=0"
+        echo "RCLONE_GD=0"; sleep 2
         RCLONE_GD=0
         echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep 2
         rclone config
       fi
     else
-      echo "RCLONE_COMPLETE=1"
+      echo "RCLONE_COMPLETE=1"; sleep 2
       RCLONE_COMPLETE=1
     fi
   fi
 else
-  echo "RCLONE_INSTALL=0"; sleep 1
-  echo "RCLONE_CONFIG=0"; sleep 1
-  echo "RCLONE_GD=0"; sleep 1
-  eccho "RCLONE_COMPLETE=0"; sleep 1
+  echo "RCLONE_INSTALL=0"; sleep 2
+  echo "RCLONE_CONFIG=0"; sleep 2
+  echo "RCLONE_GD=0"; sleep 2
+  eccho "RCLONE_COMPLETE=0"; sleep 2
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
   RCLONE_GD=0
