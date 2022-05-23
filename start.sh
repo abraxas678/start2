@@ -9,13 +9,13 @@ clear
 #  rm -rf 
 #fi
 echo
-echo [1] SYSTEM UPATE AND UPGRADE
+echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
 ##########################################  [1]
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
 echo
-echo [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
+echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
 ########################################################  [2]
 echo; cd $HOME
 sudo apt install -y zsh php
@@ -24,25 +24,61 @@ sleep 2; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
 echo
-echo "[3] SETUP RCLONE"; echo
-##########################################  [3]
+echo "[3] CLONE REPOSITORY"; sleep 2
+###############################################################################  [3]
+cd $HOME
+sleep 2
+git clone https://github.com/abraxas678/start2.git
+echo "[4] SETUP RCLONE"; echo; sleep 2
+##########################################  [4]
+echo
+cd $HOME/start2
+echo
+echo PWD: $PWD
+echo; sleep 2
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
-  echo; echo RCLONE INSTALLED
-  sleep 2
-else
-  echo; echo INSTALL RCLONE
-  sleep 2
-  apt install rclone -y
-fi
-if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
+  echo; echo RCLONE ALREADY INSTALLED
+  sleep 2; echo
+  if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
   echo; echo "SETUP GD ON RCLONE"
   rclone config
+  fi
+  rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+  echo "rlone.conf SIZE: $rclonesize"
+  echo
+  if [[ $rclonesize -lt 3000 ]]
+  then
+    echo; echo GPG DECRYPT RCLONESETUP; echo
+    echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+    echo
+    sleep 2
+    gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+    sudo chmod +x *.sh
+    echo; echo RCLONESETUP; echo
+    echo BUTTON
+    read me
+    ./rclonesetup.sh
+    rm rclonesetup.sh
+  fi  
+else
+  echo; echo RCLONE NEEDS TO GET INSTALLED
+  sleep 2
+    echo; echo GPG DECRYPT RCLONESETUP; echo
+    echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+    echo
+    sleep 2
+    gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+    sudo chmod +x *.sh
+    echo; echo RCLONESETUP; echo
+    echo BUTTON
+    read me
+    ./rclonesetup.sh
+    rm rclonesetup.sh
 fi
-rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
 echo
-echo [4] setup GPG encryption
-##########################################  [4]
+echo "[5] setup GPG encryption"; sleep 2
+##########################################  [5]
 echo
 echo "gpg -a --export-secret-keys [key-id] >key.asc"
 echo "gpg --import"
@@ -58,6 +94,10 @@ else
   echo
   #echo SETUP GPG MANUALLY VIA OD VAULT
   #echo gpg --import
+  echo
+  echo "gpg -a --export-secret-keys [key-id] >key.asc"
+  echo "gpg --import"
+  echo
   echo rko files to gd:sec please
   echo
   echo START IMPORT
@@ -70,50 +110,21 @@ else
   read me
 fi
 echo
-echo; echo "[5] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
-###############################################################################  [5]
+echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
+###############################################################################  [6]
+echo; echo "[7] SOFTWARE INSTALL RESTIC PYTHON"; sleep 2
+###############################################################################  [7]
 sudo apt-get install restic python3-pip -y
 echo
-#echo; echo CLONE https://github.com/abraxas678/start2.git; echo
-cd $HOME
-sleep 2
-git clone https://github.com/abraxas678/start2.git
-###############################################################################  [6]
 echo
-echo
-echo BUTTON
-read me
-echo
-cd $HOME
-cd start2
-echo
-echo $PWD
-echo
-sleep 2
-rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-echo "rlone.conf SIZE: $rclonesize"
-echo
-if [[ $rclonesize -lt 3000 ]]
-then
-  echo; echo GPG DECRYPT RCLONESETUP; echo
-  echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
-  echo
-  sleep 2
-  gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
-  sudo chmod +x *.sh
-  echo; echo RCLONESETUP; echo
-  echo BUTTON
-  read me
-  ./rclonesetup.sh
-  rm rclonesetup.sh
-fi
-echo
+echo "[8] SETUP SSH"
+###############################################################################  [8]
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
-  echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"
+  echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep 2
 else
-echo SHH SETUP
+echo STARTING SHH SETUP; sleep 2
 echo "rclone copy gd:/sec/start/id_rsa.asc . -P"
 echo
 rclone copy gd:/sec/start/id_rsa.asc . -P
@@ -130,8 +141,9 @@ sudo chmod 700 -R $HOME
 mv id_rsa $HOME/.ssh
 fi
 echo
-echo STARTING SSH AGENT; echo
+echo STARTING SSH AGENT; echo; sleep 2
 eval `ssh-agent -s`
+echo; echo SETTING PERMISSIONS; echo; sleep 2
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
@@ -141,11 +153,11 @@ sudo chmod 644 ~/.ssh/config
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
-sleep 2
 ##########################################rclone copy gdsec:dotfiles ./dotfiles -Pv --skip-links --fast-list
 #git clone git@github.com:abraxas678/dotfiles.git
-echo
-##########################################  RESTIC
+#echo
+echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep 2; echo 
+################################################### [9]
 restic -r rclone:gd:restic snapshots
 echo
 echo "Which snapshot do you wish to restore?"
@@ -153,13 +165,19 @@ echo
 printf ">>> "; read mysnapshot
 myrestore="n"
 echo
-echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"
+echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
 echo; echo "restore to $PWD, correct? (y/n)"; 
 read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
-  restic -r rclone:gd:restic restore $mysnapshot --target $PWD
+  rm -rf $HOME/tmprestigrestore
+  echo; echo "RESTIC TO TMP FOLDER"; echo; sleep 2
+  restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
+  echo; echo "RCLONE TO $HOME"; echo; sleep 2
+  rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
+  echo
 fi
+#################################################################  ab hier das script weiter machen
 ########################################## KEEPASSXC
 echo; echo; echo "INSTALL KEEPASSXC"
 echo
