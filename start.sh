@@ -180,6 +180,17 @@ sudo apt update
 sudo apt install ntfy
 sudo systemctl enable ntfy
 sudo systemctl start ntfy
+
+sudo mkdir /etc/systemd/system/ntfy-client.service.d
+sudo sh -c 'cat > /etc/systemd/system/ntfy-client.service.d/override.conf' <<EOF
+[Service]
+User=$USER
+Group=$USER
+Environment="DISPLAY=:0" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus"
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl restart ntfy-client
 ############################ PIP INSTALLS
 pip install apprise
 pip install paho-mqtt
