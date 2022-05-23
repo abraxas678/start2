@@ -1,5 +1,7 @@
 #!/bin/bash
 clear
+source https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
+printf "${NC}"
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
@@ -9,14 +11,18 @@ clear
 #  rm -rf 
 #fi
 echo
+printf "${BLUE1}"; printf "${UL1}"
 echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
 ##########################################  [1]
+printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
 echo
+printf "${BLUE1}"; printf "${UL2}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
 ########################################################  [2]
+printf "${NC}"; printf "${BLUE3}"
 echo; cd $HOME
 sudo apt install -y zsh php
 echo; echo INSTALL OH MY ZSH
@@ -24,6 +30,7 @@ sleep 2; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
 echo
+printf "${BLUE1}"
 echo "[3] CLONE REPOSITORY"; sleep 2
 ###############################################################################  [3]
 cd $HOME
