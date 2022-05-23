@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
-source https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
+cd $HOME
+wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
+source $HOME/color.dat
 printf "${NC}"
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
@@ -345,6 +347,7 @@ brew install gcalcli
 echo
 echo AUTOREMOVE
 echo
+rm -f $HOME/color.dat
 sudo apt autoremove -y
 
 cp $HOME/start2/dotfiles/.zshrc $HOME/
