@@ -69,31 +69,49 @@ echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
 
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
+  echo "RCLONE_INSTALL=1"
   RCLONE_INSTALL=1
   if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
+    echo "RCLONE_CONFIG=0"
     RCLONE_CONFIG=0
   else
+    echo "RCLONE_CONFIG=1"
     RCLONE_CONFIG=1
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
     echo "rlone.conf SIZE: $rclonesize"
     echo
     if [[ $rclonesize -lt 3000 ]]
     then
-      RCLONE_GD=
+      if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
+      then
+        echo "RCLONE_GD=1"
+        RCLONE_GD=1
+      else
+        echo "RCLONE_GD=0"
+        RCLONE_GD=0
+        echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep 2
+        rclone config
+      fi
     else
+      echo "RCLONE_COMPLETE=1"
       RCLONE_COMPLETE=1
     fi
   fi
   
 
 else
+  echo "RCLONE_INSTALL=0"; sleep 1
+  echo "RCLONE_CONFIG=0"; sleep 1
+  echo "RCLONE_GD=0"; sleep 1
+  eccho "RCLONE_COMPLETE=0"; sleep 1
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
-  
+  RCLONE_GD=0
   RCLONE_COMPLETE=0
 fi
 
-
+if [[ $RCLONE_INSTALL = "0" ]]
+then
 echo
 echo "[4] SETUP RCLONE"; echo; sleep 2; echo
 ############################################ [4]
@@ -142,6 +160,9 @@ else
     ./rclonesetup.sh
     rm rclonesetup.sh
 fi
+
+
+
 echo
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
 ###############################################################################  [6]
