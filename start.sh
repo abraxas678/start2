@@ -29,8 +29,74 @@ echo "[3] CLONE REPOSITORY"; sleep 2
 cd $HOME
 sleep 2
 git clone https://github.com/abraxas678/start2.git
+
+
+
+echo "[5] setup GPG encryption"; sleep 2
+##########################################  [5]
+echo
+echo "gpg -a --export-secret-keys [key-id] >key.asc"
+echo "gpg --import"
+echo
+if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
+then
+  echo; echo gpg INSTALLED
+  sleep 2
+else
+  echo; echo INSTALL gpg
+  sleep 2
+  apt install gpg -y
+  echo
+  #echo SETUP GPG MANUALLY VIA OD VAULT
+  #echo gpg --import
+  echo
+  echo "gpg -a --export-secret-keys [key-id] >key.asc"
+  echo "gpg --import"
+  echo
+  echo rko files to gd:sec please
+  echo
+  echo START IMPORT
+  read me
+  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
+  gpg --import ./tempinstall/rko-p*
+  rm -f ./tempinstall/rko-p*
+  echo; echo REMOVE rko files from gd:sec now; echo
+  echo; echo BUTTON
+  read me
+fi
+echo
+echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
+
+if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
+then
+  RCLONE_INSTALL=1
+  if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
+    RCLONE_CONFIG=0
+  else
+    RCLONE_CONFIG=1
+    rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+    echo "rlone.conf SIZE: $rclonesize"
+    echo
+    if [[ $rclonesize -lt 3000 ]]
+    then
+      RCLONE_GD=
+    else
+      RCLONE_COMPLETE=1
+    fi
+  fi
+  
+
+else
+  RCLONE_INSTALL=0
+  RCLONE_CONFIG=0
+  
+  RCLONE_COMPLETE=0
+fi
+
+
+echo
 echo "[4] SETUP RCLONE"; echo; sleep 2; echo
-##########################################  [4]
+############################################ [4]
 echo
 cd $HOME/start2
 echo
@@ -75,39 +141,6 @@ else
     read me
     ./rclonesetup.sh
     rm rclonesetup.sh
-fi
-echo
-echo "[5] setup GPG encryption"; sleep 2
-##########################################  [5]
-echo
-echo "gpg -a --export-secret-keys [key-id] >key.asc"
-echo "gpg --import"
-echo
-if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
-then
-  echo; echo gpg INSTALLED
-  sleep 2
-else
-  echo; echo INSTALL gpg
-  sleep 2
-  apt install gpg -y
-  echo
-  #echo SETUP GPG MANUALLY VIA OD VAULT
-  #echo gpg --import
-  echo
-  echo "gpg -a --export-secret-keys [key-id] >key.asc"
-  echo "gpg --import"
-  echo
-  echo rko files to gd:sec please
-  echo
-  echo START IMPORT
-  read me
-  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
-  gpg --import ./tempinstall/rko-p*
-  rm -f ./tempinstall/rko-p*
-  echo; echo REMOVE rko files from gd:sec now; echo
-  echo; echo BUTTON
-  read me
 fi
 echo
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
