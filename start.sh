@@ -29,7 +29,7 @@ echo "[3] CLONE REPOSITORY"; sleep 2
 cd $HOME
 sleep 2
 git clone https://github.com/abraxas678/start2.git
-echo "[4] SETUP RCLONE"; echo; sleep 2
+echo "[4] SETUP RCLONE"; echo; sleep 2; echo
 ##########################################  [4]
 echo
 cd $HOME/start2
