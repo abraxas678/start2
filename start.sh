@@ -66,7 +66,26 @@ else
 fi
 echo
 echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
-
+echo "GPG"; echo; sleep 1
+if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
+then
+  echo; echo GPG_INSTALLED=1; echo; sleep 1
+  GPG_INSTALLED=1
+   if [[ $(gpg --list-keys) = *"amdamdes@mymails.cc"* ]]
+   then
+     echo "GPG_KEYS=1"; sleep1
+     GPG_KEYS=1
+   else
+     echo "GPG_KEYS=0"; sleep 1
+     GPG_KEYS=0
+   fi
+else
+  echo "GPG_INSTALLED=0"; sleep 1
+  echo "GPG_KEYS=0"; sleep 1
+  GPG_INSTALLED=0
+  GPG_KEYS=0
+fi
+echo; echo "RCLONE"; echo; sleep 1
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
   echo "RCLONE_INSTALL=1"
@@ -97,8 +116,6 @@ then
       RCLONE_COMPLETE=1
     fi
   fi
-  
-
 else
   echo "RCLONE_INSTALL=0"; sleep 1
   echo "RCLONE_CONFIG=0"; sleep 1
@@ -110,55 +127,60 @@ else
   RCLONE_COMPLETE=0
 fi
 
+
+echo; echo "INSTALL AND SETUP"; echo; echo BUTTON
+read me
+
 if [[ $RCLONE_INSTALL = "0" ]]
-then
-echo
-echo "[4] SETUP RCLONE"; echo; sleep 2; echo
-############################################ [4]
-echo
-cd $HOME/start2
-echo
-echo PWD: $PWD
-echo; sleep 2
-if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
-then
-  echo; echo RCLONE ALREADY INSTALLED
-  sleep 2; echo
-  if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
-  echo; echo "SETUP GD ON RCLONE"
-  rclone config
-  fi
-  rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-  echo "rlone.conf SIZE: $rclonesize"
-  echo
-  if [[ $rclonesize -lt 3000 ]]
   then
-    echo; echo GPG DECRYPT RCLONESETUP; echo
-    echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+  echo
+  echo "[4] SETUP RCLONE"; echo; sleep 2; echo
+  ############################################ [4]
+  echo
+  cd $HOME/start2
+  echo
+  echo PWD: $PWD
+  echo; sleep 2
+  if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
+  then
+    echo; echo RCLONE ALREADY INSTALLED
+    sleep 2; echo
+    if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
+    echo; echo "SETUP GD ON RCLONE"
+    rclone config
+    fi
+    rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+    echo "rlone.conf SIZE: $rclonesize"
     echo
+    if [[ $rclonesize -lt 3000 ]]
+    then
+      echo; echo GPG DECRYPT RCLONESETUP; echo
+      echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+      echo
+      sleep 2
+      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+      sudo chmod +x *.sh
+      echo; echo RCLONESETUP; echo
+      echo BUTTON
+      read me
+      ./rclonesetup.sh
+      rm rclonesetup.sh
+    fi  
+  else
+    echo; echo RCLONE NEEDS TO GET INSTALLED
     sleep 2
-    gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
-    sudo chmod +x *.sh
-    echo; echo RCLONESETUP; echo
-    echo BUTTON
-    read me
-    ./rclonesetup.sh
-    rm rclonesetup.sh
-  fi  
-else
-  echo; echo RCLONE NEEDS TO GET INSTALLED
-  sleep 2
-    echo; echo GPG DECRYPT RCLONESETUP; echo
-    echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
-    echo
-    sleep 2
-    gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
-    sudo chmod +x *.sh
-    echo; echo RCLONESETUP; echo
-    echo BUTTON
-    read me
-    ./rclonesetup.sh
-    rm rclonesetup.sh
+      echo; echo GPG DECRYPT RCLONESETUP; echo
+      echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
+      echo
+      sleep 2
+      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+      sudo chmod +x *.sh
+      echo; echo RCLONESETUP; echo
+      echo BUTTON
+      read me
+      ./rclonesetup.sh
+      rm rclonesetup.sh
+  fi
 fi
 
 
