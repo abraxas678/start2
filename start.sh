@@ -9,14 +9,14 @@ clear
 #  rm -rf 
 #fi
 echo
-echo UPATE AND UPGRADE
+echo [1] SYSTEM UPATE AND UPGRADE
+##########################################  [1]
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
-echo; echo "sudo apt-get install restic python3-pip -y" 
-sudo apt-get install restic python3-pip -y
 echo
-echo INSTALL ZSH
+echo [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
+########################################################  [2]
 echo; cd $HOME
 sudo apt install -y zsh php
 echo; echo INSTALL OH MY ZSH
@@ -24,7 +24,8 @@ sleep 2; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
 echo
-echo
+echo "[3] SETUP RCLONE"; echo
+##########################################  [3]
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
   echo; echo RCLONE INSTALLED
@@ -39,6 +40,13 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
   rclone config
 fi
 rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+echo
+echo [4] setup GPG encryption
+##########################################  [4]
+echo
+echo "gpg -a --export-secret-keys [key-id] >key.asc"
+echo "gpg --import"
+echo
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
   echo; echo gpg INSTALLED
@@ -48,19 +56,30 @@ else
   sleep 2
   apt install gpg -y
   echo
-  echo SETUP GPG MANUALLY VIA OD VAULT
-  echo gpg --import
+  #echo SETUP GPG MANUALLY VIA OD VAULT
+  #echo gpg --import
+  echo rko files to gd:sec please
   echo
-  echo BUTTON
+  echo START IMPORT
+  read me
+  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
+  gpg --import ./tempinstall/rko-p*
+  rm -f ./tempinstall/rko-p*
+  echo; echo REMOVE rko files from gd:sec now; echo
+  echo; echo BUTTON
   read me
 fi
-echo; echo CLONE https://github.com/abraxas678/start2.git; echo
+echo
+echo; echo "[5] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
+###############################################################################  [5]
+sudo apt-get install restic python3-pip -y
+echo
+#echo; echo CLONE https://github.com/abraxas678/start2.git; echo
 cd $HOME
 sleep 2
 git clone https://github.com/abraxas678/start2.git
+###############################################################################  [6]
 echo
-echo "gpg -a --export-secret-keys [key-id] >key.asc"
-echo "gpg --import"
 echo
 echo BUTTON
 read me
