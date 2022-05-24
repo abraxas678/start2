@@ -555,6 +555,7 @@ brew install gcalcli
 printf "${NC}"; printf "${BLUE2}"; 
 echo
 echo AUTOREMOVE; sleep $myspeed
+################################################################# CLEAN UP
 echo
 printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
