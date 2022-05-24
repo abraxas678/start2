@@ -395,7 +395,7 @@ else
   echo $USER; echo; id
   echo; printf "USERNAME TO USE: >>>"; read myuser
   echo; echo "USING $myuser"; echo; echo BUTTON; read me
-  echo; echo "sudo chown $myuser:100 $HOME -R"
+  echo; echo "sudo chown $myuser:1000 $HOME -R"
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
