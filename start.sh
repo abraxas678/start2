@@ -41,12 +41,7 @@ git clone https://github.com/abraxas678/start2.git; echo
 ############################################################# weg
 
 
-#echo "[5] setup GPG encryption"; sleep 2
-##########################################  [5]
-#echo
-#echo "gpg -a --export-secret-keys [key-id] >key.asc"
-#echo "gpg --import"
-#echo
+
 
 
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
@@ -139,7 +134,6 @@ else
   RCLONE_COMPLETE=0
 fi
 
-
 echo; echo "INSTALL AND SETUP"; echo; echo BUTTON
 read me
 
@@ -153,6 +147,41 @@ if [[ $RCLONE_INSTALL = "0" ]]
   echo
   echo PWD: $PWD
   echo; sleep 2
+  apt install rclone -y
+fi
+
+if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
+  then
+    echo "SETUP GD NOW PLEASE:"; echo; sleep 2
+    rclone config
+fi
+
+echo "[5] setup GPG encryption"; sleep 2
+#########################################  [5]
+echo
+
+if [[ GPG_INSTALLED = "0" ]]
+then
+  apt install gpg -y
+fi
+if [[ GPG_KEYS = "0" ]]
+then
+  echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"
+  echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
+  echo; echo BUTTON; read me
+  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
+#  echo "gpg --import"
+   echo
+ fi
+fi
+
+
+
+
+
+
+
+
   if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
   then
     echo; echo RCLONE ALREADY INSTALLED
