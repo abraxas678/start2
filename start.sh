@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "version 11"; sleep 2
+echo "version 12"; sleep 2
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -191,6 +191,9 @@ printf "${NC}"; printf "${BLUE3}"
 echo
   echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
   echo GPG_KEYS=$GPG_KEYS; sleep 1
+  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep 1
+  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep 1
+  echo
   echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep 1
   echo CLONE_CONFIG=$RCLONE_CONFIG; sleep 1
   echo RCLONE_GD=$RCLONE_GD; sleep 1
@@ -226,9 +229,15 @@ echo; echo "[5] setup GPG encryption"; sleep 2
 echo
 printf "${NC}"; printf "${BLUE3}"
 echo
-echo GPG_KEYS $GPG_KEYS; sleep 1
-echo GPG_KEY_ASC $GPG_KEY_ASC; sleep 1
-echo GPG_KEY_RKO $GPG_KEY_RKO; sleep 1
+  echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
+  echo GPG_KEYS=$GPG_KEYS; sleep 1
+  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep 1
+  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep 1
+  echo
+  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep 1
+  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep 1
+  echo RCLONE_GD=$RCLONE_GD; sleep 1
+  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 1
 echo
 printf "${NC}"; printf "${BLUE3}"
 
@@ -294,9 +303,15 @@ then
   fi
 fi
 
-echo; echo "GPG_KEY_RKO $GPG_KEY_RKO"
-echo "GPG_KEY_ASC $GPG_KEY_ASC"
-echo
+  echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
+  echo GPG_KEYS=$GPG_KEYS; sleep 1
+  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep 1
+  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep 1
+  echo
+  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep 1
+  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep 1
+  echo RCLONE_GD=$RCLONE_GD; sleep 1
+  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 3
 
 if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
@@ -328,7 +343,8 @@ then
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
       rm rclonesetup.sh
-fi          
+fi  
+
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep 2
