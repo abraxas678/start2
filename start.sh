@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+echo "version 2"
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -15,7 +16,7 @@ printf "${NC}"; printf "${BLUE2}";
 myspeed=2
 for i in {10..1}
 do
-  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
+  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 -u fd myspeed
 done
 echo "speed [$myspeed]"
 #delstart="n"
