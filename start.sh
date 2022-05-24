@@ -227,7 +227,9 @@ if [[ $GPG_INSTALLED = "0" ]]
 then
   apt install gpg -y
 else
+  printf "${GREEN}"
   echo; echo GPG ALREADY INSTALLED; echo; sleep 2
+  printf "${NC}"; printf "${BLUE3}"
 fi
 
 if [[ $GPG_KEYS = "0" ]]
