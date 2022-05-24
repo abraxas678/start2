@@ -99,22 +99,22 @@ printf "${NC}"; printf "${BLUE3}"
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
-  echo GPG_INSTALLED=1; sleep 2
+  echo GPG_INSTALLED=1; sleep 1
   GPG_INSTALLED=1
 ### >>> IF 2 O
    if [[ $(gpg --list-keys) = *"amdamdes@mymails.cc"* ]]
    then
-     echo "GPG_KEYS=1"; sleep 2
+     echo "GPG_KEYS=1"; sleep 1
      GPG_KEYS=1
    else
-     echo "GPG_KEYS=0"; sleep 2
+     echo "GPG_KEYS=0"; sleep 1
      GPG_KEYS=0
 ### >>> IF 2 C
    fi
 ### >>> IF 1 E
 else
-  echo "GPG_INSTALLED=0"; sleep 2
-  echo "GPG_KEYS=0"; sleep 2
+  echo "GPG_INSTALLED=0"; sleep 1
+  echo "GPG_KEYS=0"; sleep 1
   GPG_INSTALLED=0
   GPG_KEYS=0
 ### >>> IF 1 C
@@ -127,15 +127,15 @@ printf "${NC}"; printf "${BLUE3}"
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
-  echo "RCLONE_INSTALL=1"; sleep 2
+  echo "RCLONE_INSTALL=1"; sleep 1
   RCLONE_INSTALL=1
 ### >>> IF 2 O
 if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
-    echo "RCLONE_CONFIG=0"; sleep 2
+    echo "RCLONE_CONFIG=0"; sleep 1
     RCLONE_CONFIG=0
  ### >>> IF 2 E
   else
-    echo "RCLONE_CONFIG=1"; sleep 2
+    echo "RCLONE_CONFIG=1"; sleep 1
     RCLONE_CONFIG=1
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
     #echo "rlone.conf SIZE: $rclonesize"
@@ -146,14 +146,16 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
 ### >>> IF 4 O
         if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
         then
-          echo "RCLONE_GD=1"; sleep 2
+          echo "RCLONE_GD=1"; sleep 1
           RCLONE_GD=1
  ### >>> IF 5 O
             if [[ $rclonesize -gt 6000 ]]
             then
+              echo "RCLONE_COMPLETE=1"; sleep 1
               RCLONE_COMPLETE=1
  ### >>> IF 5 E
             else
+              echo "RCLONE_COMPLETE=0"; sleep 1
               RCLONE_COMPLETE=0
  ### >>> IF 5 C
             fi 
@@ -161,7 +163,7 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
         fi
  ### >>> IF 3 E
     else
-        echo "RCLONE_GD=0"; sleep 2
+        echo "RCLONE_GD=0"; sleep 1
         RCLONE_GD=0
         echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep 2
         rclone config
@@ -171,10 +173,10 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
   fi
 ### >>> IF 1 E
 else
-  echo "RCLONE_INSTALL=0"; sleep 2
-  echo "RCLONE_CONFIG=0"; sleep 2
-  echo "RCLONE_GD=0"; sleep 2
-  eccho "RCLONE_COMPLETE=0"; sleep 2
+  echo "RCLONE_INSTALL=0"; sleep 1
+  echo "RCLONE_CONFIG=0"; sleep 1
+  echo "RCLONE_GD=0"; sleep 1
+  eccho "RCLONE_COMPLETE=0"; sleep 1
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
   RCLONE_GD=0
