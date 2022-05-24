@@ -219,14 +219,14 @@ echo GPG_KEY_RKO $GPG_KEY_RKO
 echo
 printf "${NC}"; printf "${BLUE3}"
 
-if [[ GPG_INSTALLED = "0" ]]
+if [[ $GPG_INSTALLED = "0" ]]
 then
   apt install gpg -y
 else
   echo; echo GPG ALREADY INSTALLED; echo; sleep 2
 fi
 
-if [[ GPG_KEYS = "0" ]]
+if [[ $GPG_KEYS = "0" ]]
 then
   printf "${NC}"; printf "${RED}"
   echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC -- SCRIPT WILL REMOVE AND DELETE THOSE FILES" 
@@ -252,7 +252,7 @@ then
     GPG_KEY_ASC=1
   fi
   
-  if [[ GPG_KEY_ASC = "0" ]]
+  if [[ $GPG_KEY_ASC = "0" ]]
   then
     GPG_KEY_RKO=0
     myrko=$(rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l)
@@ -278,7 +278,7 @@ then
   fi
 fi
 
-if [[ GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
+if [[ $GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
 then
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
   cd $HOME/tmpgpginstall#######
@@ -293,7 +293,7 @@ else
   read me
 fi
 
-if [[ RCLONE_COMPLETE = "0" ]]
+if [[ $RCLONE_COMPLETE = "0" ]]
 then
       cd $HOME/start2
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
