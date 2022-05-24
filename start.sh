@@ -11,7 +11,12 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
-printf "${NC}"
+printf "${NC}"; printf "${BLUE2}"; 
+myspeed=2
+for i in {5..1}
+do
+clear; printf " [$i] DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
+done
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
