@@ -182,9 +182,9 @@ else
 fi
 
 ########################################## INSTALL & SETUP ===============================
-printf "${UL1}"; printf "${LILA}"
+printf "${UL1}"; printf "${BLUE1}"
 echo; echo "INSTALL AND SETUP"; echo; sleep 2
-printf "${NC}"; printf "${BLUE2}"
+printf "${NC}"; printf "${BLUE3}"
 echo
   echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
   echo GPG_KEYS=$GPG_KEYS; sleep 1
@@ -221,7 +221,7 @@ printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[5] setup GPG encryption"; sleep 2
 #################################################################### SETUP GPG [5]
 echo
-printf "${NC}"; printf "${BLUE4}"
+printf "${NC}"; printf "${BLUE3}"
 echo
 echo GPG_KEYS $GPG_KEYS; sleep 1
 echo GPG_KEY_ASC $GPG_KEY_ASC; sleep 1
