@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 24"; sleep $myspeed
+echo "version 25"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -367,21 +367,27 @@ printf "${NC}"; printf "${BLUE3}"
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
+printf "${GREEN}"
+  echo; echo $sshresult; echo
   echo; echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep $myspeed
+printf "${NC}"; printf "${BLUE3}"
 else
+  printf "${RED}"
+  echo; echo $sshresult; echo; printf "${BLUE1}"; printf "${UL1}"
   echo STARTING SHH SETUP; sleep $myspeed
-  echo "rclone copy gd:/sec/start/id_rsa.asc . -P"; sleep $myspeed
+  printf "${NC}"; printf "${BLUE3}"
+  echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
-  rclone copy gd:/sec/start/id_rsa.asc . -P
+  rclone copy gdsec/supersec/sshkeys/id_rsa . -P
   echo
   sleep $myspeed
-  echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
-  echo
+  #echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
+  #echo
   printf "${YELLOW}"
-  echo "starting decryption"
-  printf "${NC}"; printf "${BLUE2}"; 
-  gpg --decrypt id_rsa.asc > id_rsa
-  rm id*.asc
+  #echo "starting decryption"
+  #printf "${NC}"; printf "${BLUE2}"; 
+  #gpg --decrypt id_rsa.asc > id_rsa
+  #rm id*.asc
   sudo mkdir $HOME/.ssh
   echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
   #  DEFINE USERNAME
