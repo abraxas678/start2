@@ -2,7 +2,7 @@
 clear
 cd $HOME
 ts=$(date +"%s")
-if [[ -d start ]]
+if [[ -d start2 ]]
 then
   mv start2 start2-backup-$ts
 fi
