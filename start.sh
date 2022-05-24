@@ -16,7 +16,7 @@ printf "${NC}"; printf "${BLUE2}";
 myspeed=2
 for i in {10..1}
 do
-  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 -u 10 myspeed
+  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 -u 8 myspeed
 done
 echo "speed [$myspeed]"
 #delstart="n"
