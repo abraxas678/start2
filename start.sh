@@ -201,6 +201,7 @@ then
       GPG_KEY_RKO=2
       echo "ONLY ONE rko-p*.key FILES FOUND. PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
     elif [[ $myrko = "2" ]]
+    then
       GPG_KEY_RKO=1
       echo; echo "TWO rko-p FILES FOUND. STARTING GPG SETUP."
     fi
