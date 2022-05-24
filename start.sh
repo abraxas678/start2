@@ -289,7 +289,7 @@ if [[ $GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
 then
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
   cd $HOME/tmpgpginstall
-  ls $HOME/tmpgpginstall
+  #ls $HOME/tmpgpginstall
   printf "${NC}"; printf "${BLUE2}"
   echo; echo "IMPORTING GPG FILES"; echo; sleep 2
   printf "${NC}"; printf "${BLUE3}"
@@ -306,9 +306,11 @@ fi
 if [[ $RCLONE_COMPLETE = "0" ]]
 then
       cd $HOME/start2
-      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
+      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
       sudo chmod +x *.sh
+      printf "${NC}"; printf "${BLUE2}"
       echo; echo RCLONESETUP VIA SCRIPT STATING; echo; sleep 2
+      printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
       rm rclonesetup.sh
 fi          
