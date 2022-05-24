@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 19"; sleep $myspeed
+echo "version 20"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -258,6 +258,10 @@ then
   echo; echo BUTTON; read me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
+  echo; echo MYKEY $mykey; sleep 5
+  echo sleep 5
+  echo
+  #######################################!!!!!!!!##############################################
   if [[ $mykey > 1 ]] 
   then
     GPG_KEY_ASC=2
