@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 29"; sleep $myspeed
+echo "version 30"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -471,13 +471,16 @@ if [[ $mykeepass = "y" ]]; then
   #printf "${BLUE1}"
   sudo apt-get install -y keepassxc
 fi
-
-printf "${NC}"; printf "${BLUE2}"
-echo; echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
+echo
+printf "${BLUE1}"; printf "${UL1}"
+echo "SOFTWARE INSTALLATION"
+printf "${NC}"; printf "${BLUE4}"
+echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
+printf "${NC}"; printf "${BLUE3}"; echo
 sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
-myfonts="n"
+myfonts="y"
 printf "${BLUE1}"; printf "${UL1}"
 echo "WANT TO INSTALL FONTS? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
@@ -543,26 +546,27 @@ if [[ $brewsetup != "n" ]]; then
   sudo apt-get install build-essential -y
   brew install gcc  
 fi
-
-brew install fd
 brew install fzf
 brew install thefuck
 $(brew --prefix)/opt/fzf/install
 brew install gcalcli
+printf "${NC}"; printf "${BLUE2}"; 
 echo
 echo AUTOREMOVE
 echo
+printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
 sudo apt autoremove -y
 
-cp $HOME/start2/dotfiles/.zshrc $HOME/
-cp $HOME/start2/dotfiles/.p10k.zsh $HOME/
-cp $HOME/start2/dotfiles/.taskrc $HOME/
-cp $HOME/start2/dotfiles/pcc $HOME/bin
-mv $HOME/start2/dotfiles/bin/* $HOME/bin/
+#p $HOME/start2/dotfiles/.zshrc $HOME/
+#cp $HOME/start2/dotfiles/.p10k.zsh $HOME/
+#cp $HOME/start2/dotfiles/.taskrc $HOME/
+#cp $HOME/start2/dotfiles/pcc $HOME/bin
+#mv $HOME/start2/dotfiles/bin/* $HOME/bin/
 echo
 rm -rf $HOME/start
 rm -rf $HME/start2
+rm -rf $HOME/tmprestigrestore
 echo
 echo EXEC ZSH
 sleep $myspeed
