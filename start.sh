@@ -163,6 +163,8 @@ echo
 if [[ GPG_INSTALLED = "0" ]]
 then
   apt install gpg -y
+else
+  echo; echo GPG ALREADY INSTALLED; echo; sleep 2
 fi
 if [[ GPG_KEYS = "0" ]]
 then
@@ -170,14 +172,48 @@ then
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
   echo; echo BUTTON; read me
   
-  echo myrko=$(rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l)
-  if [[ $myrko > 1 ]] 
+  mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
+  if [[ $mykey > 1 ]] 
   then
-  
+    GPG_KEY_ASC=2
+    echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep 2
+    echo BUTTON; read me
+  elif [[ $mykey < 1 ]] 
+  then
+    GPG_KEY_ASC=0
+    echo; echo "key.asc NOT FOUND. LOOKING FOR rko-p FILES NOW."; sleep 2
+  else
+    GPG_KEY_ASC=1
   fi
   
-  echo mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
+  if [[ GPG_KEY_ASC = "0" ]]
+  then
+    GPG_KEY_RKO=0
+    myrko=$(rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l)
+    if [[ $myrko > 2 ]] 
+    then
+      GPG_KEY_RKO=3
+      echo "MORE THAN TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      echo BUTTON; read me
+    elif [[ $myrko = "1" ]]
+    then
+      GPG_KEY_RKO=2
+      echo "ONLY ONE rko-p*.key FILES FOUND. PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+    elif [[ $myrko = "2" ]]
+      GPG_KEY_RKO=1
+      echo; echo "TWO rko-p FILES FOUND. STARTING GPG SETUP."
+    fi
+  fi
+ 
+if [[ GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
+then
+  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
   
+ ########################################################################################################################
+else
+  echo "NEITHER key.asc, NOR TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ON GD: AND RESTART SCRIPT."
+fi
+
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
 #  echo "gpg --import"
    echo
