@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 26"; sleep $myspeed
+echo "version 27"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -378,7 +378,7 @@ else
   printf "${NC}"; printf "${BLUE3}"
   echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
-  rclone copy gdsec/supersec/sshkeys/id_rsa . -P
+  rclone copy gdsec:supersec/sshkeys/id_rsa . -P
   echo
   sleep $myspeed
   #echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
