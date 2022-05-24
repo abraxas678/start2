@@ -531,6 +531,7 @@ apt-get install docker.io docker-compose -y
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "INSTALL BREW"; sleep $myspeed
+################################################################# BREW
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
 printf "${NC}"; printf "${BLUE1}"
@@ -546,6 +547,7 @@ if [[ $brewsetup != "n" ]]; then
   sudo apt-get install build-essential -y
   brew install gcc  
 fi
+################################################################### BREW BASED SOFTWARE
 brew install fzf
 brew install thefuck
 $(brew --prefix)/opt/fzf/install
