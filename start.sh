@@ -177,7 +177,13 @@ fi
 
 printf "${BLUE1}"; printf "${UL1}"
 echo "[5] setup GPG encryption"; sleep 2
-#########################################  [5]
+#################################################################### SETUP GPG [5]
+echo
+printf "${NC}"; printf "${BLUE4}"
+echo
+echo GPG_KEYS $GPG_KEYS
+echo GPG_KEY_ASC $GPG_KEY_ASC
+echo GPG_KEY_RKO $GPG_KEY_RKO
 echo
 printf "${NC}"; printf "${BLUE3}"
 
