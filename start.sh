@@ -29,7 +29,7 @@ echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
 echo
-printf "${BLUE1}"; printf "${UL2}"
+printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
 #################################################################  [2]
 printf "${NC}"; printf "${BLUE3}"
