@@ -414,21 +414,20 @@ ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
 sudo chmod 644 ~/.ssh/authorized_keys
 sudo chmod 644 ~/.ssh/known_hosts
-sudo chmod 644 ~/.ssh/config
+sudo chmod 644 ~/.ssh/config &>/dev/null
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
+############################################################### RESTIC SNAPSHOT [9]
 printf "${NC}"; printf "${BLUE3}"
-######################################################### [9]
 restic -r rclone:gd:restic snapshots
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo "Which snapshot do you wish to restore?"
 echo
-printf "${NC}"; printf "${BLUE3}"
-printf ">>> "; read mysnapshot
+printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
 myrestore="n"
 echo
 echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
@@ -437,16 +436,23 @@ read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
   rm -rf $HOME/tmprestigrestore
+  printf "${NC}"; printf "${BLUE2}"; 
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
+  printf "${NC}"; printf "${BLUE3}"
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
-  printf "${NC}"; printf "${RED}"
-  echo; echo "RCLONE TO $HOME - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
+  printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
+  echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
+  echo; echo "restic copies these files:"; echo
+  echo "rclone lsl $HOME/tmprestigrestore --max-depth 2"
+  printf "${NC}"; printf "${BLUE4}"
+  rclone lsl $HOME/tmprestigrestore --max-depth 2
+  printf "${NC}"; printf "${BLUE3}"
+  echo 
   echo BUTTON; read me
   printf "${NC}"; printf "${BLUE3}"
   rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
   echo
 fi
-#################################################################  ab hier das script weiter machen
 ########################################## KEEPASSXC
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo; echo "INSTALL KEEPASSXC"
@@ -513,7 +519,6 @@ echo; echo "PIP INSTALLS"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 pip install apprise
 pip install paho-mqtt
-############################
 ##################################################################################### DOCKER
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "INSTALL DOCKER"; sleep $myspeed
