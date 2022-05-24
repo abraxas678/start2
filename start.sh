@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
 echo "version 14"; sleep 2
-
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
