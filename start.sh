@@ -383,23 +383,28 @@ else
   sleep $myspeed
   #echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
   #echo
-  printf "${YELLOW}"
+  #printf "${YELLOW}"
   #echo "starting decryption"
   #printf "${NC}"; printf "${BLUE2}"; 
   #gpg --decrypt id_rsa.asc > id_rsa
   #rm id*.asc
   sudo mkdir $HOME/.ssh
+  mv id_rsa $HOME/.ssh
+  printf "${BLUE1}"; printf "${UL1}" 
   echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
   #  DEFINE USERNAME
+  printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo;
+  printf "${NC}"; printf "${BLUE3}"
   echo $USER; echo; id
+  printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "USERNAME TO USE: >>>"; read myuser
+  printf "${NC}"; printf "${BLUE3}"
   echo; echo "USING $myuser"; echo; echo BUTTON; read me
   echo; echo "sudo chown $myuser:1000 $HOME -R"
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
-  mv id_rsa $HOME/.ssh
 fi
 echo; echo "STARTING SSH AGENT"; echo; sleep $myspeed
 eval `ssh-agent -s`
