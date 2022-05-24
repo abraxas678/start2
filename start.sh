@@ -142,8 +142,17 @@ fi
 printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; echo
 printf "${NC}"; printf "${BLUE3}"
-echo BUTTON
-read me
+echo
+  GPG_INSTALLED=$ GPG_INSTALLED
+  GPG_KEYS=$GPG_KEYS
+  RCLONE_INSTALL=$RCLONE_INSTALL
+  RCLONE_CONFIG=$RCLONE_CONFIG
+  RCLONE_GD=$RCLONE_GD
+  RCLONE_COMPLETE=$RCLONE_COMPLETE
+echo
+sleep 3
+echo "BUTTON timer 10"
+read -t 10 me
 
 if [[ $RCLONE_INSTALL = "0" ]]
   then
