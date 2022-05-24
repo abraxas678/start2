@@ -228,44 +228,44 @@ then
       ./rclonesetup.sh
       rm rclonesetup.sh
 fi          
-      
-########################################### WORK # WORK # WORK #############################################################
-
 echo
-echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
-###############################################################################  [6]
-echo; echo "[7] SOFTWARE INSTALL RESTIC PYTHON"; sleep 2
-###############################################################################  [7]
+echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo
 sudo apt-get install restic python3-pip -y
+###############################################################################  [6]
 echo
-echo
-echo "[8] SETUP SSH"
-###############################################################################  [8]
+echo "[7] SETUP SSH"
+###############################################################################  [7]
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
-  echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep 2
+  echo; echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep 2
 else
-echo STARTING SHH SETUP; sleep 2
-echo "rclone copy gd:/sec/start/id_rsa.asc . -P"
-echo
-rclone copy gd:/sec/start/id_rsa.asc . -P
-echo
-sleep 2
-echo "gpg --decrypt id_rsa.asc > id_rsa"
-echo
-gpg --decrypt id_rsa.asc > id_rsa
-rm id*.asc
-sudo mkdir $HOME/.ssh
-echo; echo "SHH FOLDER RIGHTS"; echo
-sudo chown abraxas678:100 $HOME -R
-sudo chmod 700 -R $HOME
-mv id_rsa $HOME/.ssh
+  echo STARTING SHH SETUP; sleep 2
+  echo "rclone copy gd:/sec/start/id_rsa.asc . -P"; sleep 2
+  echo
+  rclone copy gd:/sec/start/id_rsa.asc . -P
+  echo
+  sleep 2
+  echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep 2
+  echo
+  gpg --decrypt id_rsa.asc > id_rsa
+  rm id*.asc
+  sudo mkdir $HOME/.ssh
+  echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep 2
+  #  DEFINE USERNAME
+  echo; echo; echo "CURRENT USER DETAILS:"; echo;
+  echo $USER; echo; id
+  echo; printf "USERNAME TO USE: >>>"; read myuser
+  echo; echo "USING $myuser"; echo; echo BUTTON; read me
+  echo; echo "sudo chown $myuser:100 $HOME -R"
+  echo "sudo chmod 700 -R $HOME"
+  sudo chown $myuser:100 $HOME -R
+  sudo chmod 700 -R $HOME
+  mv id_rsa $HOME/.ssh
 fi
-echo
-echo STARTING SSH AGENT; echo; sleep 2
+echo; echo "STARTING SSH AGENT"; echo; sleep 2
 eval `ssh-agent -s`
-echo; echo SETTING PERMISSIONS; echo; sleep 2
+echo; echo "SETTING FOLDER PERMISSIONS"; echo; sleep 2
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
@@ -275,11 +275,8 @@ sudo chmod 644 ~/.ssh/config
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
-##########################################rclone copy gdsec:dotfiles ./dotfiles -Pv --skip-links --fast-list
-#git clone git@github.com:abraxas678/dotfiles.git
-#echo
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep 2; echo 
-################################################### [9]
+######################################################### [9]
 restic -r rclone:gd:restic snapshots
 echo
 echo "Which snapshot do you wish to restore?"
@@ -295,7 +292,8 @@ then
   rm -rf $HOME/tmprestigrestore
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep 2
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
-  echo; echo "RCLONE TO $HOME"; echo; sleep 2
+  echo; echo "RCLONE TO $HOME - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep 2
+  echo BUTTON; read me
   rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
   echo
 fi
@@ -308,18 +306,15 @@ echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 read -n 1 -t 40 mykeepass
 #printf "${BLUE3}"
 if [[ $mykeepass = "y" ]]; then
-sudo add-apt-repository ppa:phoerious/keepassxc -y
-sudo apt-get update
-sudo apt-get dist-upgrade -y
-#printf "${BLUE1}"
-sudo apt-get install -y keepassxc
+  sudo add-apt-repository ppa:phoerious/keepassxc -y
+  sudo apt-get update
+  sudo apt-get dist-upgrade -y
+  #printf "${BLUE1}"
+  sudo apt-get install -y keepassxc
 fi
 echo
-echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all"
-echo
+echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
-echo
-echo FONTS
 echo
 myfonts="n"
 echo "WANT TO INSTALL FONTS? (y/n)"
@@ -332,7 +327,8 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep 1
 fi
-############################ NTFY
+echo; echo "SETUP NTFY"; sleep 2
+###################################################################################### NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
 sudo apt install apt-transport-https
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
@@ -352,14 +348,17 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
-############################ PIP INSTALLS
+##################################################################################### PIP INSTALLS
+echo; echo "PIP INSTALLS"; sleep 2
 pip install apprise
 pip install paho-mqtt
 ############################
-############################ DOCKER
+##################################################################################### DOCKER
+echo; echo "INSTALL DOCKER"; sleep 2 
 apt-get install docker.io docker-compose -y
 ############################
 echo
+echo; echo "INSTALL BREW"; sleep 2 
 brewsetup="n"
 echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
 echo
