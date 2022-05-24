@@ -173,15 +173,15 @@ fi
 
 ########################################## INSTALL & SETUP ===============================
 printf "${UL1}"; printf "${LILA}"
-echo; echo "INSTALL AND SETUP"; echo
+echo; echo "INSTALL AND SETUP"; echo; sleep 2
 printf "${NC}"; printf "${BLUE2}"
 echo
-  echo GPG_INSTALLED=$GPG_INSTALLED
-  echo GPG_KEYS=$GPG_KEYS
-  echo RCLONE_INSTALL=$RCLONE_INSTALL
-  echo CLONE_CONFIG=$RCLONE_CONFIG
-  echo RCLONE_GD=$RCLONE_GD
-  echo RCLONE_COMPLETE=$RCLONE_COMPLETE
+  echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
+  echo GPG_KEYS=$GPG_KEYS; sleep 1
+  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep 1
+  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep 1
+  echo RCLONE_GD=$RCLONE_GD; sleep 1
+  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 1
 echo
 printf "${NC}"; printf "${BLUE3}"
 sleep 3
@@ -208,7 +208,7 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
 fi
 
 printf "${BLUE1}"; printf "${UL1}"
-echo "[5] setup GPG encryption"; sleep 2
+echo; echo "[5] setup GPG encryption"; sleep 2
 #################################################################### SETUP GPG [5]
 echo
 printf "${NC}"; printf "${BLUE4}"
