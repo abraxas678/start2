@@ -33,9 +33,13 @@ printf "${BLUE1}"; printf "${UL2}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
 #################################################################  [2]
 printf "${NC}"; printf "${BLUE3}"
-echo; cd $HOME
+printf "${NC}"; printf "${BLUE2}"
+echo; echo INSTALL ZSH
+printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
 sudo apt install -y zsh php
+printf "${NC}"; printf "${BLUE2}"
 echo; echo INSTALL OH MY ZSH
+printf "${NC}"; printf "${BLUE3}"
 sleep 2; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
