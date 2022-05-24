@@ -1,6 +1,7 @@
 #!/bin/bash
 clear
 cd $HOME
+mv start2 start2-backup
 wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 source $HOME/color.dat
 printf "${NC}"
@@ -16,7 +17,7 @@ echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
 ##########################################  [1]
-printf "${BLUE3}"
+printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
@@ -32,18 +33,16 @@ sleep 2; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
 echo
-printf "${BLUE1}"
+printf "${BLUE1}"; printf "${UL1}"
 echo "[3] CLONE REPOSITORY"; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [3]
 cd $HOME
 sleep 2
 git clone https://github.com/abraxas678/start2.git; echo
+
+
 ############################################################# weg
-
-
-
-
-
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 #then
 #  echo; echo gpg INSTALLED
@@ -71,9 +70,13 @@ git clone https://github.com/abraxas678/start2.git; echo
 #  read me
 #fi
 ############################################################################ weg nach oben
+
 echo
+printf "${BLUE1}"; printf "${UL1}"
 echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
+printf "${NC}"; printf "${BLUE1}"; 
 echo "GPG"; echo; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
   echo GPG_INSTALLED=1; sleep 2
@@ -92,7 +95,9 @@ else
   GPG_INSTALLED=0
   GPG_KEYS=0
 fi
+printf "${BLUE1}"; 
 echo; echo "RCLONE"; echo; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
   echo "RCLONE_INSTALL=1"; sleep 2
@@ -134,8 +139,10 @@ else
   RCLONE_COMPLETE=0
 fi
 
+printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; echo; echo BUTTON
 read me
+printf "${NC}"; printf "${BLUE3}"
 
 if [[ $RCLONE_INSTALL = "0" ]]
   then
@@ -156,9 +163,11 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
     rclone config
 fi
 
+printf "${BLUE1}"; printf "${UL1}"
 echo "[5] setup GPG encryption"; sleep 2
 #########################################  [5]
 echo
+printf "${NC}"; printf "${BLUE3}"
 
 if [[ GPG_INSTALLED = "0" ]]
 then
@@ -169,7 +178,9 @@ fi
 
 if [[ GPG_KEYS = "0" ]]
 then
+  printf "${NC}"; printf "${RED}"
   echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC -- SCRIPT WILL REMOVE AND DELETE THOSE FILES" 
+  printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
   echo; echo BUTTON; read me
   
@@ -177,12 +188,16 @@ then
   if [[ $mykey > 1 ]] 
   then
     GPG_KEY_ASC=2
+    printf "${NC}"; printf "${RED}"
     echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep 2
     echo BUTTON; read me
+    printf "${NC}"; printf "${BLUE3}"
   elif [[ $mykey < 1 ]] 
   then
     GPG_KEY_ASC=0
+    printf "${NC}"; printf "${RED}"
     echo; echo "key.asc NOT FOUND. LOOKING FOR rko-p FILES NOW."; sleep 2
+    printf "${NC}"; printf "${BLUE3}"
   else
     GPG_KEY_ASC=1
   fi
@@ -194,15 +209,20 @@ then
     if [[ $myrko > 2 ]] 
     then
       GPG_KEY_RKO=3
+      printf "${NC}"; printf "${RED}"
       echo "MORE THAN TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "${NC}"; printf "${BLUE3}"
       echo BUTTON; read me
     elif [[ $myrko = "1" ]]
     then
       GPG_KEY_RKO=2
+      printf "${NC}"; printf "${RED}"
       echo "ONLY ONE rko-p*.key FILES FOUND. PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "${NC}"; printf "${BLUE3}"
     elif [[ $myrko = "2" ]]
     then
       GPG_KEY_RKO=1
+      printf "${NC}"; printf "${GREEN}"
       echo; echo "TWO rko-p FILES FOUND. STARTING GPG SETUP."
     fi
   fi
@@ -217,7 +237,9 @@ then
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
 else
+  printf "${NC}"; printf "${RED}"
   echo "NEITHER key.asc, NOR TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ON GD: AND RESTART SCRIPT."
+  printf "${NC}"; printf "${BLUE3}"
 fi
 
 if [[ RCLONE_COMPLETE = "0" ]]
@@ -230,11 +252,15 @@ then
       rm rclonesetup.sh
 fi          
 echo
+printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo
+printf "${NC}"; printf "${BLUE3}"
 sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
+printf "${BLUE1}"; printf "${UL1}"
 echo "[7] SETUP SSH"
+printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7]
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
@@ -276,12 +302,16 @@ sudo chmod 644 ~/.ssh/config
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
+printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep 2; echo 
+printf "${NC}"; printf "${BLUE3}"
 ######################################################### [9]
 restic -r rclone:gd:restic snapshots
 echo
+printf "${NC}"; printf "${BLUE2}"
 echo "Which snapshot do you wish to restore?"
 echo
+printf "${NC}"; printf "${BLUE3}"
 printf ">>> "; read mysnapshot
 myrestore="n"
 echo
@@ -293,19 +323,25 @@ then
   rm -rf $HOME/tmprestigrestore
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep 2
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
+  printf "${NC}"; printf "${RED}"
   echo; echo "RCLONE TO $HOME - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep 2
   echo BUTTON; read me
+  printf "${NC}"; printf "${BLUE3}"
   rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
   echo
 fi
 #################################################################  ab hier das script weiter machen
 ########################################## KEEPASSXC
+printf "${BLUE1}"; printf "${UL1}"
 echo; echo; echo "INSTALL KEEPASSXC"
+printf "${NC}"; printf "${BLUE3}"
 echo
 mykeepass="n"
+printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
+printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 40 mykeepass
-#printf "${BLUE3}"
+
 if [[ $mykeepass = "y" ]]; then
   sudo add-apt-repository ppa:phoerious/keepassxc -y
   sudo apt-get update
@@ -313,12 +349,16 @@ if [[ $mykeepass = "y" ]]; then
   #printf "${BLUE1}"
   sudo apt-get install -y keepassxc
 fi
-echo
-echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
+
+printf "${NC}"; printf "${BLUE2}"
+echo; echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
 echo
+printf "${NC}"; printf "${BLUE3}"
 myfonts="n"
+printf "${BLUE1}"; printf "${UL1}"
 echo "WANT TO INSTALL FONTS? (y/n)"
+printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 20 myfonts
 if [[ $myfonts = "y" ]]; then
   #https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
@@ -328,7 +368,9 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep 1
 fi
+printf "${NC}"; printf "${BLUE2}"
 echo; echo "SETUP NTFY"; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 ###################################################################################### NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
 sudo apt install apt-transport-https
@@ -349,20 +391,28 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
+printf "${NC}"; printf "${BLUE2}"
 ##################################################################################### PIP INSTALLS
 echo; echo "PIP INSTALLS"; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 pip install apprise
 pip install paho-mqtt
 ############################
 ##################################################################################### DOCKER
-echo; echo "INSTALL DOCKER"; sleep 2 
+printf "${BLUE1}"; printf "${UL1}"
+echo; echo "INSTALL DOCKER"; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 apt-get install docker.io docker-compose -y
 ############################
 echo
-echo; echo "INSTALL BREW"; sleep 2 
+printf "${NC}"; printf "${BLUE2}"
+echo; echo "INSTALL BREW"; sleep 2
+printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
+printf "${NC}"; printf "${BLUE1}"
 echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
 echo
+printf "${NC}"; printf "${BLUE3}"
 read -t 20 -n 1 brewsetup
 echo
 if [[ $brewsetup != "n" ]]; then
@@ -397,4 +447,6 @@ echo EXEC ZSH
 sleep 2
 echo
 exec zsh
+printf "${GREEN}"; printf "${UL1}"
 echo DONE 
+printf "${NC}"
