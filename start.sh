@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 20"; sleep $myspeed
+echo "version 21"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -258,10 +258,6 @@ then
   echo; echo BUTTON; read me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
-  echo; echo MYKEY $mykey; sleep 5
-  echo sleep 5
-  echo
-  #######################################!!!!!!!!##############################################
   if [[ $mykey > 1 ]] 
   then
     GPG_KEY_ASC=2
@@ -304,18 +300,6 @@ then
       printf "${NC}"; printf "${BLUE3}"
     fi
   fi
-fi
-
-  echo GPG_INSTALLED=$GPG_INSTALLED; sleep $myspeed1
-  echo GPG_KEYS=$GPG_KEYS; sleep $myspeed1
-  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep $myspeed1
-  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep $myspeed1
-  echo
-  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep $myspeed1
-  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep $myspeed1
-  echo RCLONE_GD=$RCLONE_GD; sleep $myspeed1
-  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 3
-
 if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
@@ -335,6 +319,17 @@ else
   printf "${NC}"; printf "${BLUE3}"
   read me
 fi
+fi
+
+  echo GPG_INSTALLED=$GPG_INSTALLED; sleep $myspeed1
+  echo GPG_KEYS=$GPG_KEYS; sleep $myspeed1
+  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep $myspeed1
+  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep $myspeed1
+  echo
+  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep $myspeed1
+  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep $myspeed1
+  echo RCLONE_GD=$RCLONE_GD; sleep $myspeed1
+  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 3
 
 if [[ $RCLONE_COMPLETE = "0" ]]
 then
