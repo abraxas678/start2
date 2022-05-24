@@ -233,7 +233,7 @@ fi
 if [[ $GPG_KEYS = "0" ]]
 then
   printf "${NC}"; printf "${BLUE2}"
-  printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES" 
+  printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES"; echo 
   printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
   echo; echo BUTTON; read me
