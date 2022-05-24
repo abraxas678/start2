@@ -166,6 +166,7 @@ then
 else
   echo; echo GPG ALREADY INSTALLED; echo; sleep 2
 fi
+
 if [[ GPG_KEYS = "0" ]]
 then
   echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC -- SCRIPT WILL REMOVE AND DELETE THOSE FILES" 
@@ -204,73 +205,31 @@ then
       echo; echo "TWO rko-p FILES FOUND. STARTING GPG SETUP."
     fi
   fi
- 
+fi
+
 if [[ GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
 then
-  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
-  
- ########################################################################################################################
+  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
+  cd $HOME/tmpgpginstall#######
+  echo; echo "IMPORTING GPG FILES"; echo; sleep 2
+  gpg --import *
+  rm -rf $HOME/tmpgpginstall
+  cd $HOME  
 else
   echo "NEITHER key.asc, NOR TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ON GD: AND RESTART SCRIPT."
 fi
 
-  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
-#  echo "gpg --import"
-   echo
- fi
-fi
-
-rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l
- 
-
-
-
-
-
-
-  if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
-  then
-    echo; echo RCLONE ALREADY INSTALLED
-    sleep 2; echo
-    if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
-    echo; echo "SETUP GD ON RCLONE"
-    rclone config
-    fi
-    rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-    echo "rlone.conf SIZE: $rclonesize"
-    echo
-    if [[ $rclonesize -lt 3000 ]]
-    then
-      echo; echo GPG DECRYPT RCLONESETUP; echo
-      echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
-      echo
-      sleep 2
+if [[ RCLONE_COMPLETE = "0" ]]
+then
+      cd $HOME/start2
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
       sudo chmod +x *.sh
-      echo; echo RCLONESETUP; echo
-      echo BUTTON
-      read me
+      echo; echo RCLONESETUP VIA SCRIPT STATING; echo; sleep 2
       ./rclonesetup.sh
       rm rclonesetup.sh
-    fi  
-  else
-    echo; echo RCLONE NEEDS TO GET INSTALLED
-    sleep 2
-      echo; echo GPG DECRYPT RCLONESETUP; echo
-      echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"
-      echo
-      sleep 2
-      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup. sh
-      sudo chmod +x *.sh
-      echo; echo RCLONESETUP; echo
-      echo BUTTON
-      read me
-      ./rclonesetup.sh
-      rm rclonesetup.sh
-  fi
-fi
-
-
+fi          
+      
+########################################### WORK # WORK # WORK #############################################################
 
 echo
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"
