@@ -1,8 +1,15 @@
 #!/bin/bash
 clear
 cd $HOME
-mv start2 start2-backup
-wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
+ts=$(date +"%s")
+if [[ -d start ]]
+then
+  mv start2 start2-backup-$ts
+fi
+if [[ ! -f color.dat ]]
+then
+  wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
+fi
 source $HOME/color.dat
 printf "${NC}"
 #delstart="n"
@@ -15,7 +22,7 @@ printf "${NC}"
 #fi
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
+echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
 ##########################################  [1]
 printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
@@ -24,7 +31,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 echo
 printf "${BLUE1}"; printf "${UL2}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
-########################################################  [2]
+#################################################################  [2]
 printf "${NC}"; printf "${BLUE3}"
 echo; cd $HOME
 sudo apt install -y zsh php
@@ -113,10 +120,17 @@ then
     #echo
     if [[ $rclonesize -lt 3000 ]]
     then
-      if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
-      then
-        echo "RCLONE_GD=1"; sleep 2
-        RCLONE_GD=1
+        if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
+        then
+          echo "RCLONE_GD=1"; sleep 2
+          RCLONE_GD=1
+          if [[ $rclonesize -gt 6000 ]]
+          then
+            RCLONE_COMPLETE=1
+          else
+            RCLONE_COMPLETE=0
+          fi
+        fi
       else
         echo "RCLONE_GD=0"; sleep 2
         RCLONE_GD=0
