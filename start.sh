@@ -14,9 +14,13 @@ then
 fi
 source $HOME/color.dat
 printf "${NC}"; printf "${BLUE2}"; 
-clear; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed
+clear; printf "DEFINE SPEED (default=2): "; echo; read -n 1 myspeed
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
+if [[ $myspeed1 -lt "0" ]]
+then
+  $myspeed1=0
+fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"; sleep 2
 #delstart="n"
