@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "version 9"; sleep 2
+echo "version 11"; sleep 2
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -294,7 +294,11 @@ then
   fi
 fi
 
-if [[ $GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
+echo; echo "GPG_KEY_RKO $GPG_KEY_RKO"
+echo "GPG_KEY_ASC $GPG_KEY_ASC"
+echo
+
+if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
   cd $HOME/tmpgpginstall
