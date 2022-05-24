@@ -554,7 +554,7 @@ $(brew --prefix)/opt/fzf/install
 brew install gcalcli
 printf "${NC}"; printf "${BLUE2}"; 
 echo
-echo AUTOREMOVE
+echo AUTOREMOVE; sleep $myspeed
 echo
 printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
@@ -570,10 +570,11 @@ rm -rf $HOME/start
 rm -rf $HME/start2
 rm -rf $HOME/tmprestigrestore
 echo
+printf "${GREEN}"; printf "${UL1}"
+echo DONE 
 echo EXEC ZSH
+printf "${NC}"
 sleep $myspeed
 echo
 exec zsh
-printf "${GREEN}"; printf "${UL1}"
-echo DONE 
 printf "${NC}"
