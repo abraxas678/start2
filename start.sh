@@ -527,7 +527,7 @@ printf "${BLUE1}"; printf "${UL1}"
 echo; echo "INSTALL DOCKER"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 apt-get install docker.io docker-compose -y
-############################
+#################################################### docker compose
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "INSTALL BREW"; sleep $myspeed
