@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 21"; sleep $myspeed
+echo "version 22"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -17,6 +17,7 @@ printf "${NC}"; printf "${BLUE2}";
 clear; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
+myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"; sleep 2
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
@@ -200,8 +201,8 @@ echo
 echo
 printf "${NC}"; printf "${BLUE3}"
 sleep 3
-echo "BUTTON timer 10"
-read -t 10 me
+echo "BUTTON timer $myspeed2"
+read -t $myspeed2 me
 
 if [[ $RCLONE_INSTALL = "0" ]]
   then
@@ -334,6 +335,9 @@ fi
 if [[ $RCLONE_COMPLETE = "0" ]]
 then
       cd $HOME/start2
+      printf "${YELLOW}"
+      echo "starting decryption"
+      printf "${NC}"; printf "${BLUE3}"
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
       sudo chmod +x *.sh
       printf "${NC}"; printf "${BLUE2}"
@@ -369,6 +373,9 @@ else
   sleep $myspeed
   echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
   echo
+  printf "${YELLOW}"
+  echo "starting decryption"
+  printf "${NC}"; printf "${BLUE2}"; 
   gpg --decrypt id_rsa.asc > id_rsa
   rm id*.asc
   sudo mkdir $HOME/.ssh
