@@ -66,7 +66,7 @@ git clone https://github.com/abraxas678/start2.git; echo
 #  gpg --import ./tempinstall/rko-p*
 #  rm -f ./tempinstall/rko-p*
 #  echo; echo REMOVE rko files from gd:sec now; echo
-#  echo; echo BUTTON
+#  echo; echo 
 #  read me
 #fi
 ############################################################################ weg nach oben
@@ -140,9 +140,10 @@ else
 fi
 
 printf "${UL1}"; printf "${LILA}"
-echo; echo "INSTALL AND SETUP"; echo; echo BUTTON
-read me
+echo; echo "INSTALL AND SETUP"; echo
 printf "${NC}"; printf "${BLUE3}"
+echo BUTTON
+read me
 
 if [[ $RCLONE_INSTALL = "0" ]]
   then
@@ -240,6 +241,7 @@ else
   printf "${NC}"; printf "${RED}"
   echo "NEITHER key.asc, NOR TWO rko-p*.key FILES FOUND. PLEASE PROVIDE ON GD: AND RESTART SCRIPT."
   printf "${NC}"; printf "${BLUE3}"
+  read me
 fi
 
 if [[ RCLONE_COMPLETE = "0" ]]
