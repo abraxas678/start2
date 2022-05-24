@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "version 14"; sleep 2
+echo "version 15"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -14,11 +14,8 @@ fi
 source $HOME/color.dat
 printf "${NC}"; printf "${BLUE2}"; 
 myspeed=2
-for i in {10..1}
-do
-  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 -u 8 myspeed
-done
-echo "speed [$myspeed]"
+clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
+echo "speed [$myspeed]"; sleep $myspeed
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
@@ -29,7 +26,7 @@ echo "speed [$myspeed]"
 #fi
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep 2
+echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
 ##########################################  [1]
 printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
@@ -37,7 +34,7 @@ echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep 2
+echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
 #################################################################  [2]
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE2}"
@@ -47,16 +44,16 @@ sudo apt install -y zsh php
 printf "${NC}"; printf "${BLUE2}"
 echo; echo INSTALL OH MY ZSH
 printf "${NC}"; printf "${BLUE3}"
-sleep 2; echo
+sleep $myspeed; echo
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -L git.io/antigen > antigen.zsh
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[3] CLONE REPOSITORY"; sleep 2
+echo "[3] CLONE REPOSITORY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [3]
 cd $HOME
-sleep 2
+sleep $myspeed
 git clone https://github.com/abraxas678/start2.git; echo
 
 
@@ -64,10 +61,10 @@ git clone https://github.com/abraxas678/start2.git; echo
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 #then
 #  echo; echo gpg INSTALLED
-#  sleep 2
+#  sleep $myspeed
 #else
 #  echo; echo INSTALL gpg
-#  sleep 2
+#  sleep $myspeed
 #  apt install gpg -y
 #  echo
   #echo SETUP GPG MANUALLY VIA OD VAULT
@@ -91,9 +88,9 @@ git clone https://github.com/abraxas678/start2.git; echo
 
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep 2
+echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE1}"; 
-echo "GPG"; echo; sleep 2
+echo "GPG"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 
 ### >>> IF 1 O
@@ -121,7 +118,7 @@ else
 fi
 
 printf "${BLUE1}"; 
-echo; echo "RCLONE"; echo; sleep 2
+echo; echo "RCLONE"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 
 ### >>> IF 1 O
@@ -165,7 +162,7 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
     else
         echo "RCLONE_GD=0"; sleep 1
         RCLONE_GD=0
-        echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep 2
+        echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
         rclone config
  ### >>> IF 3 C
     fi
@@ -186,7 +183,7 @@ fi
 
 ########################################## INSTALL & SETUP ===============================
 printf "${UL1}"; printf "${BLUE1}"
-echo; echo "INSTALL AND SETUP"; sleep 2
+echo; echo "INSTALL AND SETUP"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 echo
   echo GPG_INSTALLED=$GPG_INSTALLED; sleep 1
@@ -207,24 +204,24 @@ read -t 10 me
 if [[ $RCLONE_INSTALL = "0" ]]
   then
   echo
-  echo "[4] SETUP RCLONE"; echo; sleep 2; echo
+  echo "[4] SETUP RCLONE"; echo; sleep $myspeed; echo
   ############################################ [4]
   echo
   cd $HOME/start2
   echo
   echo PWD: $PWD
-  echo; sleep 2
+  echo; sleep $myspeed
   apt install rclone -y
 fi
 
 if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
   then
-    echo "SETUP GD NOW PLEASE:"; echo; sleep 2
+    echo "SETUP GD NOW PLEASE:"; echo; sleep $myspeed
     rclone config
 fi
 
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "[5] setup GPG encryption"; sleep 2
+echo; echo "[5] setup GPG encryption"; sleep $myspeed
 #################################################################### SETUP GPG [5]
 echo
 printf "${NC}"; printf "${BLUE3}"
@@ -246,7 +243,7 @@ then
   apt install gpg -y
 else
   printf "${GREEN}"
-  echo; echo GPG ALREADY INSTALLED; echo; sleep 2
+  echo; echo GPG ALREADY INSTALLED; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
 fi
 
@@ -263,14 +260,14 @@ then
   then
     GPG_KEY_ASC=2
     printf "${NC}"; printf "${RED}"
-    echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep 2
+    echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
     echo BUTTON; read me
     printf "${NC}"; printf "${BLUE3}"
   elif [[ $mykey < 1 ]] 
   then
     GPG_KEY_ASC=0
     printf "${NC}"; printf "${RED}"
-    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2} LOOKING FOR rko-p FILES NOW."; echo; sleep 2
+    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2} LOOKING FOR rko-p FILES NOW."; echo; sleep $myspeed
     printf "${NC}"; printf "${BLUE3}"
   else
     GPG_KEY_ASC=1
@@ -284,14 +281,14 @@ then
     then
       GPG_KEY_RKO=3
       printf "${NC}"; printf "${RED}"
-      printf "MORE THAN TWO rko-p*.key FILES FOUND."; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "MORE THAN TWO rko-p*.key FILES FOUND."; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       echo BUTTON; read me
     elif [[ $myrko = "1" ]]
     then
       GPG_KEY_RKO=2
       printf "${NC}"; printf "${RED}"
-      printf "ONLY ONE rko-p*.key FILES FOUND."; printf "${NC}"; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "ONLY ONE rko-p*.key FILES FOUND."; printf "${NC}"; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
     elif [[ $myrko = "2" ]]
     then
@@ -321,7 +318,7 @@ then
   ls $HOME/tmpgpginstall
   echo
   printf "${NC}"; printf "${BLUE2}"
-  echo; echo "IMPORTING GPG FILES"; echo; sleep 2
+  echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   gpg --import *
   rm -rf $HOME/tmpgpginstall
@@ -339,7 +336,7 @@ then
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
       sudo chmod +x *.sh
       printf "${NC}"; printf "${BLUE2}"
-      echo; echo RCLONESETUP VIA SCRIPT STATING; echo; sleep 2
+      echo; echo RCLONESETUP VIA SCRIPT STATING; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
       rm rclonesetup.sh
@@ -347,34 +344,34 @@ fi
 
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep 2
+echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE2}"
-echo "sudo apt-get install restic python3-pip -y"; sleep 2
+echo "sudo apt-get install restic python3-pip -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[7] SETUP SSH"; sleep 2
+echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7]
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
-  echo; echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep 2
+  echo; echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep $myspeed
 else
-  echo STARTING SHH SETUP; sleep 2
-  echo "rclone copy gd:/sec/start/id_rsa.asc . -P"; sleep 2
+  echo STARTING SHH SETUP; sleep $myspeed
+  echo "rclone copy gd:/sec/start/id_rsa.asc . -P"; sleep $myspeed
   echo
   rclone copy gd:/sec/start/id_rsa.asc . -P
   echo
-  sleep 2
-  echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep 2
+  sleep $myspeed
+  echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
   echo
   gpg --decrypt id_rsa.asc > id_rsa
   rm id*.asc
   sudo mkdir $HOME/.ssh
-  echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep 2
+  echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
   #  DEFINE USERNAME
   echo; echo; echo "CURRENT USER DETAILS:"; echo;
   echo $USER; echo; id
@@ -386,9 +383,9 @@ else
   sudo chmod 700 -R $HOME
   mv id_rsa $HOME/.ssh
 fi
-echo; echo "STARTING SSH AGENT"; echo; sleep 2
+echo; echo "STARTING SSH AGENT"; echo; sleep $myspeed
 eval `ssh-agent -s`
-echo; echo "SETTING FOLDER PERMISSIONS"; echo; sleep 2
+echo; echo "SETTING FOLDER PERMISSIONS"; echo; sleep $myspeed
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
@@ -399,7 +396,7 @@ sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep 2; echo 
+echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 printf "${NC}"; printf "${BLUE3}"
 ######################################################### [9]
 restic -r rclone:gd:restic snapshots
@@ -417,10 +414,10 @@ read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
   rm -rf $HOME/tmprestigrestore
-  echo; echo "RESTIC TO TMP FOLDER"; echo; sleep 2
+  echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
   printf "${NC}"; printf "${RED}"
-  echo; echo "RCLONE TO $HOME - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep 2
+  echo; echo "RCLONE TO $HOME - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
   echo BUTTON; read me
   printf "${NC}"; printf "${BLUE3}"
   rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
@@ -465,7 +462,7 @@ if [[ $myfonts = "y" ]]; then
   # sleep 1
 fi
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "SETUP NTFY"; sleep 2
+echo; echo "SETUP NTFY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###################################################################################### NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
@@ -489,20 +486,20 @@ sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
 printf "${NC}"; printf "${BLUE2}"
 ##################################################################################### PIP INSTALLS
-echo; echo "PIP INSTALLS"; sleep 2
+echo; echo "PIP INSTALLS"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 pip install apprise
 pip install paho-mqtt
 ############################
 ##################################################################################### DOCKER
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "INSTALL DOCKER"; sleep 2
+echo; echo "INSTALL DOCKER"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 apt-get install docker.io docker-compose -y
 ############################
 echo
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "INSTALL BREW"; sleep 2
+echo; echo "INSTALL BREW"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
 printf "${NC}"; printf "${BLUE1}"
@@ -540,7 +537,7 @@ rm -rf $HOME/start
 rm -rf $HME/start2
 echo
 echo EXEC ZSH
-sleep 2
+sleep $myspeed
 echo
 exec zsh
 printf "${GREEN}"; printf "${UL1}"
