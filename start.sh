@@ -252,7 +252,7 @@ then
   then
     GPG_KEY_ASC=0
     printf "${NC}"; printf "${RED}"
-    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2} LOOKING FOR rko-p FILES NOW."; sleep 2
+    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2} LOOKING FOR rko-p FILES NOW."; echo; sleep 2
     printf "${NC}"; printf "${BLUE3}"
   else
     GPG_KEY_ASC=1
