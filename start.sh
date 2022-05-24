@@ -250,7 +250,7 @@ then
   then
     GPG_KEY_ASC=0
     printf "${NC}"; printf "${RED}"
-    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2}LOOKING FOR rko-p FILES NOW."; sleep 2
+    echo; printf "key.asc NOT FOUND."; printf "${NC}"; printf "${BLUE2} LOOKING FOR rko-p FILES NOW."; sleep 2
     printf "${NC}"; printf "${BLUE3}"
   else
     GPG_KEY_ASC=1
@@ -264,14 +264,14 @@ then
     then
       GPG_KEY_RKO=3
       printf "${NC}"; printf "${RED}"
-      printf "MORE THAN TWO rko-p*.key FILES FOUND."; printf "${BLUE2}PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "MORE THAN TWO rko-p*.key FILES FOUND."; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
       printf "${NC}"; printf "${BLUE3}"
       echo BUTTON; read me
     elif [[ $myrko = "1" ]]
     then
       GPG_KEY_RKO=2
       printf "${NC}"; printf "${RED}"
-      printf "ONLY ONE rko-p*.key FILES FOUND."; printf "${NC}"; printf "${BLUE2}PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
+      printf "ONLY ONE rko-p*.key FILES FOUND."; printf "${NC}"; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep 2
       printf "${NC}"; printf "${BLUE3}"
     elif [[ $myrko = "2" ]]
     then
@@ -286,7 +286,7 @@ fi
 if [[ $GPG_KEY_RKO = "1" || GPG_KEY_ASC = "1" ]]
 then
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
-  cd $HOME/tmpgpginstall######
+  cd $HOME/tmpgpginstall
   ls $HOME/tmpgpginstall
   printf "${NC}"; printf "${BLUE2}"
   echo; echo "IMPORTING GPG FILES"; echo; sleep 2
