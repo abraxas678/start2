@@ -166,16 +166,26 @@ then
 fi
 if [[ GPG_KEYS = "0" ]]
 then
-  echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"
+  echo "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC -- SCRIPT WILL REMOVE AND DELETE THOSE FILES" 
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
   echo; echo BUTTON; read me
+  
+  echo myrko=$(rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l)
+  if [[ $myrko > 1 ]] 
+  then
+  
+  fi
+  
+  echo mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
+  
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc"
 #  echo "gpg --import"
    echo
  fi
 fi
 
-
+rclone ls gd:sec --max-depth 1 --include="rko-p*.key" | wc -l
+ 
 
 
 
