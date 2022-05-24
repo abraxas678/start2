@@ -13,10 +13,11 @@ fi
 source $HOME/color.dat
 printf "${NC}"; printf "${BLUE2}"; 
 myspeed=2
-for i in {5..1}
+for i in {10..1}
 do
-clear; printf " [$i] DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
+  clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
 done
+echo "speed [$myspeed]"
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
