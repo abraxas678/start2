@@ -316,13 +316,15 @@ then
 fi          
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo
+echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep 2
+printf "${NC}"; printf "${BLUE2}"
+echo "sudo apt-get install restic python3-pip -y"; sleep 2
 printf "${NC}"; printf "${BLUE3}"
 sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "[7] SETUP SSH"
+echo "[7] SETUP SSH"; sleep 2
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7]
 sshresult=$(ssh -T git@github.com)
