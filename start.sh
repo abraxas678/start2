@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "version 16"; sleep $myspeed
+echo "version 17"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -14,7 +14,7 @@ fi
 source $HOME/color.dat
 printf "${NC}"; printf "${BLUE2}"; 
 myspeed="2"
-clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 -t 1 myspeed
+clear; printf " <$i> DEFINE SPEED (default=2): "; read -n 1 myspeed
 echo "speed [$myspeed]"; sleep $myspeed
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
