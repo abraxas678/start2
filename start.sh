@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 myspeed="2"
-echo "version 23"; sleep $myspeed
+echo "version 24"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
