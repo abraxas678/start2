@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 66"; sleep $myspeed
+echo "version 67"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -474,7 +474,53 @@ then
   ls $HOME/tmprestigrestore/$myresticuserfolder
   printf "${NC}"; printf "${BLUE3}"
   echo BUTTON; 
-  rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv
+  #         --ignore-existing        Skip all files that exist on destination
+  #   -u, --update      Skip files that are newer on the destination
+  printf "${BLUE1}"; printf "${UL1}"
+  echo; echo "COPY-MODE:"; echo; sleep $myspeed
+  printf "${NC}"; printf "${BLUE2}"
+  echo "[1] conservative: skip all files already existing"
+  printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+  "; echo
+  echo; echo "[2] moderate: only overwrite if newer:"
+   printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+  "; echo
+  echo; echo "[3] agressive: overwrite everything, dont delete"
+   printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+  "; echo
+  echo;  printf "${BLUE2} >>>> "; read mymode
+  printf "${NC}"; printf "${BLUE3}"
+  x=0
+  while [[ $x = "0" ]]
+  do
+    if [[ $mymode = "1" ]]
+    then
+      x=1
+      echo "rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
+      rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+    elif [[ $mymode = "2" ]]
+    then
+      x=1
+      echo "rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
+      rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+    elif [[ $mymode = "3" ]]
+    then
+      x=1
+      echo " rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
+      rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+    else
+      x=0
+      printf "${RED}"
+      echo "select [1] to [3]"; printf "${NC}"; printf "${BLUE3}"
+    fi
+  done
+    # skip all, already existing:
+  rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+  # only overwrite if newer:
+  rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+
+  #overwrite everything, dont delete: rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+  
   ############### !!!!!!!!!!!!!! ##################################
   echo
 fi
