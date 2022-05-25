@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 63"; sleep $myspeed
+echo "version 64"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -39,11 +39,11 @@ echo ""
     echo; echo; printf "USERNAME TO USE: >>> "; read myuser
     printf "${NC}"; printf "${BLUE3}"
     echo; echo "USING $myuser"; echo; echo BUTTON; read me
+    echo; echo "sudo chown $myuser:1000 $HOME -R"
+     echo "sudo chmod 700 -R $HOME"
+    sudo chown $myuser:100 $HOME -R
+    sudo chmod 700 -R $HOME
   fi 
-  echo; echo "sudo chown $myuser:1000 $HOME -R"
-  echo "sudo chmod 700 -R $HOME"
-  sudo chown $myuser:100 $HOME -R
-  sudo chmod 700 -R $HOME
 echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
