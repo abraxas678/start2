@@ -15,7 +15,7 @@ clear
   sudo chmod 700 -R $HOME
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
-echo "version 32"; sleep $myspeed
+echo "version 33"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
