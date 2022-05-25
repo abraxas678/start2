@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 50"; sleep $myspeed
+echo "version 51"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -43,6 +43,7 @@ tput cup 7 0 && tput ed
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
+echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 ############################################################ DEFINE SPEED
@@ -178,9 +179,6 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
     echo "RCLONE_CONFIG=1"; sleep $myspeed1
     RCLONE_CONFIG=1
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-     ########################### rclonesize #########################################
-            echo; echo rclonesize $rclonesize; echo
-            read me
     #echo "rlone.conf SIZE: $rclonesize"
     #echo
 ### >>> IF 3 O
@@ -222,21 +220,17 @@ else
   RCLONE_COMPLETE=0
 ### >>> IF 1 c
 fi
-
-########################################## INSTALL & SETUP ===============================
 printf "${UL1}"; printf "${BLUE1}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
+########################################## INSTALL & SETUP ===============================
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE3}"
-sleep 3
-echo "BUTTON timer $myspeed2"
-read -t $myspeed2 me
-
+sleep $myspeed
 if [[ $RCLONE_INSTALL = "0" ]]
   then
   echo
   echo "[4] SETUP RCLONE"; echo; sleep $myspeed; echo
-  ############################################ [4]
+  ################################################### [4] SETUP RCLONE
   echo
   cd $HOME/start2
   echo
@@ -377,7 +371,7 @@ echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-###############################################################################  [7]
+###############################################################################  [7] SETUP SSH
 sshresult=$(ssh -T git@github.com)
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
@@ -427,10 +421,17 @@ printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
 printf "${NC}"; printf "${BLUE3}"
-restic -r rclone:gd:restic snapshots
+mysnapshots=$(restic -r rclone:gd:restic snapshots)
+echo $mysnapshots
+echo
+printf "[1]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 1p
+printf "[2]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 2p
+printf "[3]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 3p
+printf "[4]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 4p
+printf "[5]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 5p
 echo
 printf "${NC}"; printf "${BLUE2}"
-echo "Which snapshot do you wish to restore?"
+echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
 echo
 printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
 myrestore="n"
@@ -456,8 +457,8 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   rclone lsl $HOME/tmprestigrestore --max-depth 2
-  echo BUTTON START COPY; 
-  read me
+  echo BUTTON START COPY (y/n); 
+  
   ###### find username of restic snapshot for correct path usage: 
   myresticuserfolder=$(ls -d $HOME/tmprestigrestore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
   printf "${NC}"; printf "${BLUE2}"; 
