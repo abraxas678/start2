@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 70"; sleep $myspeed
+echo "version 71"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -484,13 +484,15 @@ then
   #   -u, --update      Skip files that are newer on the destination
   printf "${BLUE1}"; printf "${UL1}"
   echo; echo "COPY-MODE:"; echo; sleep $myspeed
-  printf "${NC}"; printf "${BLUE2}"
+  printf "${NC}"; printf "${BLUE1}"
   echo "[1] conservative: skip all files already existing"
   printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   "; echo
+  printf "${NC}"; printf "${GREEN}"
   echo; echo "[2] moderate: only overwrite if newer:"
    printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
   "; echo
+  printf "${NC}"; printf "${BLUE1}"
   echo; echo "[3] agressive: overwrite everything, dont delete"
    printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
