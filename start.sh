@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 54"; sleep $myspeed
+echo "version 55"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -16,7 +16,7 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
-tput cup 1 0 && tput ed; 
+#tput cup 1 0 && tput ed; 
 echo "[1] DEFINE USERNAME"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
 echo "[3] CLONE REPOSITORY"
@@ -43,7 +43,7 @@ tput cup 7 0 && tput ed
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
-echo; echo
+echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 ############################################################ DEFINE SPEED
