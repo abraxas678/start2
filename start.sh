@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 60"; sleep $myspeed
+echo "version 61"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -57,7 +57,7 @@ then
 fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"; sleep 2
-tput cup 10 10
+#tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
@@ -458,7 +458,7 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   rclone lsl $HOME/tmprestigrestore --max-depth 2
-  echo BUTTON START COPY (y/n); 
+  echo "BUTTON START COPY (y/n)"; 
   
   ###### find username of restic snapshot for correct path usage: 
   myresticuserfolder=$(ls -d $HOME/tmprestigrestore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
