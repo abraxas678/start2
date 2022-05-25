@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 41"; sleep $myspeed
+echo "version 42"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -39,6 +39,7 @@ tput cup 7 0 && tput ed
   sudo chmod 700 -R $HOME
 printf "${NC}"; printf "${BLUE2}"; 
 printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
+############################################################ DEFINE SPEED
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
 if [[ $myspeed1 -lt "0" ]]
@@ -220,17 +221,6 @@ fi
 printf "${UL1}"; printf "${BLUE1}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-echo
-  echo GPG_INSTALLED=$GPG_INSTALLED; sleep $myspeed1
-  echo GPG_KEYS=$GPG_KEYS; sleep $myspeed1
-  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep $myspeed1
-  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep $myspeed1
-  echo
-  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep $myspeed1
-  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep $myspeed1
-  echo RCLONE_GD=$RCLONE_GD; sleep $myspeed1
-  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep $myspeed1
-echo
 printf "${NC}"; printf "${BLUE3}"
 sleep 3
 echo "BUTTON timer $myspeed2"
