@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 46"; sleep $myspeed
+echo "version 47"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -25,20 +25,26 @@ echo "[5] SETUP GPG"
 echo ""
 tput cup 7 0 && tput ed
  #  [1] DEFINE USERNAME
+ #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
   printf "${NC}"; printf "${BLUE3}"
   echo $USER; echo; sleep 1; id
   printf "${NC}"; printf "${BLUE2}"; 
-  echo; printf "USERNAME TO USE: >>> "; read myuser
-  printf "${NC}"; printf "${BLUE3}"
-  echo; echo "USING $myuser"; echo; echo BUTTON; read me
+  printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
+  read -n 1 myanswer
+  if [[ $myanswer -ne "y" ]]
+  then
+    echo; printf "USERNAME TO USE: >>> "; read myuser
+    printf "${NC}"; printf "${BLUE3}"
+    echo; echo "USING $myuser"; echo; echo BUTTON; read me
+  fi 
   echo; echo "sudo chown $myuser:1000 $HOME -R"
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
 printf "${NC}"; printf "${BLUE2}"; 
-printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
+echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 ############################################################ DEFINE SPEED
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
