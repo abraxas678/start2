@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 44"; sleep $myspeed
+echo "version 45"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -182,6 +182,8 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
           echo "RCLONE_GD=1"; sleep $myspeed1
           RCLONE_GD=1
  ### >>> IF 5 O
+ #######################################################################################
+            echo; echo rclonesize $rclonesize; echo
             if [[ $rclonesize -gt 6000 ]]
             then
               echo "RCLONE_COMPLETE=1"; sleep $myspeed1
