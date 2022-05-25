@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 47"; sleep $myspeed
+echo "version 48"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -190,27 +190,23 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
         then
           echo "RCLONE_GD=1"; sleep $myspeed1
           RCLONE_GD=1
- ### >>> IF 5 O
-            if [[ $rclonesize -gt 6000 ]]
-            then
-              echo "RCLONE_COMPLETE=1"; sleep $myspeed1
-              RCLONE_COMPLETE=1
- ### >>> IF 5 E
-            else
-              echo "RCLONE_COMPLETE=0"; sleep $myspeed1
-              RCLONE_COMPLETE=0
- ### >>> IF 5 C
-            fi 
+        else
+          echo "RCLONE_GD=0"; sleep $myspeed1
+          RCLONE_GD=0
+          echo "RCLONE_COMPLETE=0"; sleep $myspeed1
+          echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
+          RCLONE_COMPLETE=0
+          rclone config
+        fi 
  ### >>> IF 4 C
-        fi
- ### >>> IF 3 E
-    else
-        echo "RCLONE_GD=0"; sleep $myspeed1
-        RCLONE_GD=0
-        echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
-        rclone config
- ### >>> IF 3 C
+    elif [[ $rclonesize -gt 6000 ]]
+    then
+      RCLONE_GD=1
+      RCLONE_COMPLETE=1
+      echo "RCLONE_GD=1"; sleep $myspeed1
+      echo "RCLONE_COMPLETE=1"; sleep $myspeed1
     fi
+ ### >>> IF 3 C
 ### >>> IF 2 C
   fi
 ### >>> IF 1 E
