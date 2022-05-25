@@ -14,7 +14,13 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
- #  DEFINE USERNAME
+tput cup 1 0; echo "[1] DEFINE USERNAME"
+echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
+echo "[3] CLONE REPOSITORY"
+echo "[4] SETUP RCLONE"
+echo "[5] SETUP GPG"
+echo ""
+ #  [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
   printf "${NC}"; printf "${BLUE3}"
@@ -49,7 +55,7 @@ tput cup 10 10
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-##########################################  [1]
+##########################################  [1] SYSTEM UPATE AND UPGRADE
 printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
@@ -57,7 +63,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
-#################################################################  [2]
+#################################################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE2}"
 echo; echo INSTALL ZSH
@@ -73,7 +79,7 @@ echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[3] CLONE REPOSITORY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-###############################################################################  [3]
+############################################################################### [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
 git clone https://github.com/abraxas678/start2.git; echo
@@ -244,7 +250,7 @@ fi
 
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[5] setup GPG encryption"; sleep $myspeed
-#################################################################### SETUP GPG [5]
+#################################################################### [5] SETUP GPG 
 echo
 printf "${NC}"; printf "${BLUE3}"
 echo
