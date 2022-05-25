@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 55"; sleep $myspeed
+echo "version 56"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -421,8 +421,9 @@ printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
 printf "${NC}"; printf "${BLUE3}"
-mysnapshots=$(restic -r rclone:gd:restic snapshots)
-echo $mysnapshots
+restic -r rclone:gd:restic snapshots > mysnapshots
+cat mysnapshots
+mysnapshots=$(cat mysnapshots)
 echo
 printf "[1]"; my1=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p)
 printf "[2]"; my2=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p)
