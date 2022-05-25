@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 39"; sleep $myspeed
+echo "version 40"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -64,6 +64,8 @@ printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
+echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
+source $HOME/.bashrc
 sudo apt-get install tmux tmuxinator
 echo
 printf "${BLUE1}"; printf "${UL1}"
