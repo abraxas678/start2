@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 69"; sleep $myspeed
+echo "version 70"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -442,6 +442,8 @@ echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
 printf "${NC}"; printf "${BLUE2}"
 echo; printf "restore to $PWD, correct? (y/n) >>> ";
 printf "${NC}"; printf "${BLUE3}" 
+mytext="restic snapshot version can be selected now"
+curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
@@ -459,6 +461,8 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   rclone lsl $HOME/tmprestigrestore --max-depth 2
+  mytext="snapshot downloaded, please approve continuation"
+  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
   echo "BUTTON START COPY (y/n)"; 
   
   ###### find username of restic snapshot for correct path usage: 
@@ -473,6 +477,8 @@ then
   printf "${NC}"; printf "${BLUE4}"
   ls $HOME/tmprestigrestore/$myresticuserfolder
   printf "${NC}"; printf "${BLUE3}"
+  mytext="please approve and select COPY MODE"
+  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
   echo BUTTON; 
   #         --ignore-existing        Skip all files that exist on destination
   #   -u, --update      Skip files that are newer on the destination
@@ -524,6 +530,8 @@ then
   ############### !!!!!!!!!!!!!! ##################################
   echo
 fi
+mytext="transfer finished. transfer finished"
+curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo; echo "[10] INSTALL KEEPASSXC"
 ########################################## KEEPASSXC [10]
