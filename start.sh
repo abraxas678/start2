@@ -446,6 +446,7 @@ then
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
+  ############### !!!!!!!!!!!!!! ###############################################
   printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
   echo; echo "restic copies these files:"; echo
@@ -454,7 +455,8 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   rclone lsl $HOME/tmprestigrestore --max-depth 2
-  echo BUTTON START COPY; read me
+  echo BUTTON START COPY; 
+  read me
   ###### find username of restic snapshot for correct path usage: 
   myresticuserfolder=$(ls -d $HOME/tmprestigrestore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
   printf "${NC}"; printf "${BLUE2}"; 
@@ -462,7 +464,14 @@ then
   printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
   echo; read me
   printf "${NC}"; printf "${BLUE3}"
+  printf "${BLUE1}"; printf "${UL1}"
+  echo; echo "$HOME/tmprestigrestore/$myresticuserfolder:"
+  printf "${NC}"; printf "${BLUE4}"
+  ls $HOME/tmprestigrestore/$myresticuserfolder
+  printf "${NC}"; printf "${BLUE3}"
+  echo BUTTON; 
   rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv
+  ############### !!!!!!!!!!!!!! ##################################
   echo
 fi
 printf "${BLUE1}"; printf "${UL1}"
@@ -592,5 +601,6 @@ echo EXEC ZSH
 printf "${NC}"
 sleep $myspeed
 echo
+rm -rf .antigen
 exec zsh
 printf "${NC}"
