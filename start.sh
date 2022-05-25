@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 53"; sleep $myspeed
+echo "version 54"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -424,10 +424,10 @@ printf "${NC}"; printf "${BLUE3}"
 mysnapshots=$(restic -r rclone:gd:restic snapshots)
 echo $mysnapshots
 echo
-printf "[1]"; echo "$mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 1p
-printf "[2]"; echo "$mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 2p
-printf "[3]"; echo "$mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 3p
-printf "[4]"; echo "$mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 4p
+printf "[1]"; my1=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p)
+printf "[2]"; my2=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p)
+printf "[3]"; my3=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p)
+printf "[4]"; my4=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p)
 printf "[5]"; my5=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5
 echo
 printf "${NC}"; printf "${BLUE2}"
