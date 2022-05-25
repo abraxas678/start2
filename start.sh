@@ -548,12 +548,11 @@ if [[ $brewsetup != "n" ]]; then
   brew install gcc  
 fi
 ################################################################### BREW BASED SOFTWARE
-brew install fzf
 brew install thefuck
-$(brew --prefix)/opt/fzf/install
 brew install gcalcli
-printf "${NC}"; printf "${BLUE2}"; 
-echo
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+printf "${NC}"; printf "${BLUE2}"; echo
 echo AUTOREMOVE; sleep $myspeed
 ################################################################# CLEAN UP
 echo
