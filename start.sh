@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 56"; sleep $myspeed
+echo "version 57"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -425,11 +425,11 @@ restic -r rclone:gd:restic snapshots > mysnapshots
 cat mysnapshots
 mysnapshots=$(cat mysnapshots)
 echo
-printf "[1]"; my1=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p)
-printf "[2]"; my2=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p)
-printf "[3]"; my3=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p)
-printf "[4]"; my4=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p)
-printf "[5]"; my5=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5
+printf "[1]"; my1=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p); echo $my1; echo
+printf "[2]"; my2=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p); echo $my2; echo
+printf "[3]"; my3=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p); echo $my3; echo
+printf "[4]"; my4=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p); echo $my4; echo
+printf "[5]"; my5=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5; echo
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
