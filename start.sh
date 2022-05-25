@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 48"; sleep $myspeed
+echo "version 49"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -46,6 +46,7 @@ tput cup 7 0 && tput ed
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 ############################################################ DEFINE SPEED
+printf "${NC}"; printf "${BLUE3}"
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
 if [[ $myspeed1 -lt "0" ]]
@@ -349,16 +350,6 @@ else
 fi
 fi
 
-  echo GPG_INSTALLED=$GPG_INSTALLED; sleep $myspeed1
-  echo GPG_KEYS=$GPG_KEYS; sleep $myspeed1
-  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep $myspeed1
-  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep $myspeed1
-  echo
-  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep $myspeed1
-  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep $myspeed1
-  echo RCLONE_GD=$RCLONE_GD; sleep $myspeed1
-  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep 3
-
 if [[ $RCLONE_COMPLETE = "0" ]]
 then
       cd $HOME/start2
@@ -416,10 +407,13 @@ else
   printf "${BLUE1}"; printf "${UL1}" 
   echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
 fi
+printf "${NC}"; printf "${BLUE2}"
+echo; echo "STARTING SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-echo; echo "STARTING SSH AGENT"; echo; sleep $myspeed
 eval `ssh-agent -s`
-echo; echo "SETTING FOLDER PERMISSIONS"; echo; sleep $myspeed
+printf "${NC}"; printf "${BLUE2}"
+echo; echo "SETTING FOLDER PERMISSIONS"; sleep $myspeed
+printf "${NC}"; printf "${BLUE3}"
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
@@ -442,12 +436,14 @@ printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
 myrestore="n"
 echo
 echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
-echo; echo "restore to $PWD, correct? (y/n)"; 
+printf "${NC}"; printf "${BLUE2}"
+echo; printf "restore to $PWD, correct? (y/n) >>> ";
+printf "${NC}"; printf "${BLUE3}" 
 read -n 1 myrestore
 if [[ $myrestore = "y" ]]
 then
   rm -rf $HOME/tmprestigrestore
-  printf "${NC}"; printf "${BLUE2}"; 
+  printf "${NC}"; printf "${BLUE2}"; echo;
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
