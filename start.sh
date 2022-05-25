@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 61"; sleep $myspeed
+echo "version 62"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -77,6 +77,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
 source $HOME/.bashrc
 sudo apt-get install tmux tmuxinator
+tmuxinator start2
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
@@ -596,7 +597,7 @@ sudo apt autoremove -y
 echo
 rm -rf $HOME/start
 rm -rf $HME/start2
-#rm -rf $HOME/tmprestigrestore
+rm -rf $HOME/tmprestigrestore
 echo
 printf "${GREEN}"; printf "${UL1}"
 echo DONE 
