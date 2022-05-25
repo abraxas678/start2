@@ -77,7 +77,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
 source $HOME/.bashrc
 sudo apt-get install tmux tmuxinator
-tmuxinator start2
+############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
