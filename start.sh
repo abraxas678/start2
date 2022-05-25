@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 36"; sleep $myspeed
+echo "version 37"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -36,7 +36,7 @@ echo ""
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
 printf "${NC}"; printf "${BLUE2}"; 
-clear; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
+printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
 if [[ $myspeed1 -lt "0" ]]
