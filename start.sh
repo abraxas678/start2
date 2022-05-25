@@ -2,7 +2,7 @@
 clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
-echo "version 33"; sleep $myspeed
+echo "version 34"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
