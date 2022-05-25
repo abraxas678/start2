@@ -449,8 +449,14 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   echo BUTTON; read me
+  ###### find username of restic snapshot for correct path usage: 
+  myresticuserfolder=$(ls -d $HOME/tmprestigrestore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore//')
+  printf "${NC}"; printf "${BLUE2}"; 
+  echo; echo "rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv"
+  printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
+  echo; read me
   printf "${NC}"; printf "${BLUE3}"
-  rclone copy $HOME/tmprestigrestore/ $HOME/ -Pv
+  rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv
   echo
 fi
 ########################################## KEEPASSXC
