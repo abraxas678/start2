@@ -2,7 +2,7 @@
 clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
-echo "version 34"; sleep $myspeed
+echo "version 35"; sleep $myspeed
 cd $HOME
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -37,6 +37,7 @@ then
 fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"; sleep 2
+tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
 #read -n 1 -t 5 delstart
