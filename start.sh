@@ -407,6 +407,7 @@ else
   printf "${BLUE1}"; printf "${UL1}" 
   echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
 fi
+printf "${NC}"; printf "${BLUE3}"
 echo; echo "STARTING SSH AGENT"; echo; sleep $myspeed
 eval `ssh-agent -s`
 echo; echo "SETTING FOLDER PERMISSIONS"; echo; sleep $myspeed
