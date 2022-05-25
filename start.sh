@@ -1,18 +1,5 @@
 #!/bin/bash
 clear
- #  DEFINE USERNAME
-  printf "${NC}"; printf "${BLUE2}"
-  echo; echo; echo "CURRENT USER DETAILS:"; echo;
-  printf "${NC}"; printf "${BLUE3}"
-  echo $USER; echo; id
-  printf "${NC}"; printf "${BLUE2}"; 
-  echo; printf "USERNAME TO USE: >>>"; read myuser
-  printf "${NC}"; printf "${BLUE3}"
-  echo; echo "USING $myuser"; echo; echo BUTTON; read me
-  echo; echo "sudo chown $myuser:1000 $HOME -R"
-  echo "sudo chmod 700 -R $HOME"
-  sudo chown $myuser:100 $HOME -R
-  sudo chmod 700 -R $HOME
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 echo "version 33"; sleep $myspeed
@@ -27,6 +14,19 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
+ #  DEFINE USERNAME
+  printf "${NC}"; printf "${BLUE2}"
+  echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
+  printf "${NC}"; printf "${BLUE3}"
+  echo $USER; echo; sleep 1; id
+  printf "${NC}"; printf "${BLUE2}"; 
+  echo; printf "USERNAME TO USE: >>> "; read myuser
+  printf "${NC}"; printf "${BLUE3}"
+  echo; echo "USING $myuser"; echo; echo BUTTON; read me
+  echo; echo "sudo chown $myuser:1000 $HOME -R"
+  echo "sudo chmod 700 -R $HOME"
+  sudo chown $myuser:100 $HOME -R
+  sudo chmod 700 -R $HOME
 printf "${NC}"; printf "${BLUE2}"; 
 clear; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 echo "speed [$myspeed]"
@@ -421,7 +421,7 @@ sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
-############################################################### RESTIC SNAPSHOT [9]
+############################################################### RESTIC SNAPSHOT RESTORE [9]
 printf "${NC}"; printf "${BLUE3}"
 restic -r rclone:gd:restic snapshots
 echo
@@ -460,9 +460,9 @@ then
   rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv
   echo
 fi
-########################################## KEEPASSXC
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo; echo "INSTALL KEEPASSXC"
+echo; echo; echo "[10] INSTALL KEEPASSXC"
+########################################## KEEPASSXC [10]
 printf "${NC}"; printf "${BLUE3}"
 echo
 mykeepass="n"
@@ -480,7 +480,8 @@ if [[ $mykeepass = "y" ]]; then
 fi
 echo
 printf "${BLUE1}"; printf "${UL1}"
-echo "SOFTWARE INSTALLATION"
+echo "[11] SOFTWARE INSTALLATION"
+################################################ [11] SOFTWARE INSTALLATION
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
@@ -489,7 +490,8 @@ echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
 printf "${BLUE1}"; printf "${UL1}"
-echo "WANT TO INSTALL FONTS? (y/n)"
+echo "[12] WANT TO INSTALL FONTS? (y/n)"
+##################################################### [12] FONTS
 printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 20 myfonts
 if [[ $myfonts = "y" ]]; then
@@ -501,9 +503,9 @@ if [[ $myfonts = "y" ]]; then
   # sleep $myspeed1
 fi
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "SETUP NTFY"; sleep $myspeed
+echo; echo "[13] SETUP NTFY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-###################################################################################### NTFY
+######################################################################### [13] NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
 sudo apt install apt-transport-https
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
@@ -524,21 +526,21 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
 printf "${NC}"; printf "${BLUE2}"
-##################################################################################### PIP INSTALLS
-echo; echo "PIP INSTALLS"; sleep $myspeed
+echo; echo "[14] PIP INSTALLS"; sleep $myspeed
+############################################################## [14] PIP INSTALLS
 printf "${NC}"; printf "${BLUE3}"
 pip install apprise
 pip install paho-mqtt
-##################################################################################### DOCKER
+########################################################### [15] DOCKER
 printf "${BLUE1}"; printf "${UL1}"
-echo; echo "INSTALL DOCKER"; sleep $myspeed
+echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 apt-get install docker.io docker-compose -y
 #################################################### docker compose
 echo
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "INSTALL BREW"; sleep $myspeed
-################################################################# BREW
+echo; echo "[16] INSTALL BREW"; sleep $myspeed
+################################################################# [16] BREW
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
 printf "${NC}"; printf "${BLUE1}"
@@ -554,16 +556,18 @@ if [[ $brewsetup != "n" ]]; then
   sudo apt-get install build-essential -y
   brew install gcc  
 fi
-################################################################### BREW BASED SOFTWARE
+printf "${BLUE1}"; printf "${UL1}"
+echo "[17] INSTALL BREW BASED SOFTWARE"
+printf "${NC}"; printf "${BLUE3}"
+################################################################### [17] BREW BASED SOFTWARE
 brew install thefuck
 brew install gcalcli
 brew install fzf
 $(brew --prefix)/opt/fzf/install
-printf "${NC}"; printf "${BLUE2}"; echo
-echo AUTOREMOVE; sleep $myspeed
-################################################################# CLEAN UP
-echo
-printf "${NC}"; printf "${BLUE3}"
+printf "${BLUE1}"; printf "${UL1}"; echo
+echo "[18] AUTOREMOVE"; sleep $myspeed
+################################################################# [18] CLEAN UP
+echo; printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
 sudo apt autoremove -y
 
