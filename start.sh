@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 37"; sleep $myspeed
+echo "version 39"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -16,12 +16,14 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
-tput cup 1 0; echo "[1] DEFINE USERNAME"
+tput cup 1 0 && tput ed; 
+echo "[1] DEFINE USERNAME"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
 echo "[3] CLONE REPOSITORY"
 echo "[4] SETUP RCLONE"
 echo "[5] SETUP GPG"
 echo ""
+tput cup 7 0 && tput ed
  #  [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
@@ -62,6 +64,7 @@ printf "${NC}"; printf "${BLUE3}"
 echo "sudo apt-get update && sudo apt-get upgrade -y"
 echo; sleep 4
 sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install tmux tmuxinator
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
