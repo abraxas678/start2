@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 49"; sleep $myspeed
+echo "version 50"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -446,7 +446,7 @@ then
   printf "${NC}"; printf "${BLUE2}"; echo;
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
-  restic -r rclone:gd:restic restore $mysnapshot --target $HOME/tmprestigrestore
+  restic -r rclone:gd:restic -v restore $mysnapshot --target $HOME/tmprestigrestore
   ############### !!!!!!!!!!!!!! ###############################################
   printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
