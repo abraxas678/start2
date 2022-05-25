@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 62"; sleep $myspeed
+echo "version 63"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
