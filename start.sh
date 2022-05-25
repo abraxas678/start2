@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 51"; sleep $myspeed
+echo "version 52"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -35,7 +35,7 @@ tput cup 7 0 && tput ed
   read -n 1 myanswer
   if [[ $myanswer -ne "y" ]]
   then
-    echo; printf "USERNAME TO USE: >>> "; read myuser
+    echo; echo; printf "USERNAME TO USE: >>> "; read myuser
     printf "${NC}"; printf "${BLUE3}"
     echo; echo "USING $myuser"; echo; echo BUTTON; read me
   fi 
@@ -43,7 +43,7 @@ tput cup 7 0 && tput ed
   echo "sudo chmod 700 -R $HOME"
   sudo chown $myuser:100 $HOME -R
   sudo chmod 700 -R $HOME
-echo
+echo; echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
 ############################################################ DEFINE SPEED
@@ -428,7 +428,7 @@ printf "[1]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed
 printf "[2]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 2p
 printf "[3]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 3p
 printf "[4]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 4p
-printf "[5]"; echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 5p
+printf "[5]"; my5=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d'" | sed -n 5p); echo $my5
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
