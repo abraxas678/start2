@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 58"; sleep $myspeed
+echo "version 60"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -23,7 +23,7 @@ echo "[3] CLONE REPOSITORY"
 echo "[4] SETUP RCLONE"
 echo "[5] SETUP GPG"
 echo ""
-tput cup 7 0 && tput ed
+#tput cup 7 0 && tput ed
  #  [1] DEFINE USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
@@ -31,6 +31,7 @@ tput cup 7 0 && tput ed
   printf "${NC}"; printf "${BLUE3}"
   echo $USER; echo; sleep 1; id
   printf "${NC}"; printf "${BLUE2}"; 
+  echo
   printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
   read -n 1 myanswer
   if [[ $myanswer -ne "y" ]]
@@ -423,15 +424,12 @@ echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo
 printf "${NC}"; printf "${BLUE3}"
 restic -r rclone:gd:restic snapshots > mysnapshots
 cat mysnapshots
-mysnapshots=$(cat mysnapshots)
 echo
-echo MYSNAPSHOTS $mysnapshots
-echo
-printf "[1]"; my1=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p); echo $my1; echo
-printf "[2]"; my2=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p); echo $my2; echo
-printf "[3]"; my3=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p); echo $my3; echo
-printf "[4]"; my4=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p); echo $my4; echo
-printf "[5]"; my5=$(echo $mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5; echo
+printf "[1]"; my1=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p); echo $my1; echo
+printf "[2]"; my2=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p); echo $my2; echo
+printf "[3]"; my3=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p); echo $my3; echo
+printf "[4]"; my4=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p); echo $my4; echo
+printf "[5]"; my5=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5; echo
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
