@@ -488,7 +488,7 @@ then
   echo; echo "[3] agressive: overwrite everything, dont delete"
    printf "${BLUE4} rclone copy $HOME/tmprestigrestore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
-  echo;  printf "${BLUE2} >>>> "; read mymode
+  echo;  printf "${BLUE2} >>>> "; read -n 1 mymode
   printf "${NC}"; printf "${BLUE3}"
   x=0
   while [[ $x = "0" ]]
