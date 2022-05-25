@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 40"; sleep $myspeed
+echo "version 41"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -594,7 +594,7 @@ sudo apt autoremove -y
 echo
 rm -rf $HOME/start
 rm -rf $HME/start2
-rm -rf $HOME/tmprestigrestore
+#rm -rf $HOME/tmprestigrestore
 echo
 printf "${GREEN}"; printf "${UL1}"
 echo DONE 
