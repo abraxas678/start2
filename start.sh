@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 84"; sleep $myspeed
+echo "version 85"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -360,6 +360,8 @@ echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
 sshresult=$(ssh -T git@github.com)
+echo; echo sshresult $sshresult; echo; echo BUTTON; 
+read me 
 if [[ $sshresult = *"successfully authenticated"* ]]
 then
 printf "${GREEN}"
@@ -369,7 +371,7 @@ printf "${NC}"; printf "${BLUE3}"
 else
   printf "${RED}"
   echo; echo $sshresult; echo; printf "${BLUE1}"; printf "${UL1}"
-  echo STARTING SHH SETUP; sleep $myspeed
+  echo "STARTING SHH SETUP"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
