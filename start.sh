@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 74"; sleep $myspeed
+echo "version 75"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -437,12 +437,14 @@ echo
 printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
 myrestore="n"
 echo
+printf "${NC}"; printf "${BLUE4}"
+curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
+echo
 echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
 printf "${NC}"; printf "${BLUE2}"
 echo; printf "restore to $PWD, correct? (y/n) >>> ";
 printf "${NC}"; printf "${BLUE3}" 
 mytext="restic snapshot version can be selected now"
-curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 read -n 1 myrestore
 myy=0
 while [[ $myy = "0" ]]
