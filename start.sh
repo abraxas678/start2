@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 73"; sleep $myspeed
+echo "version 74"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -444,6 +444,9 @@ printf "${NC}"; printf "${BLUE3}"
 mytext="restic snapshot version can be selected now"
 curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 read -n 1 myrestore
+myy=0
+while [[ $myy = "0" ]]
+do
 if [[ $myrestore = "y" ]]
 then
   rm -rf $HOME/tmprestigrestore
@@ -530,7 +533,20 @@ then
   
   ############### !!!!!!!!!!!!!! ##################################
   echo
+  myy=1
+elif [[ $myrestore = "n" ]]
+then
+  echo "OK; n selected, I will exit"; sleep 3
+  echo BUTTON
+  read me
+  myy=1
+  exit
+else
+  echo "choose y or n"
+  myy=0
 fi
+done
+
 mytext="transfer finished. transfer finished"
 curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 printf "${BLUE1}"; printf "${UL1}"
