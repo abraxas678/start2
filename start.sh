@@ -1,9 +1,10 @@
 #!/bin/bash
 clear
+sudo chmod 777 $HOME/tmprestigrestore -R
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 76"; sleep $myspeed
+echo "version 77"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
