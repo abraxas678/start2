@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 80"; sleep $myspeed
+echo "version 81"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -507,6 +507,7 @@ then
   echo;  printf "${BLUE2} >>>> "; read -n 1 mymode
   printf "${NC}"; printf "${BLUE3}"
   x=0
+  sudo chmod 777 /tmp-restic-restore -R
   while [[ $x = "0" ]]
   do
     if [[ $mymode = "1" ]]
