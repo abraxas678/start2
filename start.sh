@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 81"; sleep $myspeed
+echo "version 82"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -459,15 +459,16 @@ then
   
   ###### find username of restic snapshot for correct path usage: 
   myresticuserfolder=$(ls -d /tmp-restic-restore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
+  echo myresticuserfolder $myresticuserfolder
   printf "${NC}"; printf "${BLUE2}"; 
-  echo; echo "rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv"
+  echo; echo "rclone copy$myresticuserfolder $HOME/ -Pv"
   printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
   echo; read me
   printf "${NC}"; printf "${BLUE3}"
   printf "${BLUE1}"; printf "${UL1}"
   echo; echo "/tmp-restic-restore/$myresticuserfolder:"
   printf "${NC}"; printf "${BLUE4}"
-  ls /tmp-restic-restore/$myresticuserfolder
+  ls$myresticuserfolder
   printf "${NC}"; printf "${BLUE3}"
   mytext="please approve and select COPY MODE"
   curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
@@ -480,15 +481,15 @@ then
   ################################################## COPY-MODE ###############################
   printf "${NC}"; printf "${BLUE1}"
   echo "[1] conservative: skip all files already existing"
-  printf "${BLUE4} rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+  printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   "; echo
   printf "${NC}"; printf "${GREEN}"
   echo; echo "[2] moderate: only overwrite if newer:"
-   printf "${BLUE4} rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+   printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
   "; echo
   printf "${NC}"; printf "${BLUE1}"
   echo; echo "[3] agressive: overwrite everything, dont delete"
-   printf "${BLUE4} rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+   printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
   echo;  printf "${BLUE2} >>>> "; read -n 1 mymode
   printf "${NC}"; printf "${BLUE3}"
@@ -499,18 +500,18 @@ then
     if [[ $mymode = "1" ]]
     then
       x=1
-      echo "rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
-      rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+      echo "rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
+      rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
     elif [[ $mymode = "2" ]]
     then
       x=1
-      echo "rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
-      rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+      echo "rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
+      rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
     elif [[ $mymode = "3" ]]
     then
       x=1
-      echo " rclone sync /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
-      rclone sync /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+      echo " rclone sync$myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
+      rclone sync$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
     else
       x=0
       printf "${RED}"
@@ -518,11 +519,11 @@ then
     fi
   done
     # skip all, already existing:
-  #rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+  #rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   # only overwrite if newer:
-  #rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+  #rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
 
-  #overwrite everything, dont delete: rclone copy /tmp-restic-restore/$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+  #overwrite everything, dont delete: rclone copy$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   
   ############### !!!!!!!!!!!!!! ##################################
   echo
