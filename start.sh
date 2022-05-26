@@ -81,7 +81,7 @@ sudo apt-get install tmux tmuxinator
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
-#################################################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
+#############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE2}"
 echo; echo INSTALL ZSH
@@ -97,11 +97,10 @@ echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[3] CLONE REPOSITORY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-############################################################################### [3] CLONE REPOSITORY
+######################################################################## [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
 git clone https://github.com/abraxas678/start2.git; echo
-
 
 ############################################################# weg
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
