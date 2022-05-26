@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 85"; sleep $myspeed
+echo "version 86"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -359,7 +359,9 @@ printf "${BLUE1}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
-sshresult=$(ssh -T git@github.com)
+ssh -T git@github.com > sshresult
+sshresult=$(cat sshresult)
+rm -f sshresult 
 echo; echo sshresult $sshresult; echo; echo BUTTON; 
 read me 
 if [[ $sshresult = *"successfully authenticated"* ]]
