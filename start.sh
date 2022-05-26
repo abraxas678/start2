@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 83"; sleep $myspeed
+echo "version 84"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -618,7 +618,13 @@ pip install paho-mqtt
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-apt-get install docker.io docker-compose -y
+if [[ $HOST = *"LAPTOP"* ]]
+then
+  printf "${RED}"
+  echo; echo "SKIPPING DOCKER INSTALLATION ON $HOST"; sleep $myspeed; printf "${NC}"; printf "${BLUE3}"
+else 
+  sudo apt-get install docker.io docker-compose -y
+fi
 #################################################### docker compose
 echo
 printf "${NC}"; printf "${BLUE2}"
