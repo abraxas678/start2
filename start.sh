@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 82"; sleep $myspeed
+echo "version 83"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -386,10 +386,10 @@ else
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
   printf "${BLUE1}"; printf "${UL1}" 
-  echo; echo "SETUP SHH FOLDER RIGHTS"; echo; sleep $myspeed
+  echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 fi
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "STARTING SSH AGENT"; sleep $myspeed
+echo "STARTING SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
 printf "${NC}"; printf "${BLUE2}"
@@ -500,18 +500,18 @@ then
     if [[ $mymode = "1" ]]
     then
       x=1
-      echo "rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
-      rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
+      rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
     elif [[ $mymode = "2" ]]
     then
       x=1
-      echo "rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
-      rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
+      rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
     elif [[ $mymode = "3" ]]
     then
       x=1
-      echo " rclone sync$myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
-      rclone sync$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+      echo " rclone sync $myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
+      rclone sync $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
     else
       x=0
       printf "${RED}"
