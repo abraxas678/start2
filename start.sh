@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 75"; sleep $myspeed
+echo "version 76"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -484,6 +484,7 @@ then
   mytext="please approve and select COPY MODE"
   curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
   echo BUTTON; 
+  sudo chmod 777 $HOME/tmprestigrestore -R 
   #         --ignore-existing        Skip all files that exist on destination
   #   -u, --update      Skip files that are newer on the destination
   printf "${BLUE1}"; printf "${UL1}"
