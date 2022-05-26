@@ -3,7 +3,7 @@ clear
 rm -rf $HOME/tmprestigrestore
 myspeed="2"
 #######################################################
-echo "version 71"; sleep $myspeed
+echo "version 72"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -238,7 +238,7 @@ if [[ $RCLONE_INSTALL = "0" ]]
   echo
   echo PWD: $PWD
   echo; sleep $myspeed
-  apt install rclone -y
+  sudo apt install rclone -y
 fi
 
 if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
