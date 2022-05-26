@@ -250,20 +250,6 @@ printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[5] setup GPG encryption"; sleep $myspeed
 #################################################################### [5] SETUP GPG 
 echo
-printf "${NC}"; printf "${BLUE3}"
-echo
-  echo GPG_INSTALLED=$GPG_INSTALLED; sleep $myspeed1
-  echo GPG_KEYS=$GPG_KEYS; sleep $myspeed1
-  echo GPG_KEY_ASC $GPG_KEY_ASC; sleep $myspeed1
-  echo GPG_KEY_RKO $GPG_KEY_RKO; sleep $myspeed1
-  echo
-  echo RCLONE_INSTALL=$RCLONE_INSTALL; sleep $myspeed1
-  echo CLONE_CONFIG=$RCLONE_CONFIG; sleep $myspeed1
-  echo RCLONE_GD=$RCLONE_GD; sleep $myspeed1
-  echo RCLONE_COMPLETE=$RCLONE_COMPLETE; sleep $myspeed1
-echo
-printf "${NC}"; printf "${BLUE3}"
-
 if [[ $GPG_INSTALLED = "0" ]]
 then
   apt install gpg -y
