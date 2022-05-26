@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 86"; sleep $myspeed
+echo "version 87"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -514,8 +514,9 @@ then
     elif [[ $mymode = "3" ]]
     then
       x=1
-      echo " rclone sync $myresticuserfolder $HOME/ -Pv --skip-links --fast-list"
-      rclone sync $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+      echo "sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list"
+     # rclone sync $HOME/ -Pv --skip-links --fast-list
+      sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list
     else
       x=0
       printf "${RED}"
