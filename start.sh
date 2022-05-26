@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 79"; sleep $myspeed
+echo "version 80"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -453,6 +453,7 @@ if [[ $myrestore = "y" ]]
 then
   sudo rm -rf /tmp-restic-restore
   sudo mkdir /tmp-restic-restore
+  sudo chmod 777 /tmp-restic-restore -R 
   printf "${NC}"; printf "${BLUE2}"; echo;
   echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
