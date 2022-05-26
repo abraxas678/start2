@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
-sudo chmod 777 /tmp-restic-restore -R
-rm -rf /tmp-restic-restore
+sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
 echo "version 79"; sleep $myspeed
