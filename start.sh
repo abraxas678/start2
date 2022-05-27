@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 87"; sleep $myspeed
+echo "version 88"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -359,7 +359,7 @@ printf "${BLUE1}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
-ssh -T git@github.com > sshresult
+sudo ssh -T git@github.com > sshresult
 sshresult=$(cat sshresult)
 rm -f sshresult 
 echo; echo sshresult $sshresult; echo; echo BUTTON; 
@@ -617,8 +617,8 @@ printf "${NC}"; printf "${BLUE2}"
 echo; echo "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 printf "${NC}"; printf "${BLUE3}"
-pip install apprise
-pip install paho-mqtt
+pip install apprise; sleep $myspeed
+pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
