@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 92"; sleep $myspeed
+echo "version 93"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -337,10 +337,12 @@ then
       printf "${YELLOW}"
       echo "starting decryption"; seep $myspeed
       printf "${NC}"; printf "${BLUE3}"
-      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
+      echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"; sleep $myspeed
+      gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh; sleep $myspeed
+      cat rclonesetup.sh
       sudo chmod +x *.sh
       printf "${NC}"; printf "${BLUE2}"
-      echo; echo RCLONESETUP VIA SCRIPT STATING; echo; sleep $myspeed
+      echo; echo RCLONESETUP VIA SCRIPT STARTING; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
       rm rclonesetup.sh
