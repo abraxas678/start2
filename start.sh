@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 89"; sleep $myspeed
+echo "version 90"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -410,6 +410,7 @@ printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
 printf "${NC}"; printf "${BLUE3}"
+cd %HOME
 restic -r rclone:gd:restic snapshots > mysnapshots
 cat mysnapshots
 echo
