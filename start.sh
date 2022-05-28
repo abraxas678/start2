@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 93"; sleep $myspeed
+echo "version 94"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -144,7 +144,7 @@ then
   echo GPG_INSTALLED=1; sleep $myspeed1
   GPG_INSTALLED=1
 ### >>> IF 2 O
-   if [[ $(gpg --list-keys) = *"amdamdes@mymails.cc"* ]]
+   if [[ $(gpg --list-secret-keys) -gt "0" ]]
    then
      echo "GPG_KEYS=1"; sleep $myspeed1
      GPG_KEYS=1
