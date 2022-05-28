@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 91"; sleep $myspeed
+echo "version 92"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
