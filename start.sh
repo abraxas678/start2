@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 94"; sleep $myspeed
+echo "version 95"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -312,9 +312,10 @@ then
   fi
 if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
-  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links
+  sleep $myspeed; echo; echo 'rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links'; echo; sleep $myspeed
+  rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links; sleep $myspeed
   cd $HOME/tmpgpginstall
-  echo; echo "files downloaded:"
+  echo; echo "files downloaded:"; sleep $myspeed
   ls $HOME/tmpgpginstall
   echo
   printf "${NC}"; printf "${BLUE2}"
@@ -335,7 +336,7 @@ if [[ $RCLONE_COMPLETE != "1" ]]
 then
       cd $HOME/start2
       printf "${YELLOW}"
-      echo "starting decryption"; seep $myspeed
+      echo "starting decryption"; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       echo "gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh"; sleep $myspeed
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh; sleep $myspeed
