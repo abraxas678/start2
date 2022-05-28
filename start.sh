@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 90"; sleep $myspeed
+echo "version 91"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -335,7 +335,7 @@ if [[ $RCLONE_COMPLETE = "0" ]]
 then
       cd $HOME/start2
       printf "${YELLOW}"
-      echo "starting decryption"
+      echo "starting decryption"; seep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       gpg --decrypt rclone_secure_setup2gd.sh.asc > rclonesetup.sh
       sudo chmod +x *.sh
@@ -344,6 +344,7 @@ then
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
       rm rclonesetup.sh
+      sleep $myspeed
 fi  
 
 echo
