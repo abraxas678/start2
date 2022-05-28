@@ -331,7 +331,7 @@ else
 fi
 fi
 
-if [[ $RCLONE_COMPLETE = "0" ]]
+if [[ $RCLONE_COMPLETE != "1" ]]
 then
       cd $HOME/start2
       printf "${YELLOW}"
