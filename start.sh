@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 103"; sleep $myspeed
+echo "version 104"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -57,7 +57,13 @@ then
   myspeed1=0
 fi
 myspeed2=$(($myspeed+5))
-echo "lower speed [$myspeed1]"; sleep 2
+echo "lower speed [$myspeed1]"
+printf "${NC}"; printf "${BLUE2}"; 
+echo; echo "restic password: >>> "
+printf "${NC}"; printf "${BLUE3}"
+read -n 4 mresticpw
+export RESTIC_REPOSITORY=rclone:gd:restic
+export RESTIC_PASSWORD=$myresticpw
 #tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
@@ -102,8 +108,7 @@ then
 
 echo $ts > mylastupdate.log
 else
-
-printf "${RED}"
+printf "${NC}"; printf "${RED}"
 echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
 echo
 printf "${NC}"; printf "${BLUE3}"
@@ -491,9 +496,9 @@ then
   echo; read me
   printf "${NC}"; printf "${BLUE3}"
   printf "${BLUE1}"; printf "${UL1}"
-  echo; echo "/tmp-restic-restore/$myresticuserfolder:"
+  echo; echo "/tmp-restic-restore/$myresticuserfolder:"; sleep $myspeed; sleep $myspeed; 
   printf "${NC}"; printf "${BLUE4}"
-  ls$myresticuserfolder
+  ls $myresticuserfolder; sleep $myspeed; 
   printf "${NC}"; printf "${BLUE3}"
   mytext="please approve and select COPY MODE"
   curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
@@ -514,9 +519,9 @@ then
   "; echo
   printf "${NC}"; printf "${BLUE1}"
   echo; echo "[3] agressive: overwrite everything, dont delete"
-   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+   printf "${BLUE4} rclone ${RED} SYNC ${BLUE4} $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
-  echo;  printf "${BLUE2} >>>> "; read -n 1 mymode
+  echo;  printf "${BLUE2} >>>> "; read -n 1 mymode; echo; echo
   printf "${NC}"; printf "${BLUE3}"
   x=0
   sudo chmod 777 /tmp-restic-restore -R
@@ -611,7 +616,7 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep $myspeed1
 fi
-printf "${NC}"; printf "${BLUE2}"
+printf "${NC}"; printf "${BLUE1}"
 echo; echo "[13] SETUP NTFY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ######################################################################### [13] NTFY
