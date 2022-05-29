@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 105"; sleep $myspeed
+echo "version 106"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -59,9 +59,10 @@ fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"
 printf "${NC}"; printf "${BLUE2}"; 
-echo; echo "restic password: >>> "
+echo; printf "restic password: >>> "
 printf "${NC}"; printf "${BLUE3}"
 read -n 4 mresticpw
+echo
 export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
 #tput cup 10 10
@@ -489,7 +490,7 @@ then
   echo "BUTTON START COPY (y/n)"; 
   
   ###### find username of restic snapshot for correct path usage: 
-  myresticuserfolder=$(ls -d /tmp-restic-restore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
+  myresticuserfolder=$(ls -d /tmp-restic-restore/*/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
   printf "${RED}"; echo myresticuserfolder $myresticuserfolder; printf "${NC}"; printf "${BLUE3}"; sleep 2
   printf "${NC}"; printf "${BLUE2}"; 
   echo; echo "rclone copy$myresticuserfolder $HOME/ -Pv"
