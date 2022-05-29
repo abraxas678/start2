@@ -551,6 +551,10 @@ then
       echo "select [1] to [3]"; printf "${NC}"; printf "${BLUE3}"
     fi
   done
+
+sudo chown $USER: $HOME -R
+sudo chown $USER: $myresticuserfolder -R 
+
     # skip all, already existing:
   #rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   # only overwrite if newer:
