@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 96"; sleep $myspeed
+echo "version 97"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -322,7 +322,7 @@ then
   printf "${NC}"; printf "${BLUE2}"
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
-  gpg --import *
+  sudo gpg --import *
   echo BUTTON
   read me 
   rm -rf $HOME/tmpgpginstall
