@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 98"; sleep $myspeed
+echo "version 99"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -655,7 +655,7 @@ if [[ $brewsetup != "n" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   brew install gcc  
-fi
+
 printf "${BLUE1}"; printf "${UL1}"
 echo "[17] INSTALL BREW BASED SOFTWARE"
 printf "${NC}"; printf "${BLUE3}"
@@ -664,6 +664,8 @@ brew install thefuck
 brew install gcalcli
 brew install fzf
 $(brew --prefix)/opt/fzf/install
+fi
+
 printf "${BLUE1}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
