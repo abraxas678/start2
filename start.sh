@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+cd $HOME
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
