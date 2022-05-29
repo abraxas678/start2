@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 104"; sleep $myspeed
+echo "version 105"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -73,12 +73,12 @@ export RESTIC_PASSWORD=$myresticpw
 #  cd $HOME
 #  rm -rf 
 #fi
-echo
-printf "${BLUE1}"; printf "${UL1}"
-echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
-then
 
+if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
+  then
+  echo
+  printf "${BLUE1}"; printf "${UL1}"
+  echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
   echo "sudo apt-get update && sudo apt-get upgrade -y"
@@ -471,10 +471,11 @@ then
   sudo mkdir /tmp-restic-restore
   sudo chmod 777 /tmp-restic-restore -R 
   printf "${NC}"; printf "${BLUE2}"; echo;
-  echo; echo "RESTIC TO TMP FOLDER"; echo; sleep $myspeed
-  printf "${NC}"; printf "${BLUE3}"
-  restic -r rclone:gd:restic -v restore $mysnapshot --target /tmp-restic-restore
+  echo; echo "RESTIC TO TMP FOLDER /tmp-restic-restore"; echo; sleep $myspeed
+  printf "${NC}"; printf "${YELLOW}"
+  echo; restic -r rclone:gd:restic -v restore $mysnapshot --target /tmp-restic-restore
   ############### !!!!!!!!!!!!!! ###############################################
+  echo
   printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
   echo; echo "restic copies these files:"; echo
@@ -489,7 +490,7 @@ then
   
   ###### find username of restic snapshot for correct path usage: 
   myresticuserfolder=$(ls -d /tmp-restic-restore/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
-  echo myresticuserfolder $myresticuserfolder
+  printf "${RED}"; echo myresticuserfolder $myresticuserfolder; printf "${NC}"; printf "${BLUE3}"; sleep 2
   printf "${NC}"; printf "${BLUE2}"; 
   echo; echo "rclone copy$myresticuserfolder $HOME/ -Pv"
   printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
