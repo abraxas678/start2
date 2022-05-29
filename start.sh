@@ -3,7 +3,7 @@ clear
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 95"; sleep $myspeed
+echo "version 96"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -313,6 +313,8 @@ if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
   sleep $myspeed; echo; echo 'rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links'; echo; sleep $myspeed
   rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links; sleep $myspeed
+  sudo chown abraxas: $HOME/tmpgpginstall -R
+  sudo chmod 777 $HOME/tmpgpginstall -R
   cd $HOME/tmpgpginstall
   echo; echo "files downloaded:"; sleep $myspeed
   ls $HOME/tmpgpginstall
@@ -461,7 +463,7 @@ then
   printf "${NC}"; printf "${BLUE3}"
   echo 
   rclone lsl /tmp-restic-restore --max-depth 2
-  mytext="snapshot downloaded, please approve continuation"
+  mytext="snapshot downloaded, please approve continuation"; sleep $myspeed
   curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
   echo "BUTTON START COPY (y/n)"; 
   
@@ -489,15 +491,15 @@ then
   ################################################## COPY-MODE ###############################
   printf "${NC}"; printf "${BLUE1}"
   echo "[1] conservative: skip all files already existing"
-  printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+  printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   "; echo
   printf "${NC}"; printf "${GREEN}"
   echo; echo "[2] moderate: only overwrite if newer:"
-   printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
   "; echo
   printf "${NC}"; printf "${BLUE1}"
   echo; echo "[3] agressive: overwrite everything, dont delete"
-   printf "${BLUE4} rclone copy$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
   echo;  printf "${BLUE2} >>>> "; read -n 1 mymode
   printf "${NC}"; printf "${BLUE3}"
