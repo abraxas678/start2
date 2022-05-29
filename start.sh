@@ -1,10 +1,11 @@
 #!/bin/bash
 clear
 cd $HOME
+ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 100"; sleep $myspeed
+echo "version 101"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -69,32 +70,45 @@ echo "lower speed [$myspeed1]"; sleep 2
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-##########################################  [1] SYSTEM UPATE AND UPGRADE
-printf "${NC}"; printf "${BLUE3}"
-echo "sudo apt-get update && sudo apt-get upgrade -y"
-echo; sleep 4
-sudo apt-get update && sudo apt-get upgrade -y
-echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
-source $HOME/.bashrc
-sudo apt-get install tmux tmuxinator
-############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
+if [[ -f mylastupdate.log && $(($($ts-cat mylastupdate.log))) -gr 86400 ]]
+then
+
+  ##########################################  [1] SYSTEM UPATE AND UPGRADE
+  printf "${NC}"; printf "${BLUE3}"
+  echo "sudo apt-get update && sudo apt-get upgrade -y"
+  echo; sleep 4
+  sudo apt-get update && sudo apt-get upgrade -y
+  echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
+  source $HOME/.bashrc
+  sudo apt-get install tmux tmuxinator
+  ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
+  echo
+  printf "${BLUE1}"; printf "${UL1}"
+  echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
+  #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
+  printf "${NC}"; printf "${BLUE3}"
+  printf "${NC}"; printf "${BLUE2}"
+  echo; echo INSTALL ZSH
+  printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
+  sudo apt install -y zsh php
+  printf "${NC}"; printf "${BLUE2}"
+  echo; echo INSTALL OH MY ZSH
+  printf "${NC}"; printf "${BLUE3}"
+  sleep $myspeed; echo
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  curl -L git.io/antigen > antigen.zsh
+  echo
+  printf "${BLUE1}"; printf "${UL1}"
+
+echo $ts > mylastupdate.log
+else
+
+printf "${RED}"
+echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
 echo
-printf "${BLUE1}"; printf "${UL1}"
-echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
-#############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
 printf "${NC}"; printf "${BLUE3}"
-printf "${NC}"; printf "${BLUE2}"
-echo; echo INSTALL ZSH
-printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-sudo apt install -y zsh php
-printf "${NC}"; printf "${BLUE2}"
-echo; echo INSTALL OH MY ZSH
-printf "${NC}"; printf "${BLUE3}"
-sleep $myspeed; echo
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -L git.io/antigen > antigen.zsh
-echo
-printf "${BLUE1}"; printf "${UL1}"
+fi
+
 echo "[3] CLONE REPOSITORY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ######################################################################## [3] CLONE REPOSITORY
