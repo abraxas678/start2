@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 101"; sleep $myspeed
+echo "version 102"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -70,7 +70,7 @@ echo "lower speed [$myspeed1]"; sleep 2
 echo
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-if [[ -f mylastupdate.log && $(($($ts-cat mylastupdate.log))) -gr 86400 ]]
+if [[ -f mylastupdate.log && (echo$(($ts-$(cat mylastupdate.log)))) -gr 86400 ]]
 then
 
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
