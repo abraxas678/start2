@@ -47,7 +47,6 @@ echo ""
 echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
-############################################################ DEFINE SPEED
 printf "${NC}"; printf "${BLUE3}"
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
@@ -322,6 +321,8 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   gpg --import *
+  echo BUTTON
+  read me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
 else
