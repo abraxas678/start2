@@ -437,6 +437,10 @@ echo
 printf "${BLUE1}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
+echo; echo "do you want to perform this step? (y/n)"
+echo; read -n 1 myrestic
+if [[ $myrestic = "y" ]]
+then
 printf "${NC}"; printf "${BLUE3}"
 cd $HOME
 restic -r rclone:gd:restic snapshots > mysnapshots
@@ -582,6 +586,7 @@ mytext="transfer finished. transfer finished"
 curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 printf "${BLUE1}"; printf "${UL1}"
 echo; echo; echo "[10] INSTALL KEEPASSXC"
+done
 ########################################## KEEPASSXC [10]
 printf "${NC}"; printf "${BLUE3}"
 echo
