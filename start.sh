@@ -65,6 +65,10 @@ read -n 4 mresticpw
 echo
 export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
+echo
+echo "rclone password:" 
+read RCLONE_CONFIG_PASS
+export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
 #tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
