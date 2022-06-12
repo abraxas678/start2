@@ -589,8 +589,8 @@ done
 mytext="transfer finished. transfer finished"
 curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 printf "${BLUE1}"; printf "${UL1}"
+fi
 echo; echo; echo "[10] INSTALL KEEPASSXC"
-done
 ########################################## KEEPASSXC [10]
 printf "${NC}"; printf "${BLUE3}"
 echo
