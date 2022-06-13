@@ -79,8 +79,8 @@ export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
 #  rm -rf 
 #fi
 
-if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
-  then
+# if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
+#  then
   echo
   printf "${BLUE1}"; printf "${UL1}"
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
@@ -112,12 +112,12 @@ if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
   printf "${BLUE1}"; printf "${UL1}"
 
 echo $ts > mylastupdate.log
-else
-printf "${NC}"; printf "${RED}"
-echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
-echo
-printf "${NC}"; printf "${BLUE3}"
-fi
+#else
+#printf "${NC}"; printf "${RED}"
+#echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
+#echo
+#printf "${NC}"; printf "${BLUE3}"
+#fi
 
 echo "[3] CLONE REPOSITORY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
