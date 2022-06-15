@@ -706,7 +706,9 @@ brew install gcalcli
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 fi
-
+restic snapshots
+echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
+restic $myrestic --target="$HOME" --include=".zshrc"
 printf "${BLUE1}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
