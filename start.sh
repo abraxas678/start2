@@ -274,6 +274,8 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
     printf "${NC}"; printf "${BLUE2}"
     echo; echo "SETUP GD ON RCLONE NOW PLEASE:"; printf "${NC}"; printf "${BLUE3}"; echo; sleep $myspeed
     rclone config
+    rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
+    printf "${RED}"; echo; echo rclone.conf size $rclonesize; echo
 fi
 
 printf "${BLUE1}"; printf "${UL1}"
