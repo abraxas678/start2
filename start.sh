@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 106"; sleep $myspeed
+echo "version 107"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -66,9 +66,10 @@ echo
 export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
 echo
-echo "rclone password:" 
+printf "rclone password: >>> " 
 read RCLONE_CONFIG_PASS
 export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+tput cup 15 0 && tput ed
 #tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
@@ -86,9 +87,14 @@ export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
-  echo "sudo apt-get update && sudo apt-get upgrade -y"
-  echo; sleep 4
-  sudo apt-get update && sudo apt-get upgrade -y
+  printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
+  read -n 1 myanswer
+  if [[ $myanswer -ne "y" ]]
+  then
+    echo "sudo apt-get update && sudo apt-get upgrade -y"
+    echo; sleep 1
+    sudo apt-get update && sudo apt-get upgrade -y
+  fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
   sudo apt-get install tmux tmuxinator
