@@ -710,6 +710,7 @@ $(brew --prefix)/opt/fzf/install
 fi
 echo; echo "RESTIC:"; echo
 restic snapshots
+curl -d "restic snapshot read to choose" ntfy.sh/rkorkorkomain
 echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
 restic restore $myrestic --target="$HOME" --include=".zshrc"
 printf "${BLUE1}"; printf "${UL1}"; echo
