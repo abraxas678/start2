@@ -354,8 +354,8 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   sudo gpg --import *
-  echo BUTTON
-  read me 
+  echo BUTTON 60
+  read -t 60 me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
 else
@@ -642,11 +642,11 @@ echo; echo "[13] SETUP NTFY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ######################################################################### [13] NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
-sudo apt install apt-transport-https
+sudo apt install apt-transport-https -y
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
     > /etc/apt/sources.list.d/archive.heckel.io.list"  
 sudo apt update
-sudo apt install ntfy
+sudo apt install ntfy -y
 sudo systemctl enable ntfy
 sudo systemctl start ntfy
 
