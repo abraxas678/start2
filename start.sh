@@ -706,6 +706,7 @@ brew install gcalcli
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 fi
+echo; echo "RESTIC:"; echo
 restic snapshots
 echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
 restic $myrestic --target="$HOME" --include=".zshrc"
