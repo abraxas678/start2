@@ -174,7 +174,7 @@ then
   echo GPG_INSTALLED=1; sleep $myspeed1
   GPG_INSTALLED=1
 ### >>> IF 2 O
-   if [[ $(gpg --list-secret-keys) -gt "0" ]]
+   if [[ $(sudo gpg --list-secret-keys) -gt "0" ]]
    then
      echo "GPG_KEYS=1"; sleep $myspeed1
      GPG_KEYS=1
@@ -287,7 +287,7 @@ then
   apt install gpg -y
 else
   printf "${NC}"; printf "${GREEN}"
-  echo GPG ALREADY INSTALLED; echo; sleep $myspeed
+  echo GPG ALREADY INSTALLED -- CHECKING KEYS; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
 fi
 
