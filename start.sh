@@ -67,7 +67,7 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
 echo
 printf "rclone password: >>> " 
-read RCLONE_CONFIG_PASS
+read -n 12 RCLONE_CONFIG_PASS
 export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
 tput cup 15 0 && tput ed
 #tput cup 10 10
