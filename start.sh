@@ -40,7 +40,7 @@ echo ""
   then
     echo; echo; printf "USERNAME TO USE: >>> "; read myuser
     printf "${NC}"; printf "${BLUE3}"
-    echo; echo "USING $myuser"; echo; echo BUTTON; read me
+    echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
     echo; echo "sudo chown $myuser:1000 $HOME -R"
      echo "sudo chmod 700 -R $HOME"
     sudo chown $myuser:100 $HOME -R
@@ -83,7 +83,7 @@ tput cup 15 0 && tput ed
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
   echo
-  printf "${BLUE1}"; printf "${UL1}"
+  printf "${LILA}"; printf "${UL1}"
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
@@ -100,7 +100,7 @@ tput cup 15 0 && tput ed
   sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   echo
-  printf "${BLUE1}"; printf "${UL1}"
+  printf "${LILA}"; printf "${UL1}"
   echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
   printf "${NC}"; printf "${BLUE3}"
@@ -115,7 +115,7 @@ tput cup 15 0 && tput ed
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   curl -L git.io/antigen > antigen.zsh
   echo
-  printf "${BLUE1}"; printf "${UL1}"
+  printf "${LILA}"; printf "${UL1}"
 
 echo $ts > mylastupdate.log
 #else
@@ -162,9 +162,9 @@ git clone https://github.com/abraxas678/start2.git; echo
 ############################################################################ weg nach oben
 
 echo
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
-printf "${NC}"; printf "${BLUE1}"; 
+printf "${NC}"; printf "${LILA}"; 
 echo "GPG"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 
@@ -192,7 +192,7 @@ else
 ### >>> IF 1 C
 fi
 
-printf "${BLUE1}"; 
+printf "${LILA}"; 
 echo; echo "RCLONE"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 
@@ -251,7 +251,7 @@ else
   RCLONE_COMPLETE=0
 ### >>> IF 1 c
 fi
-printf "${UL1}"; printf "${BLUE1}"
+printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
 ########################################## INSTALL & SETUP ===============================
 printf "${NC}"; printf "${BLUE3}"
@@ -278,7 +278,7 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
     printf "${RED}"; echo; echo rclone.conf size $rclonesize; echo
 fi
 
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo; echo "[5] setup GPG encryption"; sleep $myspeed
 #################################################################### [5] SETUP GPG 
 echo
@@ -297,7 +297,7 @@ then
   printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES"; echo 
   printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
-  echo; echo BUTTON; read me
+  echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
   if [[ $mykey > 1 ]] 
@@ -305,7 +305,7 @@ then
     GPG_KEY_ASC=2
     printf "${NC}"; printf "${RED}"
     echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
-    echo BUTTON; read me
+    printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
     printf "${NC}"; printf "${BLUE3}"
   elif [[ $mykey < 1 ]] 
   then
@@ -327,7 +327,7 @@ then
       printf "${NC}"; printf "${RED}"
       printf "MORE THAN TWO rko-p*.key FILES FOUND."; printf "${BLUE2} PLEASE PROVIDE ONLY TWO FILES ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
-      echo BUTTON; read me
+      printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
     elif [[ $myrko = "1" ]]
     then
       GPG_KEY_RKO=2
@@ -356,7 +356,7 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   sudo gpg --import *
-  echo BUTTON 60
+  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}" 60
   read -t 60 me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
@@ -387,7 +387,7 @@ then
 fi  
 
 echo
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic python3-pip -y"; sleep $myspeed
@@ -395,7 +395,7 @@ printf "${NC}"; printf "${BLUE3}"
 sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
@@ -410,7 +410,7 @@ printf "${GREEN}"
 printf "${NC}"; printf "${BLUE3}"
 else
   printf "${RED}"
-  echo; echo $sshresult; echo; printf "${BLUE1}"; printf "${UL1}"
+  echo; echo $sshresult; echo; printf "${LILA}"; printf "${UL1}"
   echo "STARTING SHH SETUP"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
@@ -427,7 +427,7 @@ else
   #rm id*.asc
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
-  printf "${BLUE1}"; printf "${UL1}" 
+  printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 fi
 printf "${NC}"; printf "${BLUE2}"
@@ -446,7 +446,7 @@ sudo chmod 644 ~/.ssh/config &>/dev/null
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
 echo; echo "do you want to perform this step? (y/n)"
@@ -513,21 +513,21 @@ then
   printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
   echo; read me
   printf "${NC}"; printf "${BLUE3}"
-  printf "${BLUE1}"; printf "${UL1}"
+  printf "${LILA}"; printf "${UL1}"
   echo; echo "/tmp-restic-restore/$myresticuserfolder:"; sleep $myspeed; sleep $myspeed; 
   printf "${NC}"; printf "${BLUE4}"
   ls $myresticuserfolder; sleep $myspeed; 
   printf "${NC}"; printf "${BLUE3}"
   mytext="please approve and select COPY MODE"
   curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-  echo BUTTON; 
+  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; 
   sudo chmod 777 /tmp-restic-restore -R 
   #         --ignore-existing        Skip all files that exist on destination
   #   -u, --update      Skip files that are newer on the destination
-  printf "${BLUE1}"; printf "${UL1}"
+  printf "${LILA}"; printf "${UL1}"
   echo; echo "COPY-MODE:"; echo; sleep $myspeed
   ################################################## COPY-MODE ###############################
-  printf "${NC}"; printf "${BLUE1}"
+  printf "${NC}"; printf "${LILA}"
   echo "[1] conservative: skip all files already existing"
   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
   "; echo
@@ -535,7 +535,7 @@ then
   echo; echo "[2] moderate: only overwrite if newer:"
    printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
   "; echo
-  printf "${NC}"; printf "${BLUE1}"
+  printf "${NC}"; printf "${LILA}"
   echo; echo "[3] agressive: overwrite everything, dont delete"
    printf "${BLUE4} rclone ${RED} SYNC ${BLUE4} $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   "; echo
@@ -584,7 +584,7 @@ sudo chown $USER: $myresticuserfolder -R
 elif [[ $myrestore = "n" ]]
 then
   echo "OK; n selected, I will exit"; sleep 3
-  echo BUTTON
+  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"
   read me
   myy=1
   exit
@@ -596,7 +596,7 @@ done
 
 mytext="transfer finished. transfer finished"
 curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 fi
 echo; echo; echo "[10] INSTALL KEEPASSXC"
 ########################################## KEEPASSXC [10]
@@ -612,11 +612,11 @@ if [[ $mykeepass = "y" ]]; then
   sudo add-apt-repository ppa:phoerious/keepassxc -y
   sudo apt-get update
   sudo apt-get dist-upgrade -y
-  #printf "${BLUE1}"
+  #printf "${LILA}"
   sudo apt-get install -y keepassxc
 fi
 echo
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "[11] SOFTWARE INSTALLATION"
 ################################################ [11] SOFTWARE INSTALLATION
 printf "${NC}"; printf "${BLUE4}"
@@ -626,7 +626,7 @@ sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior an
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "[12] WANT TO INSTALL FONTS? (y/n)"
 ##################################################### [12] FONTS
 printf "${NC}"; printf "${BLUE3}"
@@ -639,7 +639,7 @@ if [[ $myfonts = "y" ]]; then
   ###### https://github.com/suin/git-remind
   # sleep $myspeed1
 fi
-printf "${NC}"; printf "${BLUE1}"
+printf "${NC}"; printf "${LILA}"
 echo; echo "[13] SETUP NTFY"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ######################################################################### [13] NTFY
@@ -669,7 +669,7 @@ printf "${NC}"; printf "${BLUE3}"
 pip install apprise; sleep $myspeed
 pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 if [[ $HOST = *"LAPTOP"* ]]
@@ -686,7 +686,7 @@ echo; echo "[16] INSTALL BREW"; sleep $myspeed
 ################################################################# [16] BREW
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
-printf "${NC}"; printf "${BLUE1}"
+printf "${NC}"; printf "${LILA}"
 echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
 echo
 printf "${NC}"; printf "${BLUE3}"
@@ -699,7 +699,7 @@ if [[ $brewsetup != "n" ]]; then
   sudo apt-get install build-essential -y
   brew install gcc  
 
-printf "${BLUE1}"; printf "${UL1}"
+printf "${LILA}"; printf "${UL1}"
 echo "[17] INSTALL BREW BASED SOFTWARE"
 printf "${NC}"; printf "${BLUE3}"
 ################################################################### [17] BREW BASED SOFTWARE
@@ -713,7 +713,7 @@ restic snapshots
 curl -d "restic snapshot read to choose" ntfy.sh/rkorkorkomain
 echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
 restic restore $myrestic --target="$HOME" --include=".zshrc"
-printf "${BLUE1}"; printf "${UL1}"; echo
+printf "${LILA}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
 echo; printf "${NC}"; printf "${BLUE3}"
