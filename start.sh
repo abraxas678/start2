@@ -174,7 +174,9 @@ then
   echo GPG_INSTALLED=1; sleep $myspeed1
   GPG_INSTALLED=1
 ### >>> IF 2 O
-   if [[ $(sudo gpg --list-secret-keys) -gt "0" ]]
+mykeycheck=$(sudo gpg --list-secret-keys)
+echo "MYKEYCHECK $mykeycheck"
+   if [[ $mykeycheck -gt "0" ]]
    then
      echo "GPG_KEYS=1"; sleep $myspeed1
      GPG_KEYS=1
