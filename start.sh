@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 111"; sleep $myspeed
+echo "version 112"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -70,7 +70,7 @@ echo
 printf "rclone password: >>> " 
 read -n 12 RCLONE_CONFIG_PASS
 export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
-tput cup 15 0 && tput ed
+tput cup 16 0 && tput ed
 #tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
@@ -84,6 +84,7 @@ sudo apt install cargo -y
 cargo install --locked pueue
 pueued -d
 pueue parallel 2
+pueue start
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
   echo
