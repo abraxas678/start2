@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 109"; sleep $myspeed
+echo "version 110"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -116,8 +116,8 @@ pueue parallel 2
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  curl -L git.io/antigen > antigen.zsh
+  pueue add sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  pueue add curl -L git.io/antigen > antigen.zsh
   echo
   printf "${LILA}"; printf "${UL1}"
 
