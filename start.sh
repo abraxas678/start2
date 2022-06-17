@@ -99,10 +99,17 @@ pueue start
     echo "sudo apt-get update && sudo apt-get upgrade -y"
     echo; sleep 1
     pueue add sudo apt-get update && sudo apt-get upgrade -y
+    x=0
+    while [[ x = "0" ]]
+    do
+    clear
+    pueue status 
+    sleep 2
+    done 
   fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-  pueue add sudo apt-get install tmux tmuxinator
+  sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   echo
   printf "${LILA}"; printf "${UL1}"
@@ -112,13 +119,13 @@ pueue start
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL ZSH
   printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-  pueue add sudo apt install -y zsh php
+   sudo apt install -y zsh php
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  pueue add sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  pueue add curl -L git.io/antigen > antigen.zsh
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  add curl -L git.io/antigen > antigen.zsh
   echo
   printf "${LILA}"; printf "${UL1}"
 
@@ -135,7 +142,7 @@ printf "${NC}"; printf "${BLUE3}"
 ######################################################################## [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
-pueue add git clone https://github.com/abraxas678/start2.git; echo
+git clone https://github.com/abraxas678/start2.git; echo
 
 ############################################################# weg
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
