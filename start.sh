@@ -80,7 +80,7 @@ tput cup 15 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
-apt install cargo -y
+sudo apt install cargo -y
 cargo install --locked pueue
 pueued -d
 pueue parallel 2
@@ -93,7 +93,7 @@ pueue parallel 2
   printf "${NC}"; printf "${BLUE3}"
   echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
   read -n 1 myanswer
-  if [[ $myanswer -ne "y" ]]
+  if [[ $myanswer -ne "n" ]]
   then
     echo "sudo apt-get update && sudo apt-get upgrade -y"
     echo; sleep 1
