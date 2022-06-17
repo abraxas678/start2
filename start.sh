@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 110"; sleep $myspeed
+echo "version 111"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -111,7 +111,7 @@ pueue parallel 2
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL ZSH
   printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-  sudo apt install -y zsh php
+  pueue add sudo apt install -y zsh php
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
@@ -134,7 +134,7 @@ printf "${NC}"; printf "${BLUE3}"
 ######################################################################## [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
-git clone https://github.com/abraxas678/start2.git; echo
+pueue add git clone https://github.com/abraxas678/start2.git; echo
 
 ############################################################# weg
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
