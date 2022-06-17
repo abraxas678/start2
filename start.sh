@@ -65,6 +65,7 @@ read -n 4 mresticpw
 echo
 export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
+tput cup 15 0 && tput ed
 echo
 printf "rclone password: >>> " 
 read -n 12 RCLONE_CONFIG_PASS
@@ -79,7 +80,10 @@ tput cup 15 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
-
+apt install cargo -y
+cargo install --locked pueue
+pueued -d
+pueue parallel 2
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
   echo
@@ -87,17 +91,17 @@ tput cup 15 0 && tput ed
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
-  printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
+  echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
   read -n 1 myanswer
   if [[ $myanswer -ne "y" ]]
   then
     echo "sudo apt-get update && sudo apt-get upgrade -y"
     echo; sleep 1
-    sudo apt-get update && sudo apt-get upgrade -y
+    pueue add sudo apt-get update && sudo apt-get upgrade -y
   fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-  sudo apt-get install tmux tmuxinator
+  pueue add sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   echo
   printf "${LILA}"; printf "${UL1}"
