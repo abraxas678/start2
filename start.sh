@@ -18,14 +18,13 @@ then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
-#tput cup 1 0 && tput ed; 
-echo "[1] DEFINE USERNAME"
+tput cup 1 0 && tput ed; 
+echo "[1] DEFINE USER DETAILS"
 echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
 echo "[3] CLONE REPOSITORY"
 echo "[4] SETUP RCLONE"
 echo "[5] SETUP GPG"
-echo ""
-#tput cup 7 0 && tput ed
+tput cup 10 0 && tput ed
  #  [1] DEFINE USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
@@ -70,7 +69,14 @@ echo
 printf "rclone password: >>> " 
 read -n 12 RCLONE_CONFIG_PASS
 export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
-tput cup 16 0 && tput ed
+source $HOME/color.dat
+tput cup 1 0 && tput ed; 
+echo "["; printf "${CHECK}] DEFINE USER DETAILS"
+echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
+echo "[3] CLONE REPOSITORY"
+echo "[4] SETUP RCLONE"
+echo "[5] SETUP GPG"
+tput cup 10 0 && tput ed
 #tput cup 10 10
 #delstart="n"
 #echo; echo "DELETE FOLDER START? (y/n)"; echo
