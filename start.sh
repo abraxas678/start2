@@ -628,6 +628,7 @@ echo
 #curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 #printf "${LILA}"; printf "${UL1}"
 #fi
+if [[ $mysnas = "0" ]]; then
 echo; echo; echo "[10] INSTALL KEEPASSXC"
 ########################################## KEEPASSXC [10]
 printf "${NC}"; printf "${BLUE3}"
@@ -745,6 +746,7 @@ echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myresti
 restic restore $myrestic --target="$HOME" --include=".zshrc"
 printf "${LILA}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
+fi
 ################################################################# [18] CLEAN UP
 echo; printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
