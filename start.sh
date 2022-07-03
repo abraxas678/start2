@@ -69,6 +69,8 @@ echo
 printf "rclone password: >>> " 
 read -n 12 RCLONE_CONFIG_PASS
 export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+if [[ $(hostname) = "snas" ]]; then mysnas=1; else mysnas=0; fi
+echo; echo "mysnas= $msnas"; sleep 1
 source $HOME/color.dat
 tput cup 1 0 && tput ed; 
 echo "["; printf "${CHECK}] DEFINE USER DETAILS"
@@ -86,6 +88,7 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
+if [[ $mysnas = "0" ]]; then
 sudo apt install cargo -y
 cargo install --locked pueue
 pueued -d
@@ -100,21 +103,23 @@ pueue start
   printf "${NC}"; printf "${BLUE3}"
   echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
   read -n 1 myanswer
-  if [[ $myanswer -ne "n" ]]
-  then
-    echo "sudo apt-get update && sudo apt-get upgrade -y"
-    echo; sleep 1
-    pueue add sudo apt-get update && sudo apt-get upgrade -y
-    x=0
-    while [[ x = "0" ]]
-    do
-    clear
-    pueue status 
-    sleep 2
-    done 
-  fi
+    if [[ $myanswer -ne "n" ]]
+    then
+      echo "sudo apt-get update && sudo apt-get upgrade -y"
+      echo; sleep 1
+      pueue add sudo apt-get update && sudo apt-get upgrade -y
+      x=0
+      while [[ x = "0" ]]
+      do
+      clear
+      pueue status 
+      sleep 2
+      done 
+    fi
+fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
+if [[ $mysnas = "0" ]]; then
   sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   echo
@@ -131,11 +136,12 @@ pueue start
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  add curl -L git.io/antigen > antigen.zsh
+fi
+  curl -L git.io/antigen > antigen.zsh
   echo
   printf "${LILA}"; printf "${UL1}"
 
-echo $ts > mylastupdate.log
+#echo $ts > mylastupdate.log
 #else
 #printf "${NC}"; printf "${RED}"
 #echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
@@ -406,6 +412,7 @@ then
       sleep $myspeed
 fi  
 
+if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep $myspeed
@@ -445,11 +452,14 @@ else
   #printf "${NC}"; printf "${BLUE2}"; 
   #gpg --decrypt id_rsa.asc > id_rsa
   #rm id*.asc
+fi
+fi
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
   printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
-fi
+
+
 printf "${NC}"; printf "${BLUE2}"
 echo "STARTING SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
@@ -466,130 +476,130 @@ sudo chmod 644 ~/.ssh/config &>/dev/null
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 echo
-printf "${LILA}"; printf "${UL1}"
-echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
+#printf "${LILA}"; printf "${UL1}"
+#echo "[9] RESTORE LATEST RESTIC SNAPSHOT"; sleep $myspeed; echo 
 ############################################################### RESTIC SNAPSHOT RESTORE [9]
-echo; echo "do you want to perform this step? (y/n)"
-echo; read -n 1 myrestic
-if [[ $myrestic = "y" ]]
-then
-printf "${NC}"; printf "${BLUE3}"
-cd $HOME
-restic -r rclone:gd:restic snapshots > mysnapshots
-cat mysnapshots
-echo
-printf "[1]"; my1=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p); echo $my1; echo
-printf "[2]"; my2=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p); echo $my2; echo
-printf "[3]"; my3=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p); echo $my3; echo
-printf "[4]"; my4=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p); echo $my4; echo
-printf "[5]"; my5=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5; echo
-echo
-printf "${NC}"; printf "${BLUE2}"
-echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
-echo
-printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
-myrestore="n"
-echo
-printf "${NC}"; printf "${BLUE4}"
-curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-echo
-echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
-printf "${NC}"; printf "${BLUE2}"
-echo; printf "restore to $PWD, correct? (y/n) >>> ";
-printf "${NC}"; printf "${BLUE3}" 
-mytext="restic snapshot version can be selected now"
-read -n 1 myrestore
-myy=0
-while [[ $myy = "0" ]]
-do
-if [[ $myrestore = "y" ]]
-then
-  sudo rm -rf /tmp-restic-restore
-  sudo mkdir /tmp-restic-restore
-  sudo chmod 777 /tmp-restic-restore -R 
-  printf "${NC}"; printf "${BLUE2}"; echo;
-  echo; echo "RESTIC TO TMP FOLDER /tmp-restic-restore"; echo; sleep $myspeed
-  printf "${NC}"; printf "${YELLOW}"
-  echo; restic -r rclone:gd:restic -v restore $mysnapshot --target /tmp-restic-restore
+#echo; echo "do you want to perform this step? (y/n)"
+#echo; read -n 1 myrestic
+#if [[ $myrestic = "y" ]]
+#then
+#printf "${NC}"; printf "${BLUE3}"
+#cd $HOME
+#restic -r rclone:gd:restic snapshots > mysnapshots
+#cat mysnapshots
+#echo
+#printf "[1]"; my1=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 1p); echo $my1; echo
+#printf "[2]"; my2=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 2p); echo $my2; echo
+#printf "[3]"; my3=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 3p); echo $my3; echo
+#printf "[4]"; my4=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 4p); echo $my4; echo
+#printf "[5]"; my5=$(cat mysnapshots | tail -n7 | awk '{ print $1}' | sed '$ d' | sed '$ d' | sed -n 5p); echo $my5; echo
+#echo
+#printf "${NC}"; printf "${BLUE2}"
+#echo "COPY THE SNASPSHOT CODE OR CHOOSE FROM THE LAST 5:"
+#echo
+#printf ">>> "; printf "${NC}"; printf "${BLUE3}"; read mysnapshot
+#myrestore="n"
+#echo
+#printf "${NC}"; printf "${BLUE4}"
+#curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
+#echo
+#echo "restic -r rclone:gd:restic restore $mysnapshot --target $PWD"; echo
+#printf "${NC}"; printf "${BLUE2}"
+#echo; printf "restore to $PWD, correct? (y/n) >>> ";
+#printf "${NC}"; printf "${BLUE3}" 
+#mytext="restic snapshot version can be selected now"
+#read -n 1 myrestore
+#myy=0
+#while [[ $myy = "0" ]]
+#do
+#if [[ $myrestore = "y" ]]
+#then
+#  sudo rm -rf /tmp-restic-restore
+#  sudo mkdir /tmp-restic-restore
+#  sudo chmod 777 /tmp-restic-restore -R 
+#  printf "${NC}"; printf "${BLUE2}"; echo;
+#  echo; echo "RESTIC TO TMP FOLDER /tmp-restic-restore"; echo; sleep $myspeed
+#  printf "${NC}"; printf "${YELLOW}"
+#  echo; restic -r rclone:gd:restic -v restore $mysnapshot --target /tmp-restic-restore
   ############### !!!!!!!!!!!!!! ###############################################
-  echo
-  printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
-  echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
-  echo; echo "restic copies these files:"; echo
-  echo "rclone lsl /tmp-restic-restore --max-depth 2"
-  printf "${NC}"; printf "${BLUE4}"
-  printf "${NC}"; printf "${BLUE3}"
-  echo 
-  rclone lsl /tmp-restic-restore --max-depth 2
-  mytext="snapshot downloaded, please approve continuation"; sleep $myspeed
-  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-  echo "BUTTON START COPY (y/n)"; 
+#  echo
+#  printf "${NC}"; printf "${NC}"; printf "${BLUE2}"; 
+#  echo; printf "RCLONE TO $HOME"; printf "${RED} - THIS WILL OVERRIDE EXISTING FILES"; echo; sleep $myspeed
+#  echo; echo "restic copies these files:"; echo
+#  echo "rclone lsl /tmp-restic-restore --max-depth 2"
+#  printf "${NC}"; printf "${BLUE4}"
+#  printf "${NC}"; printf "${BLUE3}"
+#  echo 
+#  rclone lsl /tmp-restic-restore --max-depth 2
+#  mytext="snapshot downloaded, please approve continuation"; sleep $myspeed
+#  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
+#  echo "BUTTON START COPY (y/n)"; 
   
   ###### find username of restic snapshot for correct path usage: 
-  myresticuserfolder=$(ls -d /tmp-restic-restore/*/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
-  printf "${RED}"; echo myresticuserfolder $myresticuserfolder; printf "${NC}"; printf "${BLUE3}"; sleep 2
-  printf "${NC}"; printf "${BLUE2}"; 
-  echo; echo "rclone copy$myresticuserfolder $HOME/ -Pv"
-  printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
-  echo; read me
-  printf "${NC}"; printf "${BLUE3}"
-  printf "${LILA}"; printf "${UL1}"
-  echo; echo "/tmp-restic-restore/$myresticuserfolder:"; sleep $myspeed; sleep $myspeed; 
-  printf "${NC}"; printf "${BLUE4}"
-  ls $myresticuserfolder; sleep $myspeed; 
-  printf "${NC}"; printf "${BLUE3}"
-  mytext="please approve and select COPY MODE"
-  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; 
-  sudo chmod 777 /tmp-restic-restore -R 
+#  myresticuserfolder=$(ls -d /tmp-restic-restore/*/*/bin | sed 's/\/bin.*//' | sed 's/.*tmprestigrestore\///')
+#  printf "${RED}"; echo myresticuserfolder $myresticuserfolder; printf "${NC}"; printf "${BLUE3}"; sleep 2
+#  printf "${NC}"; printf "${BLUE2}"; 
+#  echo; echo "rclone copy$myresticuserfolder $HOME/ -Pv"
+#  printf "${NC}"; printf "${BLUE4}"; echo "ENTER to START the transfer"
+#  echo; read me
+#  printf "${NC}"; printf "${BLUE3}"
+#  printf "${LILA}"; printf "${UL1}"
+#  echo; echo "/tmp-restic-restore/$myresticuserfolder:"; sleep $myspeed; sleep $myspeed; 
+#  printf "${NC}"; printf "${BLUE4}"
+#  ls $myresticuserfolder; sleep $myspeed; 
+#  printf "${NC}"; printf "${BLUE3}"
+#  mytext="please approve and select COPY MODE"
+#  curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
+#  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; 
+#  sudo chmod 777 /tmp-restic-restore -R 
   #         --ignore-existing        Skip all files that exist on destination
   #   -u, --update      Skip files that are newer on the destination
-  printf "${LILA}"; printf "${UL1}"
-  echo; echo "COPY-MODE:"; echo; sleep $myspeed
-  ################################################## COPY-MODE ###############################
-  printf "${NC}"; printf "${LILA}"
-  echo "[1] conservative: skip all files already existing"
-  printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
-  "; echo
-  printf "${NC}"; printf "${GREEN}"
-  echo; echo "[2] moderate: only overwrite if newer:"
-   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
-  "; echo
-  printf "${NC}"; printf "${LILA}"
-  echo; echo "[3] agressive: overwrite everything, dont delete"
-   printf "${BLUE4} rclone ${RED} SYNC ${BLUE4} $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
-  "; echo
-  echo;  printf "${BLUE2} >>>> "; read -n 1 mymode; echo; echo
-  printf "${NC}"; printf "${BLUE3}"
-  x=0
-  sudo chmod 777 /tmp-restic-restore -R
-  while [[ $x = "0" ]]
-  do
-    if [[ $mymode = "1" ]]
-    then
-      x=1
-      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
-      rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
-    elif [[ $mymode = "2" ]]
-    then
-      x=1
-      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
-      rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
-    elif [[ $mymode = "3" ]]
-    then
-      x=1
-      echo "sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list"
-     # rclone sync $HOME/ -Pv --skip-links --fast-list
-      sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list
-    else
-      x=0
-      printf "${RED}"
-      echo "select [1] to [3]"; printf "${NC}"; printf "${BLUE3}"
-    fi
-  done
+#  printf "${LILA}"; printf "${UL1}"
+#  echo; echo "COPY-MODE:"; echo; sleep $myspeed
+#  ################################################## COPY-MODE ###############################
+#  printf "${NC}"; printf "${LILA}"
+#  echo "[1] conservative: skip all files already existing"
+#  printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+#  "; echo
+#  printf "${NC}"; printf "${GREEN}"
+#  echo; echo "[2] moderate: only overwrite if newer:"
+#   printf "${BLUE4} rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+#  "; echo
+#  printf "${NC}"; printf "${LILA}"
+#  echo; echo "[3] agressive: overwrite everything, dont delete"
+#   printf "${BLUE4} rclone ${RED} SYNC ${BLUE4} $myresticuserfolder $HOME/ -Pv --skip-links --fast-list
+#  "; echo
+#  echo;  printf "${BLUE2} >>>> "; read -n 1 mymode; echo; echo
+#  printf "${NC}"; printf "${BLUE3}"
+#  x=0
+#  sudo chmod 777 /tmp-restic-restore -R
+#  while [[ $x = "0" ]]
+#  do
+#    if [[ $mymode = "1" ]]
+#    then
+#      x=1
+#      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list"
+#      rclone copy $myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
+#    elif [[ $mymode = "2" ]]
+#    then
+#      x=1
+#      echo "rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list"
+#      rclone copy $myresticuserfolder $HOME/ -Pv --update --skip-links --fast-list
+#    elif [[ $mymode = "3" ]]
+#    then
+#      x=1
+#      echo "sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list"
+#     # rclone sync $HOME/ -Pv --skip-links --fast-list
+#      sudo rclone sync $myresticuserfolder/ $HOME/ -Pv --skip-links --fast-list
+#    else
+#      x=0
+#      printf "${RED}"
+#      echo "select [1] to [3]"; printf "${NC}"; printf "${BLUE3}"
+#    fi
+#  done
 
-sudo chown $USER: $HOME -R
-sudo chown $USER: $myresticuserfolder -R 
+#sudo chown $USER: $HOME -R
+#sudo chown $USER: $myresticuserfolder -R 
 
     # skip all, already existing:
   #rclone copy$myresticuserfolder $HOME/ -Pv --update --ignore-existing --skip-links --fast-list
@@ -599,25 +609,25 @@ sudo chown $USER: $myresticuserfolder -R
   #overwrite everything, dont delete: rclone copy$myresticuserfolder $HOME/ -Pv --skip-links --fast-list
   
   ############### !!!!!!!!!!!!!! ##################################
-  echo
-  myy=1
-elif [[ $myrestore = "n" ]]
-then
-  echo "OK; n selected, I will exit"; sleep 3
-  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"
-  read me
-  myy=1
-  exit
-else
-  echo "choose y or n"
-  myy=0
-fi
-done
+#  echo
+#  myy=1
+#elif [[ $myrestore = "n" ]]
+#then
+#  echo "OK; n selected, I will exit"; sleep 3
+#  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"
+#  read me
+#  myy=1
+#  exit
+#else
+#  echo "choose y or n"
+#  myy=0
+#fi
+#done
 
-mytext="transfer finished. transfer finished"
-curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
-printf "${LILA}"; printf "${UL1}"
-fi
+#mytext="transfer finished. transfer finished"
+#curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
+#printf "${LILA}"; printf "${UL1}"
+#fi
 echo; echo; echo "[10] INSTALL KEEPASSXC"
 ########################################## KEEPASSXC [10]
 printf "${NC}"; printf "${BLUE3}"
