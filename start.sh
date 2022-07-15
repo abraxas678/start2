@@ -35,7 +35,7 @@ tput cup 10 0 && tput ed
   echo
   printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
   read -n 1 myanswer
-  echo "[x3] CLONE REPOSITORY"; sleep $myspeed
+  echo; echo "[x3] CLONE REPOSITORY"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
 ######################################################################## [3] CLONE REPOSITORY
 cd $HOME
@@ -57,6 +57,7 @@ git clone https://github.com/abraxas678/start2.git; echo
     sudo chmod 700 -R $HOME
     fi
   fi 
+echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
