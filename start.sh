@@ -35,8 +35,19 @@ tput cup 10 0 && tput ed
   echo
   printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
   read -n 1 myanswer
-  if [[ $myanswer -ne "y" ]]
+  echo "[x3] CLONE REPOSITORY"; sleep $myspeed
+  printf "${NC}"; printf "${BLUE3}"
+######################################################################## [3] CLONE REPOSITORY
+cd $HOME
+sleep $myspeed
+git clone https://github.com/abraxas678/start2.git; echo
+  if [[ $myanswer != "y" ]]
   then
+    echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
+    if [[ $mynewanswer = "y" ]]
+    then
+      $HOME/start2/setup-new-user.sh
+    else
     echo; echo; printf "USERNAME TO USE: >>> "; read myuser
     printf "${NC}"; printf "${BLUE3}"
     echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
@@ -44,6 +55,7 @@ tput cup 10 0 && tput ed
      echo "sudo chmod 700 -R $HOME"
     sudo chown $myuser:100 $HOME -R
     sudo chmod 700 -R $HOME
+    fi
   fi 
 echo
 printf "${NC}"; printf "${BLUE2}"; 
@@ -148,13 +160,6 @@ fi
 #echo
 #printf "${NC}"; printf "${BLUE3}"
 #fi
-
-echo "[3] CLONE REPOSITORY"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
-######################################################################## [3] CLONE REPOSITORY
-cd $HOME
-sleep $myspeed
-git clone https://github.com/abraxas678/start2.git; echo
 
 ############################################################# weg
 #if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
