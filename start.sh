@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 120"; sleep $myspeed
+echo "version 121"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -105,6 +105,7 @@ if [[ $mysnas = "0" ]]; then
 sudo apt install cargo -y
 cargo install pueue
 export PATH="$PATH:/home/abraxas/.cargo/bin"
+sudo chown abraxas: -R /run/user/0/
 /home/abraxas/.cargo/bin/pueued -d
 /home/abraxas/.cargo/bin/pueue parallel 2
 /home/abraxas/.cargo/bin/pueue start
