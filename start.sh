@@ -103,7 +103,7 @@ tput cup 10 0 && tput ed
 #fi
 if [[ $mysnas = "0" ]]; then
 sudo apt install cargo -y
-cargo install --locked pueue
+cargo install pueue
 pueued -d
 pueue parallel 2
 pueue start
