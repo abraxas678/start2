@@ -783,6 +783,8 @@ echo EXEC ZSH
 printf "${NC}"
 sleep $myspeed
 echo
+echo "INSTALL TAILSCALE"
+curl -fsSL https://tailscale.com/install.sh | sh
 rm -rf .antigen
 exec zsh
 printf "${NC}"
