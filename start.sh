@@ -102,11 +102,13 @@ tput cup 10 0 && tput ed
 #  rm -rf 
 #fi
 if [[ $mysnas = "0" ]]; then
-sudo apt install cargo -y
+#sudo apt install cargo -y
 cargo install --locked pueue
 pueued -d
 pueue parallel 2
 pueue start
+echo; echo "BUTTON peueue installed"
+read -t 600 me
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
   echo
@@ -120,12 +122,12 @@ pueue start
     then
       echo "sudo apt-get update && sudo apt-get upgrade -y"
       echo; sleep 1
-      pueue add sudo apt-get update && sudo apt-get upgrade -y
+      sudo apt-get update && sudo apt-get upgrade -y
       x=0
       while [[ x = "0" ]]
       do
       clear
-      pueue status 
+      #pueue status 
       sleep 2
       done 
     fi
