@@ -647,10 +647,14 @@ read -n 1 -t 40 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
   sudo add-apt-repository ppa:phoerious/keepassxc -y
-  sudo apt-get update
-  sudo apt-get dist-upgrade -y
+  sudo chown abraxas: -R /run/user/0/
+  pueued -d
+  pueue add -- sudo apt-get update
+  pueue parallel 1
+  pueue add -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  sudo apt-get install -y keepassxc
+  pueue wait
+  pueue add -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
