@@ -105,10 +105,9 @@ if [[ $mysnas = "0" ]]; then
 sudo apt install cargo -y
 cargo install pueue
 export PATH="$PATH:/home/abraxas/.cargo/bin"
-bash
-pueued -d
-pueue parallel 2
-pueue start
+/home/abraxas/.cargo/bin/pueued -d
+/home/abraxas/.cargo/bin/pueue parallel 2
+/home/abraxas/.cargo/bin/pueue start
 echo; echo "BUTTON peueue installed"
 read -t 600 me
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
@@ -626,6 +625,7 @@ echo
 #  echo "OK; n selected, I will exit"; sleep 3
 #  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"
 #  read me
+
 #  myy=1
 #  exit
 #else
@@ -650,15 +650,15 @@ printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 40 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
-  pueued -d
-  pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  /home/abraxas/.cargo/bin/pueued -d
+  /home/abraxas/.cargo/bin/pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
   sudo chown abraxas: -R /run/user/0/
-  pueue add -- sudo apt-get update
-  pueue parallel 1
-  pueue add -- sudo apt-get dist-upgrade -y
+  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get update
+  /home/abraxas/.cargo/bin/pueue parallel 1
+  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  pueue wait
-  pueue add -- sudo apt-get install -y keepassxc
+  /home/abraxas/.cargo/bin/pueue wait
+  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
