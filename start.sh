@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 117"; sleep $myspeed
+echo "version 118"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -102,7 +102,7 @@ tput cup 10 0 && tput ed
 #  rm -rf 
 #fi
 if [[ $mysnas = "0" ]]; then
-#sudo apt install cargo -y
+sudo apt install cargo -y
 cargo install --locked pueue
 pueued -d
 pueue parallel 2
