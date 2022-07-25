@@ -785,6 +785,7 @@ sleep $myspeed
 echo
 echo "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
 rm -rf .antigen
 exec zsh
 printf "${NC}"
