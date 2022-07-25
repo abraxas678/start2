@@ -104,6 +104,8 @@ tput cup 10 0 && tput ed
 if [[ $mysnas = "0" ]]; then
 sudo apt install cargo -y
 cargo install pueue
+export PATH="$PATH:/home/abraxas/.cargo/bin"
+bash
 pueued -d
 pueue parallel 2
 pueue start
