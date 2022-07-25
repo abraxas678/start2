@@ -135,7 +135,7 @@ fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
 if [[ $mysnas = "0" ]]; then
-  sudo apt-get install tmux tmuxinator
+#  sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   echo
   printf "${LILA}"; printf "${UL1}"
@@ -450,7 +450,7 @@ else
   printf "${NC}"; printf "${BLUE3}"
   echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
-  rclone copy gdsec:supersec/sshkeys/id_rsa . -P
+  rclone copy gd:sec/supersec/sshkeys/id_rsa . -P
   echo
   sleep $myspeed
   #echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
@@ -648,9 +648,9 @@ printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 40 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
-  sudo add-apt-repository ppa:phoerious/keepassxc -y
-  sudo chown abraxas: -R /run/user/0/
   pueued -d
+  pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  sudo chown abraxas: -R /run/user/0/
   pueue add -- sudo apt-get update
   pueue parallel 1
   pueue add -- sudo apt-get dist-upgrade -y
@@ -752,8 +752,8 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install
 fi
 echo; echo "RESTIC:"; echo
-restic snapshots
-curl -d "restic snapshot read to choose" ntfy.sh/rkorkorkomain
+#restic snapshots
+curl -d "restic snapshot ready to choose" ntfy.sh/rkorkorko-main
 echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
 restic restore $myrestic --target="$HOME" --include=".zshrc"
 printf "${LILA}"; printf "${UL1}"; echo
