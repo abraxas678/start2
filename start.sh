@@ -786,6 +786,7 @@ echo
 echo "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
+sudo apt-get install cifs-utils
 rm -rf .antigen
 exec zsh
 printf "${NC}"
