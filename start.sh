@@ -786,6 +786,7 @@ echo
 echo "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
+pip install taskwarrior-inthe.am
 sudo apt-get install cifs-utils -y
 echo; echo GOODSYNC; echo
 cd $HOME
