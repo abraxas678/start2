@@ -789,6 +789,8 @@ sudo tailscale up
 pip install taskwarrior-inthe.am
 sudo apt-get install cifs-utils -y
 echo; echo GOODSYNC; echo
+rm -rf .antigen
+printf "${NC}"
 cd $HOME
 wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
 chmod +x goodsync-linux-x86_64-release.run
@@ -796,6 +798,6 @@ sudo ./goodsync-linux-x86_64-release.run
 sudo gsync /gs-account-enroll=abraxas678@gmail.com
 sudo gsync /activate
 
-rm -rf .antigen
+
 exec zsh
-printf "${NC}"
+
