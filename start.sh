@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 122"; sleep $myspeed
+echo "version 123"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -101,6 +101,26 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
+echo
+  printf "${LILA}"; printf "${UL1}"
+  echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
+  ##########################################  [1] SYSTEM UPATE AND UPGRADE
+  printf "${NC}"; printf "${BLUE3}"
+  echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
+  read -n 1 myanswer
+    if [[ $myanswer = "y" ]]
+    then
+      echo "sudo apt-get update && sudo apt-get upgrade -y"
+      echo; sleep 1
+      sudo apt-get update && sudo apt-get upgrade -y
+      x=0
+      while [[ x = "0" ]]
+      do
+      clear
+      #pueue status 
+      sleep 2
+      done 
+    fi
 ########################################## BREW ##########################################
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
@@ -124,17 +144,21 @@ if [[ $brewsetup != "n" ]]; then
   echo; echo; echo "pueued -d"
   pueued -d 
   pueue add -- ls
+  echo; echo
   pueue
-  echo; echo BUTTON
+  echo; echo "BUTTON"
   read me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
   printf "${NC}"; printf "${BLUE3}"
-  brew install thefuck
-  brew install gcalcli
-  brew install fzf
-  $(brew --prefix)/opt/fzf/install
+  pueue parallel 1
+  pueue add -- brew install thefuck
+  pueue add -- brew install gcalcli
+  pueue add -- brew install fzf
+  pueue add -- $(brew --prefix)/opt/fzf/install
+  echo; pueue
+  echo; echo BUTTON; read me
 fi
 
 ########################################## CARGO - PUEUE OLD ##########################################
@@ -152,26 +176,6 @@ fi
 ################################################################################################
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
-  echo
-  printf "${LILA}"; printf "${UL1}"
-  echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-  ##########################################  [1] SYSTEM UPATE AND UPGRADE
-  printf "${NC}"; printf "${BLUE3}"
-  echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
-  read -n 1 myanswer
-    if [[ $myanswer = "y" ]]
-    then
-      echo "sudo apt-get update && sudo apt-get upgrade -y"
-      echo; sleep 1
-      sudo apt-get update && sudo apt-get upgrade -y
-      x=0
-      while [[ x = "0" ]]
-      do
-      clear
-      #pueue status 
-      sleep 2
-      done 
-    fi
 fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
