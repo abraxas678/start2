@@ -73,7 +73,7 @@ echo "lower speed [$myspeed1]"
 printf "${NC}"; printf "${BLUE2}"; 
 echo; printf "restic password: >>> "
 printf "${NC}"; printf "${BLUE3}"
-read -n 4 mresticpw
+read -n 4 myresticpw
 echo
 export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
@@ -120,7 +120,7 @@ read -t 600 me
   printf "${NC}"; printf "${BLUE3}"
   echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
   read -n 1 myanswer
-    if [[ $myanswer -ne "n" ]]
+    if [[ $myanswer = "y" ]]
     then
       echo "sudo apt-get update && sudo apt-get upgrade -y"
       echo; sleep 1
@@ -792,12 +792,15 @@ echo; echo GOODSYNC; echo
 rm -rf .antigen
 printf "${NC}"
 cd $HOME
-wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
-chmod +x goodsync-linux-x86_64-release.run
-sudo ./goodsync-linux-x86_64-release.run
-sudo gsync /gs-account-enroll=abraxas678@gmail.com
-sudo gsync /activate
-
-
+echo "INSTALL GOODSYNC? (y/n)"
+read -n 1 mychoice
+if [[ $mychoice = "y" ]]
+then
+  wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+  chmod +x goodsync-linux-x86_64-release.run
+  ./goodsync-linux-x86_64-release.run
+  gsync /gs-account-enroll=abraxas678@gmail.com
+  gsync /activate
+fi
 exec zsh
 
