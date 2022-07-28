@@ -101,16 +101,49 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
-if [[ $mysnas = "0" ]]; then
-sudo apt install cargo -y
-cargo install pueue
-export PATH="$PATH:/home/abraxas/.cargo/bin"
-sudo chown abraxas: -R /run/user/0/
-/home/abraxas/.cargo/bin/pueued -d
-/home/abraxas/.cargo/bin/pueue parallel 2
-/home/abraxas/.cargo/bin/pueue start
-echo; echo "BUTTON peueue installed"
-read -t 600 me
+########################################## BREW ##########################################
+printf "${NC}"; printf "${BLUE3}"
+brewsetup="n"
+printf "${NC}"; printf "${LILA}"
+echo "START BREW SETUP?  (y/n)"
+echo
+printf "${NC}"; printf "${BLUE3}"
+read -t 20 -n 1 brewsetup
+echo
+if [[ $brewsetup != "n" ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/abrax/.zprofile
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  sudo apt-get install build-essential -y
+  brew install gcc 
+  ########################################## CARGO NEW ################################################
+  brew install cargo
+  cargo install pueue
+  sudo chown -R abraxas: /run/user/1001
+  sudo chown -R abraxas: /run/user/0
+  ######################################## BREW BASED SOFTWARE ########################################
+  printf "${LILA}"; printf "${UL1}"
+  echo "[17] INSTALL BREW BASED SOFTWARE"
+  printf "${NC}"; printf "${BLUE3}"
+  brew install thefuck
+  brew install gcalcli
+  brew install fzf
+  $(brew --prefix)/opt/fzf/install
+fi
+
+########################################## CARGO - PUEUE OLD ##########################################
+#if [[ $mysnas = "0" ]]; then
+#sudo apt install cargo -y
+#cargo install pueue
+#export PATH="$PATH:/home/abraxas/.cargo/bin"
+#sudo chown abraxas: -R /run/user/0/
+#/home/abraxas/.cargo/bin/pueued -d
+#/home/abraxas/.cargo/bin/pueue parallel 2
+#/home/abraxas/.cargo/bin/pueue start
+#echo; echo "BUTTON peueue installed"
+#read -t 600 me
+
+################################################################################################
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
   echo
@@ -729,31 +762,7 @@ fi
 echo
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "[16] INSTALL BREW"; sleep $myspeed
-################################################################# [16] BREW
-printf "${NC}"; printf "${BLUE3}"
-brewsetup="n"
-printf "${NC}"; printf "${LILA}"
-echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
-echo
-printf "${NC}"; printf "${BLUE3}"
-read -t 20 -n 1 brewsetup
-echo
-if [[ $brewsetup != "n" ]]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/abrax/.zprofile
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  sudo apt-get install build-essential -y
-  brew install gcc  
 
-printf "${LILA}"; printf "${UL1}"
-echo "[17] INSTALL BREW BASED SOFTWARE"
-printf "${NC}"; printf "${BLUE3}"
-################################################################### [17] BREW BASED SOFTWARE
-brew install thefuck
-brew install gcalcli
-brew install fzf
-$(brew --prefix)/opt/fzf/install
-fi
 echo; echo "RESTIC:"; echo
 #restic snapshots
 curl -d "restic snapshot ready to choose" ntfy.sh/rkorkorko-main
