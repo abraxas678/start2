@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 121"; sleep $myspeed
+echo "version 122"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -121,6 +121,12 @@ if [[ $brewsetup != "n" ]]; then
   cargo install pueue
   sudo chown -R abraxas: /run/user/1001
   sudo chown -R abraxas: /run/user/0
+  echo; echo; echo "pueued -d"
+  pueued -d 
+  pueue add -- ls
+  pueue
+  echo; echo BUTTON
+  read me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
