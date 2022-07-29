@@ -13,7 +13,7 @@ if [[ -d start2 ]]
 then
   mv start2 start2-backup-$ts
 fi
-if [[ ! -f color.dat ]]
+if [[ ! -f $HOME/color.dat ]]
 then
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
