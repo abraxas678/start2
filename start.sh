@@ -128,7 +128,7 @@ echo
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
 printf "${NC}"; printf "${LILA}"
-echo "START BREW SETUP?  (y/n)"
+echo; echo "START BREW SETUP?  (y/n)"
 echo
 printf "${NC}"; printf "${BLUE3}"
 read -t 20 -n 1 brewsetup
