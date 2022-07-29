@@ -163,7 +163,7 @@ if [[ $brewsetup != "n" ]]; then
   pueue add -- brew install thefuck
   pueue add -- brew install gcalcli
   pueue add -- brew install fzf
-  pueue add -- yes | $(brew --prefix)/opt/fzf/install
+  pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue
   echo; echo BUTTON60; read -t 60 me
 fi
