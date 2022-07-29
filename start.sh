@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 124"; sleep $myspeed
+echo "version 125"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -40,6 +40,7 @@ tput cup 10 0 && tput ed
 ######################################################################## [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
+sudo ls 
 git clone https://github.com/abraxas678/start2.git; echo
   if [[ $myanswer != "y" ]]
   then
