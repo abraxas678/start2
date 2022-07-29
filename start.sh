@@ -42,25 +42,31 @@ cd $HOME
   echo $USER; echo; sleep 1; id
   printf "${NC}"; printf "${BLUE2}"; 
   echo
-  printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
-  read -n 1 myanswer
-######################################################################## [3] CLONE REPOSITORY
-  if [[ $myanswer != "y" ]]
+  sleep 2; 
+  if [[ $USER != "abraxas" ]]
   then
-    echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
-    if [[ $mynewanswer = "y" ]]
+    printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
+    read -n 1 myanswer
+  ######################################################################## [3] CLONE REPOSITORY
+    if [[ $myanswer != "y" ]]
     then
-      $HOME/start2/setup-new-user.sh
-    else
-    echo; echo; printf "USERNAME TO USE: >>> "; read myuser
-    printf "${NC}"; printf "${BLUE3}"
-    echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
-    echo; echo "sudo chown $myuser:1000 $HOME -R"
-     echo "sudo chmod 700 -R $HOME"
-    sudo chown $myuser:100 $HOME -R
-    sudo chmod 700 -R $HOME
-    fi
-  fi 
+      echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
+      if [[ $mynewanswer = "y" ]]
+      then
+        $HOME/start2/setup-new-user.sh
+      else
+      echo; echo; printf "USERNAME TO USE: >>> "; read myuser
+      printf "${NC}"; printf "${BLUE3}"
+      echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+      echo; echo "sudo chown $myuser:1000 $HOME -R"
+      echo "sudo chmod 700 -R $HOME"
+      sudo chown $myuser: $HOME -R
+      sudo chmod 700 -R $HOME
+      fi
+    fi 
+  fi
+myuser=$(whoami)
+sudo chown $myuser: $HOME -R
 echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
