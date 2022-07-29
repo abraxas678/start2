@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 134"; sleep $myspeed
+echo "version 135"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -212,7 +212,7 @@ if [[ $mysnas = "0" ]]; then
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  pueue add -- sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install'.sh)"'
+  pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
 fi
   pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
   echo
