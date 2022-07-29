@@ -26,6 +26,10 @@ echo "[3] CLONE REPOSITORY"
 echo "[4] SETUP RCLONE"
 echo "[5] SETUP GPG"
 tput cup 10 0 && tput ed
+cd $HOME
+sleep $myspeed
+sudo ls >/dev/null
+git clone https://github.com/abraxas678/start2.git; echo
  #  [1] DEFINE USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
@@ -39,10 +43,6 @@ tput cup 10 0 && tput ed
   echo; echo "[x3] CLONE REPOSITORY"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
 ######################################################################## [3] CLONE REPOSITORY
-cd $HOME
-sleep $myspeed
-sudo ls >/dev/null
-git clone https://github.com/abraxas678/start2.git; echo
   if [[ $myanswer != "y" ]]
   then
     echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
