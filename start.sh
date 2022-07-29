@@ -219,7 +219,7 @@ fi
   
 echo; pueue; echo
 echo BUTTON100; read -t 100 me
-
+sudo apt-get install jq -y
 #echo $ts > mylastupdate.log
 #else
 #printf "${NC}"; printf "${RED}"
