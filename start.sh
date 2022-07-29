@@ -195,14 +195,14 @@ if [[ $mysnas = "0" ]]; then
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  pueue add -- sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
 fi
   pueue add -- curl -L git.io/antigen > antigen.zsh
   echo
   printf "${LILA}"; printf "${UL1}"
   
 echo; pueue; echo
-echo BUTTON; read -t 100 me
+echo BUTTON100; read -t 100 me
 
 #echo $ts > mylastupdate.log
 #else
@@ -334,7 +334,7 @@ else
 ### >>> IF 1 c
 fi
 
-echo BUTTON5; read -t 5 me
+echo; echo BUTTON5; read -t 5 me
 printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
 ########################################## INSTALL & SETUP ===============================
@@ -440,7 +440,7 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   sudo gpg --import *
-  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}" 60
+  printf "${YELLOW}"; echo BUTTON60; printf "${BLUE3}" 60
   read -t 60 me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
@@ -477,7 +477,7 @@ echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y";
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic python3-pip -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-sudo apt-get install restic python3-pip -y
+pueue add -- sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -699,15 +699,13 @@ printf "${NC}"; printf "${BLUE3}"
 read -n 1 -t 40 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
-  /home/abraxas/.cargo/bin/pueued -d
-  /home/abraxas/.cargo/bin/pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
-  sudo chown abraxas: -R /run/user/0/
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get update
-  /home/abraxas/.cargo/bin/pueue parallel 1
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get dist-upgrade -y
+#  /home/abraxas/.cargo/bin/pueued -d
+  pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  pueue add -- sudo apt-get update
+  pueue parallel 1
+  pueue add -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  /home/abraxas/.cargo/bin/pueue wait
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get install -y keepassxc
+  pueue add -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -716,7 +714,7 @@ echo "[11] SOFTWARE INSTALLATION"
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
-sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
+pueue add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
@@ -756,12 +754,13 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
+
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 printf "${NC}"; printf "${BLUE3}"
-pip install apprise; sleep $myspeed
-pip install paho-mqtt; sleep $myspeed
+pueue add -- pip install apprise; sleep $myspeed
+pueue add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 printf "${LILA}"; printf "${UL1}"
 echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
@@ -771,7 +770,7 @@ then
   printf "${RED}"
   echo; echo "SKIPPING DOCKER INSTALLATION ON $HOST"; sleep $myspeed; printf "${NC}"; printf "${BLUE3}"
 else 
-  sudo apt-get install docker.io docker-compose -y
+  pueue add -- sudo apt-get install docker.io docker-compose -y
 fi
 #################################################### docker compose
 echo
