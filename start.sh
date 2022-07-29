@@ -152,8 +152,8 @@ if [[ $brewsetup != "n" ]]; then
   pueue add -- ls
   echo; echo
   pueue
-  echo; echo "BUTTON"
-  read me
+  echo; echo "BUTTON600"
+  read -t 600 me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
