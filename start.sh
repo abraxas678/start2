@@ -145,6 +145,7 @@ if [[ $brewsetup != "n" ]]; then
   brew install cargo
   cargo install pueue
   sudo chown -R abraxas: /run/user/1001
+  sudo chown -R abraxas: /run/user/1000
   sudo chown -R abraxas: /run/user/0
   echo; echo; echo "pueued -d"
   pueued -d 
