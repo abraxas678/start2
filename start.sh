@@ -112,6 +112,7 @@ echo
   read -n 1 myanswer
     if [[ $myanswer = "y" ]]
     then
+      echo
       echo "sudo apt-get update && sudo apt-get upgrade -y"
       echo; sleep 1
       sudo apt-get update && sudo apt-get upgrade -y
