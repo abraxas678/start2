@@ -157,7 +157,7 @@ if [[ $brewsetup != "n" ]]; then
   pueue add -- brew install thefuck
   pueue add -- brew install gcalcli
   pueue add -- brew install fzf
-  pueue add -- $(brew --prefix)/opt/fzf/install
+  pueue add -- yes | $(brew --prefix)/opt/fzf/install
   echo; pueue
   echo; echo BUTTON; read me
 fi
@@ -201,6 +201,7 @@ fi
   echo
   printf "${LILA}"; printf "${UL1}"
   
+echo; pueue; echo
 echo BUTTON; read -t 100 me
 
 #echo $ts > mylastupdate.log
@@ -332,6 +333,8 @@ else
   RCLONE_COMPLETE=0
 ### >>> IF 1 c
 fi
+
+echo BUTTON5; read -t 5 me
 printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
 ########################################## INSTALL & SETUP ===============================
