@@ -844,13 +844,13 @@ fi
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 echo "copy files from gd:dotfiles"
 read -t 10 me
-rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
+#rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
 read -t 10 me
-rclone copy gd:dotfiles/bin $HOME/bin --filter-from="$HOME/myfilter.txt" -P
+#rclone copy gd:dotfiles/bin $HOME/bin --filter-from="$HOME/myfilter.txt" -P
 read -t 10 me
-rclone copy gd:dotfiles/docker $HOME/docker --filter-from="$HOME/myfilter.txt" -P
+#rclone copy gd:dotfiles/docker $HOME/docker --filter-from="$HOME/myfilter.txt" -P
 read -t 10 me
-rclone copy gd:dotfiles $HOME --filter-from="$HOME/myfilter.txt" -P
+#rclone copy gd:dotfiles $HOME --filter-from="$HOME/myfilter.txt" -P
 sudo chown $user: -R $HOME
 echo DONE 
 echo EXEC ZSH
