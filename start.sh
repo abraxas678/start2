@@ -474,7 +474,8 @@ then
       rm rclonesetup.sh
       sleep $myspeed
 fi  
-
+rclone copy gd:dotfiles/.zshrc $HOME -P
+rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
