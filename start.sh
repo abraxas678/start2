@@ -139,7 +139,7 @@ if [[ $brewsetup != "n" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   brew install gcc 
-  echo; echo BUTTON20; read -t 20 me
+  echo; echo BUTTON120; read -t 120 me
   ########################################## CARGO NEW ################################################
   echo; echo CARGO
   brew install cargo
