@@ -40,7 +40,7 @@ tput cup 10 0 && tput ed
 ######################################################################## [3] CLONE REPOSITORY
 cd $HOME
 sleep $myspeed
-sudo ls 
+sudo ls >/dev/null
 git clone https://github.com/abraxas678/start2.git; echo
   if [[ $myanswer != "y" ]]
   then
