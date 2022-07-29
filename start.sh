@@ -15,6 +15,7 @@ then
 fi
 if [[ ! -f $HOME/color.dat ]]
 then
+  echo "load color.dat"; sleep 1
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
