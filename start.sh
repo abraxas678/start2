@@ -70,7 +70,8 @@ sudo chown $myuser: $HOME -R
 echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
-echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
+myspeed=2
+echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 printf "${NC}"; printf "${BLUE3}"
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
