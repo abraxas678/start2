@@ -843,13 +843,13 @@ then
 fi
 echo "copy files from gd:dotfiles"
 read -t 10 me
-rclone copy gd:dotfiles $HOME --max-depth 1 --fast-list -P
+rclone copy gd:dotfiles $HOME --max-depth 1 -P
 read -t 10 me
-rclone copy gd:dotfiles/bin $HOME/bin --fast-list -P
+rclone copy gd:dotfiles/bin $HOME/bin -P
 read -t 10 me
-rclone copy gd:dotfiles/docker $HOME/docker --fast-list -P
+rclone copy gd:dotfiles/docker $HOME/docker -P
 read -t 10 me
-rclone copy gd:dotfiles $HOME --fast-list -P
+rclone copy gd:dotfiles $HOME -P
 sudo chown $user: -R $HOME
 echo DONE 
 echo EXEC ZSH
