@@ -843,6 +843,9 @@ then
   sudo gsync /activate
 fi
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
+rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
+sudo chmod +x $HOME/bin/*
+/bin/bash $HOME/bin/install-age.sh
 echo "copy files from gd:dotfiles"
 read -t 10 me
 #rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
