@@ -114,13 +114,13 @@ echo
       echo "sudo apt-get update && sudo apt-get upgrade -y"
       echo; sleep 1
       sudo apt-get update && sudo apt-get upgrade -y
-      x=0
-      while [[ x = "0" ]]
-      do
-      clear
+   #   x=0
+   #   while [[ x = "0" ]]
+   #   do
+   #   clear
       #pueue status 
-      sleep 2
-      done 
+   #   sleep 2
+   #   done 
     fi
 ########################################## BREW ##########################################
 printf "${NC}"; printf "${BLUE3}"
@@ -137,7 +137,9 @@ if [[ $brewsetup != "n" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   brew install gcc 
+  echo; echo BUTTON20; read -t 20 me
   ########################################## CARGO NEW ################################################
+  echo; echo CARGO
   brew install cargo
   cargo install pueue
   sudo chown -R abraxas: /run/user/1001
