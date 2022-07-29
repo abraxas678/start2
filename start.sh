@@ -15,7 +15,7 @@ then
 fi
 if [[ ! -f $HOME/color.dat ]]
 then
-  echo "load color.dat"; sleep 1
+  echo "load color.dat"; sleep 3
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
@@ -830,7 +830,7 @@ rm -rf .antigen
 echo; echo GOODSYNC; echo
 printf "${NC}"
 cd $HOME
-echo "INSTALL GOODSYNC? (y/n)"
+echo; echo "INSTALL GOODSYNC? (y/n)"
 read -n 1 mychoice
 if [[ $mychoice = "y" ]]
 then
