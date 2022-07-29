@@ -818,18 +818,16 @@ rm -rf $HME/start2
 #rm -rf /tmp-restic-restore
 echo
 printf "${GREEN}"; printf "${UL1}"
-echo DONE 
-echo EXEC ZSH
 printf "${NC}"
 sleep $myspeed
 echo
 echo "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
-pip install taskwarrior-inthe.am
-sudo apt-get install cifs-utils -y
-echo; echo GOODSYNC; echo
+pueue add -- pip install taskwarrior-inthe.am
+pueue add -- sudo apt-get install cifs-utils -y
 rm -rf .antigen
+echo; echo GOODSYNC; echo
 printf "${NC}"
 cd $HOME
 echo "INSTALL GOODSYNC? (y/n)"
@@ -842,5 +840,7 @@ then
   gsync /gs-account-enroll=abraxas678@gmail.com
   gsync /activate
 fi
+echo DONE 
+echo EXEC ZSH
 exec zsh
 
