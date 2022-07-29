@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 131"; sleep $myspeed
+echo "version 132"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -32,8 +32,6 @@ cd $HOME
 sleep $myspeed
 sudo ls >/dev/null
 git clone https://github.com/abraxas678/start2.git; echo
-su abraxas
-cd $HOME
  #  [1] DEFINE USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
@@ -45,6 +43,7 @@ cd $HOME
   sleep 2; 
   if [[ $USER != "abraxas" ]]
   then
+    su abraxas
     printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
     read -n 1 myanswer
   ######################################################################## [3] CLONE REPOSITORY
@@ -65,6 +64,7 @@ cd $HOME
       fi
     fi 
   fi
+cd $HOME
 myuser=$(whoami)
 sudo chown $myuser: $HOME -R
 echo; echo "CURRENT USER: $USER"
