@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 128"; sleep $myspeed
+echo "version 129"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -102,6 +102,7 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
+sudo apt install -y git
 echo
   printf "${LILA}"; printf "${UL1}"
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
