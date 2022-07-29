@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 129"; sleep $myspeed
+echo "version 130"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -138,6 +138,7 @@ if [[ $brewsetup != "n" ]]; then
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/abrax/.zprofile
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   brew install gcc 
   echo; echo BUTTON120; read -t 120 me
   ########################################## CARGO NEW ################################################
