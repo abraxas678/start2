@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 130"; sleep $myspeed
+echo "version 131"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -142,9 +142,9 @@ if [[ $brewsetup != "n" ]]; then
   brew install gcc 
   echo; echo BUTTON120; read -t 120 me
   ########################################## CARGO NEW ################################################
-  echo; echo CARGO
-  brew install cargo
-  cargo install pueue
+  #echo; echo CARGO
+  #brew install cargo
+  brew install pueue
   sudo chown -R abraxas: /run/user/1001
   sudo chown -R abraxas: /run/user/1000
   sudo chown -R abraxas: /run/user/0
