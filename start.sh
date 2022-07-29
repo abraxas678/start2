@@ -850,6 +850,7 @@ read -t 10 me
 rclone copy gd:dotfiles/docker $HOME/docker --fast-list -P
 read -t 10 me
 rclone copy gd:dotfiles $HOME --fast-list -P
+sudo chown $user: -R $HOME
 echo DONE 
 echo EXEC ZSH
 exec zsh
