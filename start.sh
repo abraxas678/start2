@@ -214,7 +214,7 @@ if [[ $mysnas = "0" ]]; then
   sleep $myspeed; echo
   pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
 fi
-  pueue add -- curl -L git.io/antigen > antigen.zsh
+  pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
   echo
   printf "${LILA}"; printf "${UL1}"
   
