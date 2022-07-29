@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 138"; sleep $myspeed
+echo "version 139"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -164,6 +164,7 @@ if [[ $brewsetup != "n" ]]; then
   pueued -d 
   pueue add -- ls
   echo; echo
+  pueue start
   pueue
   echo; echo "BUTTON600"
   read -t 600 me
