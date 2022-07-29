@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 123"; sleep $myspeed
+echo "version 124"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -176,7 +176,6 @@ fi
 ################################################################################################
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
-fi
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
 if [[ $mysnas = "0" ]]; then
@@ -190,16 +189,18 @@ if [[ $mysnas = "0" ]]; then
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL ZSH
   printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-   sudo apt install -y zsh php
+  pueue add --  sudo apt install -y zsh php
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  pueue add -- sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
-  curl -L git.io/antigen > antigen.zsh
+  pueue add -- curl -L git.io/antigen > antigen.zsh
   echo
   printf "${LILA}"; printf "${UL1}"
+  
+echo BUTTON; read -t 100 me
 
 #echo $ts > mylastupdate.log
 #else
