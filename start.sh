@@ -112,6 +112,7 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
+echo; echo install git; echo
 sudo apt install -y git
 echo
   printf "${LILA}"; printf "${UL1}"
