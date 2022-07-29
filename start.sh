@@ -164,7 +164,7 @@ if [[ $brewsetup != "n" ]]; then
   pueue add -- brew install fzf
   pueue add -- yes | $(brew --prefix)/opt/fzf/install
   echo; pueue
-  echo; echo BUTTON; read me
+  echo; echo BUTTON60; read -t 60 me
 fi
 
 ########################################## CARGO - PUEUE OLD ##########################################
