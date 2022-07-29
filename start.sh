@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 135"; sleep $myspeed
+echo "version 136"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -67,6 +67,7 @@ git clone https://github.com/abraxas678/start2.git; echo
 cd $HOME
 myuser=$(whoami)
 sudo chown $myuser: $HOME -R
+sudo chmod +x $HOME/bin * -R
 echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
