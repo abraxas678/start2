@@ -212,7 +212,7 @@ if [[ $mysnas = "0" ]]; then
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  pueue add -- sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install'.sh)"'
 fi
   pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
   echo
@@ -841,6 +841,15 @@ then
   gsync /gs-account-enroll=abraxas678@gmail.com
   gsync /activate
 fi
+echo "copy files from gd:dotfiles"
+read -t 10 me
+rclone copy gd:dotfiles $HOME --max-depth 1 --fast-list -P
+read -t 10 me
+rclone copy gd:dotfiles/bin $HOME/bin --fast-list -P
+read -t 10 me
+rclone copy gd:dotfiles/docker $HOME/docker --fast-list -P
+read -t 10 me
+rclone copy gd:dotfiles $HOME --fast-list -P
 echo DONE 
 echo EXEC ZSH
 exec zsh
