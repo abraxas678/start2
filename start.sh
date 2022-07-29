@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="2"
 #######################################################
-echo "version 136"; sleep $myspeed
+echo "version 137"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -838,9 +838,9 @@ if [[ $mychoice = "y" ]]
 then
   wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
   chmod +x goodsync-linux-x86_64-release.run
-  ./goodsync-linux-x86_64-release.run
-  gsync /gs-account-enroll=abraxas678@gmail.com
-  gsync /activate
+  sudo ./goodsync-linux-x86_64-release.run
+  sudo gsync /gs-account-enroll=abraxas678@gmail.com
+  sudo gsync /activate
 fi
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 echo "copy files from gd:dotfiles"
