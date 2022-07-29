@@ -841,6 +841,7 @@ then
   gsync /gs-account-enroll=abraxas678@gmail.com
   gsync /activate
 fi
+rclone copy gd:dotfiles/myfilter.txt $HOME -P
 echo "copy files from gd:dotfiles"
 read -t 10 me
 rclone copy gd:dotfiles $HOME --max-depth 1 -P
