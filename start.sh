@@ -99,9 +99,12 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 export RESTIC_PASSWORD=$myresticpw
 tput cup 15 0 && tput ed
 echo
-printf "rclone password: >>> " 
-read -n 12 RCLONE_CONFIG_PASS
-export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+if [[ $RCLONE_CONFIG_PASS = "" ]]
+  then
+  printf "rclone password: >>> " 
+  read -n 12 RCLONE_CONFIG_PASS
+  export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+fi
 if [[ $(hostname) = "snas" ]]; then mysnas=1; else mysnas=0; fi
 echo; echo "mysnas= $msnas"; sleep 1
 source $HOME/color.dat
@@ -129,12 +132,13 @@ echo
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
   echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
-  read -n 1 myanswer
+  myanswer="y"
+  read -n 1 -t 5 myanswer
     if [[ $myanswer = "y" ]]
     then
       echo
       echo "sudo apt-get update && sudo apt-get upgrade -y"
-      echo; sleep 1
+      echo
       sudo apt-get update && sudo apt-get upgrade -y
    #   x=0
    #   while [[ x = "0" ]]
@@ -148,9 +152,11 @@ echo
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="n"
 printf "${NC}"; printf "${LILA}"
+echo
 echo; echo "START BREW SETUP?  (y/n)"
 echo
 printf "${NC}"; printf "${BLUE3}"
+brewsetup="y"
 read -t 20 -n 1 brewsetup
 echo
 if [[ $brewsetup != "n" ]]; then
@@ -160,11 +166,13 @@ if [[ $brewsetup != "n" ]]; then
   sudo apt-get install build-essential -y
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   brew install gcc 
-  echo; echo BUTTON120; read -t 120 me
   ########################################## CARGO NEW ################################################
   #echo; echo CARGO
   #brew install cargo
+  echo; echo "PUEUE INSTALL"
   brew install pueue
+  sudo chown -R abraxas: /run/user/1003
+  sudo chown -R abraxas: /run/user/1002
   sudo chown -R abraxas: /run/user/1001
   sudo chown -R abraxas: /run/user/1000
   sudo chown -R abraxas: /run/user/0
@@ -174,8 +182,8 @@ if [[ $brewsetup != "n" ]]; then
   echo; echo
   pueue start
   pueue
-  echo; echo "BUTTON600"
-  read -t 600 me
+  echo; echo "BUTTON60"
+  read -t 60 me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
@@ -186,7 +194,7 @@ if [[ $brewsetup != "n" ]]; then
   pueue add -- brew install fzf
   pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue
-  echo; echo BUTTON60; read -t 60 me
+  echo; echo BUTTON10; read -t 10 me
 fi
 
 ########################################## CARGO - PUEUE OLD ##########################################
@@ -229,7 +237,7 @@ fi
   printf "${LILA}"; printf "${UL1}"
   
 echo; pueue; echo
-echo BUTTON100; read -t 100 me
+echo BUTTON10; read -t 10 me
 sudo apt-get install jq -y
 #echo $ts > mylastupdate.log
 #else
@@ -380,7 +388,7 @@ if [[ $RCLONE_INSTALL = "0" ]]
   sudo apt install rclone -y
 fi
 
-if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
+if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
   then
     printf "${NC}"; printf "${BLUE2}"
     echo; echo "SETUP GD ON RCLONE NOW PLEASE:"; printf "${NC}"; printf "${BLUE3}"; echo; sleep $myspeed
@@ -416,7 +424,7 @@ then
     GPG_KEY_ASC=2
     printf "${NC}"; printf "${RED}"
     echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
-    printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+    printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read -t 10 me
     printf "${NC}"; printf "${BLUE3}"
   elif [[ $mykey < 1 ]] 
   then
@@ -453,6 +461,7 @@ then
       printf "${NC}"; printf "${BLUE3}"
     fi
   fi
+  echo GPG_KEY_RKO $GPG_KEY_RKO GPG_KEY_ASC $GPG_KEY_ASC
 if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
   sleep $myspeed; echo; echo 'rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links'; echo; sleep $myspeed
@@ -493,9 +502,11 @@ then
       echo; echo RCLONESETUP VIA SCRIPT STARTING; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
+      rclone copy ./rclonesetup.sh gdsec: -P
       rm rclonesetup.sh
       sleep $myspeed
 fi  
+rclone copy gd:dotfiles/.bashrc $HOME -P
 rclone copy gd:dotfiles/.zshrc $HOME -P
 rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 if [[ $mysnas = "0" ]]; then
@@ -526,7 +537,7 @@ else
   echo; echo $sshresult; echo; printf "${LILA}"; printf "${UL1}"
   echo "STARTING SHH SETUP"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
-  echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
+  echo "rclone copy gd:sec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
   rclone copy gd:sec/supersec/sshkeys/id_rsa . -P
   echo
@@ -724,7 +735,8 @@ mykeepass="n"
 printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
-read -n 1 -t 40 mykeepass
+mykeepass="y"
+read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
 #  /home/abraxas/.cargo/bin/pueued -d
@@ -742,7 +754,7 @@ echo "[11] SOFTWARE INSTALLATION"
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
-pueue add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
+pueue add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
@@ -782,7 +794,9 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
-
+echo
+echo "NTFY SETUP >>> DONE"
+echo
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
@@ -803,13 +817,12 @@ fi
 #################################################### docker compose
 echo
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "[16] INSTALL BREW"; sleep $myspeed
 
 echo; echo "RESTIC:"; echo
 #restic snapshots
-curl -d "restic snapshot ready to choose" ntfy.sh/rkorkorko-main
-echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
-restic restore $myrestic --target="$HOME" --include=".zshrc"
+#curl -d "restic snapshot ready to choose" https://n.dmw.zone/main
+#echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
+#restic restore $myrestic --target="$HOME" --include=".zshrc"
 printf "${LILA}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
 fi
@@ -837,12 +850,13 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 pueue add -- pip install taskwarrior-inthe.am
 pueue add -- sudo apt-get install cifs-utils -y
-rm -rf .antigen
+rm -rf $HOME/.antigen
 echo; echo GOODSYNC; echo
 printf "${NC}"
 cd $HOME
 echo; echo "INSTALL GOODSYNC? (y/n)"
-read -n 1 mychoice
+mychoice="n"
+read -n 1 -t 5 mychoice
 if [[ $mychoice = "y" ]]
 then
   wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
@@ -855,16 +869,20 @@ rclone copy gd:dotfiles/myfilter.txt $HOME -P
 rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
 sudo chmod +x $HOME/bin/*
 /bin/bash $HOME/bin/install-age.sh
-echo "copy files from gd:dotfiles"
-read -t 10 me
+#echo "copy files from gd:dotfiles"
+#read -t 10 me
 #rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
-read -t 10 me
+#read -t 10 me
 #rclone copy gd:dotfiles/bin $HOME/bin --filter-from="$HOME/myfilter.txt" -P
-read -t 10 me
+#read -t 10 me
 #rclone copy gd:dotfiles/docker $HOME/docker --filter-from="$HOME/myfilter.txt" -P
-read -t 10 me
+#read -t 10 me
 #rclone copy gd:dotfiles $HOME --filter-from="$HOME/myfilter.txt" -P
-sudo chown $user: -R $HOME
+echo "RCLONE BISYNC DOTFILES (-1)"
+touch $HOME/RCLONE_TEST
+rclone copy RCLONE_TEST gd:dotfiles -P
+rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
+sudo chown $user: -R /home
 echo DONE 
 echo EXEC ZSH
 exec zsh
