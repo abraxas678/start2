@@ -241,7 +241,7 @@ fi
   
 echo; pueue; echo
 echo BUTTON10; read -t 10 me
-sudo apt-get install jq -y
+sudo apt-get install unzip jq -y
 #echo $ts > mylastupdate.log
 #else
 #printf "${NC}"; printf "${RED}"
