@@ -68,7 +68,7 @@ echo; printf "password for abraxas? >>>"
 read -t 10 mypassw
 if [[ $mypassw = "y" ]]
 then
-  passwd abraxas
+  sudo passwd abraxas
 fi
 sudo usermod -aG sudo abraxas
 
