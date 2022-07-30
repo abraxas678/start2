@@ -388,7 +388,8 @@ if [[ $RCLONE_INSTALL = "0" ]]
   cd $HOME/start2
   echo PWD: $PWD
   echo; sleep $myspeed
-  sudo apt install rclone -y
+  #sudo apt install rclone -y
+  curl https://rclone.org/install.sh | sudo bash
 fi
 
 if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
