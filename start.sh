@@ -885,6 +885,7 @@ sudo chmod +x $HOME/bin/*
 echo "RCLONE BISYNC DOTFILES (-1)"
 touch $HOME/RCLONE_TEST
 rclone copy RCLONE_TEST gd:dotfiles -P
+rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
 sudo chown $user: -R /home
 echo DONE 
