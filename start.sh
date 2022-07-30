@@ -66,8 +66,8 @@ git clone https://github.com/abraxas678/start2.git; echo
       fi
     fi 
   fi
-echo; printf "password for abraxas? >>>"
-read -t 10 mypassw
+echo; printf "password for abraxas? >>> "
+read -t 10 -n 1 mypassw
 if [[ $mypassw = "y" ]]
 then
   sudo passwd abraxas
