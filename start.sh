@@ -64,8 +64,8 @@ git clone https://github.com/abraxas678/start2.git; echo
       fi
     fi 
   fi
-echo; echo "password for abraxas?"
-read -t 3 mypassw
+echo; printf "password for abraxas? >>>"
+read -t 10 mypassw
 if [[ $mypassw = "y" ]]
 then
   passwd abraxas
@@ -74,8 +74,8 @@ sudo usermod -aG sudo abraxas
 
 cd $HOME
 myuser=$(whoami)
-sudo chown $myuser: $HOME -R
-sudo chmod +x $HOME/bin * -R
+sudo chown $myuser: /home/ -R
+sudo chmod +x $HOME/bin/* -R
 echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
