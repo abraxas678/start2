@@ -64,6 +64,14 @@ git clone https://github.com/abraxas678/start2.git; echo
       fi
     fi 
   fi
+echo; echo "password for abraxas?"
+read -t 3 mypassw
+if [[ $mypassw = "y" ]]
+then
+  passwd abraxas
+fi
+sudo usermod -aG sudo abraxas
+
 cd $HOME
 myuser=$(whoami)
 sudo chown $myuser: $HOME -R
