@@ -3,9 +3,9 @@ clear
 cd $HOME
 ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
-myspeed="2"
+myspeed="0.5"
 #######################################################
-echo "version 140"; sleep $myspeed
+echo "version 141"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -15,24 +15,26 @@ then
 fi
 if [[ ! -f $HOME/color.dat ]]
 then
-  echo "load color.dat"; sleep 3
+  echo "load color.dat"
+  cd $HOME
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
 source $HOME/color.dat
 tput cup 1 0 && tput ed; 
-echo "[1] DEFINE USER DETAILS"
-echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
-echo "[3] CLONE REPOSITORY"
-echo "[4] SETUP RCLONE"
-echo "[5] SETUP GPG"
-tput cup 10 0 && tput ed
-echo; echo "[x3] CLONE REPOSITORY"; sleep $myspeed
+#echo "[1] DEFINE USER DETAILS"
+#echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
+#echo "[3] CLONE REPOSITORY"
+#echo "[4] SETUP RCLONE"
+#echo "[5] SETUP GPG"
+tput cup 5 0 && tput ed
+echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
+sudo apt-get install git -y
  printf "${NC}"; printf "${BLUE3}"
 cd $HOME
 sleep $myspeed
 sudo ls >/dev/null
 git clone https://github.com/abraxas678/start2.git; echo
- #  [1] DEFINE USERNAME
+ #  [1] CHECK USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
