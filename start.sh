@@ -163,8 +163,9 @@ brewsetup="y"
 read -t 20 -n 1 brewsetup
 echo
 if [[ $brewsetup != "n" ]]; then
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/abrax/.zprofile
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shelle /home/linuxbrew/.linuxbrew/binnv)"' >> /home/abrax/.zprofile
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
