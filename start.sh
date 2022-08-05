@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 142"; sleep $myspeed
+echo "version 143"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
