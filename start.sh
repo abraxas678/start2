@@ -175,11 +175,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   #brew install cargo
   echo; echo "PUEUE INSTALL"
   brew install pueue
-  sudo chown -R abraxas: /run/user/1003
-  sudo chown -R abraxas: /run/user/1002
-  sudo chown -R abraxas: /run/user/1001
-  sudo chown -R abraxas: /run/user/1000
-  sudo chown -R abraxas: /run/user/0
+  sudo chown -R abraxas: /run/user/
+  source $HOME/start2/path.dat
   echo; echo; echo "pueued -d"
   pueued -d 
   pueue add -- ls
