@@ -177,6 +177,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   brew install pueue
   sudo chown -R abraxas: /run/user/
   sudo chown -R abraxas: /home
+  sudo chmod +x /home/abraxas/.cargo/bin/pueue
+  sudo chmod +x /home/abraxas/.cargo/bin/pueued
   source $HOME/start2/path.dat
   echo; echo; echo "pueued -d"
   pueued -d 
