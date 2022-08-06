@@ -94,7 +94,7 @@ fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"
 MY_RESTIC_PW_SET=$(echo $RESTIC_PASSWORD | wc -c)
-if [[ $MY_RESTIC_PW_SET <= 1 ]]; then
+if [[ $MY_RESTIC_PW_SET -lt 2 ]]; then
   printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "restic password: >>> "
   printf "${NC}"; printf "${BLUE3}"
