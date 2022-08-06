@@ -867,7 +867,7 @@ sudo tailscale up
 pueue add -- pip install taskwarrior-inthe.am
 pueue add -- sudo apt-get install cifs-utils -y
 rm -rf $HOME/.antigen
-echo; echo GOODSYNC; echo
+#echo; echo GOODSYNC; echo
 printf "${NC}"
 cd $HOME
 #echo; echo "INSTALL GOODSYNC? (y/n)"
