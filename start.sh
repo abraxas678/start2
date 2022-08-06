@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 152"; sleep $myspeed
+echo "version 153"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -71,6 +71,8 @@ source $HOME/start2/path.dat
   fi
 if [[ $USER = "abraxas" ]]; then
   sudo chown abraxas: -R /home
+  sudo chown abraxas: -R /run/user/
+  sudo chown abraxas: -R /usr/share/taskwarrior
 fi
 echo; printf "password for abraxas? (y/n) >>> "
 read -t 10 -n 1 mypassw
