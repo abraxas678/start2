@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 148"; sleep $myspeed
+echo "version 149"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -35,6 +35,7 @@ sleep $myspeed
 sudo ls >/dev/null
 git clone https://github.com/abraxas678/start2.git; echo
 source $HOME/start2/color.dat
+source $HOME/start2/path.dat
  #  [1] CHECK USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
