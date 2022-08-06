@@ -67,7 +67,7 @@ source $HOME/start2/color.dat
       fi
     fi 
   fi
-echo; printf "password for abraxas? >>> "
+echo; printf "password for abraxas? (y/n) >>> "
 read -t 10 -n 1 mypassw
 if [[ $mypassw = "y" ]]
 then
@@ -93,20 +93,26 @@ then
 fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"
-printf "${NC}"; printf "${BLUE2}"; 
-echo; printf "restic password: >>> "
-printf "${NC}"; printf "${BLUE3}"
-read -n 4 myresticpw
-echo
+MY_RESTIC_PW_SET=$(echo $RESTIC_PASSWORD | wc -c)
+if [[ $MY_RESTIC_PW_SET <= "1" ]]; then
+  printf "${NC}"; printf "${BLUE2}"; 
+  echo; printf "restic password: >>> "
+  printf "${NC}"; printf "${BLUE3}"
+  read -n 4 myresticpw
+  echo
+  export RESTIC_PASSWORD=$myresticpw
+fi
 export RESTIC_REPOSITORY=rclone:gd:restic
-export RESTIC_PASSWORD=$myresticpw
 tput cup 15 0 && tput ed
 echo
+MY_RCLONE_PW_SET=$(echo $RCLONE_CONFIG_PASS | wc -c)
+if [[ $MY_RCLONE_PW_SET <= "1" ]]; then
 if [[ $RCLONE_CONFIG_PASS = "" ]]
   then
   printf "rclone password: >>> " 
   read -n 12 RCLONE_CONFIG_PASS
   export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+fi
 fi
 if [[ $(hostname) = "snas" ]]; then mysnas=1; else mysnas=0; fi
 echo; echo "mysnas= $msnas"; sleep 1
