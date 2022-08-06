@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 151"; sleep $myspeed
+echo "version 152"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -69,6 +69,9 @@ source $HOME/start2/path.dat
       fi
     fi 
   fi
+if [[ $USER = "abraxas" ]]; then
+  sudo chown abraxas: -R /home
+fi
 echo; printf "password for abraxas? (y/n) >>> "
 read -t 10 -n 1 mypassw
 if [[ $mypassw = "y" ]]
