@@ -427,7 +427,7 @@ then
   printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES"; echo 
   printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
-  echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+  echo; printf "${YELLOW}"; echo BUTTON20; printf "${BLUE3}"; read -t 20 me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
   if [[ $mykey > 1 ]] 
