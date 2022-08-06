@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 147"; sleep $myspeed
+echo "version 148"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -106,7 +106,7 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 tput cup 15 0 && tput ed
 echo
 MY_RCLONE_PW_SET=$(echo $RCLONE_CONFIG_PASS | wc -c)
-if [[ $MY_RCLONE_PW_SET <= "1" ]]; then
+if [[ $MY_RCLONE_PW_SET -lt 2 ]]; then
 if [[ $RCLONE_CONFIG_PASS = "" ]]
   then
   printf "rclone password: >>> " 
