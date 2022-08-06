@@ -866,17 +866,17 @@ rm -rf $HOME/.antigen
 echo; echo GOODSYNC; echo
 printf "${NC}"
 cd $HOME
-echo; echo "INSTALL GOODSYNC? (y/n)"
-mychoice="n"
-read -n 1 -t 5 mychoice
-if [[ $mychoice = "y" ]]
-then
-  wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
-  chmod +x goodsync-linux-x86_64-release.run
-  sudo ./goodsync-linux-x86_64-release.run
-  sudo gsync /gs-account-enroll=abraxas678@gmail.com
-  sudo gsync /activate
-fi
+#echo; echo "INSTALL GOODSYNC? (y/n)"
+#mychoice="n"
+#read -n 1 -t 5 mychoice
+#if [[ $mychoice = "y" ]]
+#then
+#  wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+#  chmod +x goodsync-linux-x86_64-release.run
+#  sudo ./goodsync-linux-x86_64-release.run
+#  sudo gsync /gs-account-enroll=abraxas678@gmail.com
+#  sudo gsync /activate
+#fi
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
 sudo chmod +x $HOME/bin/*
@@ -890,12 +890,12 @@ sudo chmod +x $HOME/bin/*
 #rclone copy gd:dotfiles/docker $HOME/docker --filter-from="$HOME/myfilter.txt" -P
 #read -t 10 me
 #rclone copy gd:dotfiles $HOME --filter-from="$HOME/myfilter.txt" -P
-echo "RCLONE BISYNC DOTFILES (-1)"
-touch $HOME/RCLONE_TEST
-rclone copy RCLONE_TEST gd:dotfiles -P
-rclone copy gd:dotfiles/bin $HOME/bin -P
-rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
-rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
+#echo "RCLONE BISYNC DOTFILES (-1)"
+#touch $HOME/RCLONE_TEST
+#rclone copy RCLONE_TEST gd:dotfiles -P
+#rclone copy gd:dotfiles/bin $HOME/bin -P
+#rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
+#rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
 sudo chown $user: -R /home
 echo DONE 
 echo EXEC ZSH
