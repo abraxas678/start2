@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 145"; sleep $myspeed
+echo "version 146"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -94,7 +94,7 @@ fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"
 MY_RESTIC_PW_SET=$(echo $RESTIC_PASSWORD | wc -c)
-if [[ $MY_RESTIC_PW_SET <= "1" ]]; then
+if [[ $MY_RESTIC_PW_SET <= 1 ]]; then
   printf "${NC}"; printf "${BLUE2}"; 
   echo; printf "restic password: >>> "
   printf "${NC}"; printf "${BLUE3}"
