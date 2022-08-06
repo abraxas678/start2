@@ -572,9 +572,11 @@ fi
   printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
-
+echo "pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-echo "STARTING SSH AGENT"; sleep $myspeed
+echo "echo "STARTINpueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
 printf "${NC}"; printf "${BLUE2}"
@@ -881,6 +883,7 @@ cd $HOME
 #  sudo gsync /gs-account-enroll=abraxas678@gmail.com
 #  sudo gsync /activate
 #fi
+echo INSTALL AGE
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
 sudo chmod +x $HOME/bin/*
