@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 150"; sleep $myspeed
+echo "version 151"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -19,6 +19,7 @@ then
   cd $HOME
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
+export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
 source $HOME/color.dat
 tput cup 1 0 && tput ed; 
 #echo "[1] DEFINE USER DETAILS"
