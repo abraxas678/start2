@@ -242,7 +242,7 @@ if [[ $mysnas = "0" ]]; then
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL ZSH
   printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-  pueue add --  sudo apt install -y zsh php
+  pueue add --  sudo apt install -y zsh php nodejs npm
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
