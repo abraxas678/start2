@@ -905,6 +905,7 @@ sudo chmod +x $HOME/bin/*
 #rclone copy gd:dotfiles/bin $HOME/bin -P
 #rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
+rclone copy df:.config $HOME/.config --update -Pv 
 sudo chown $user: -R /home
 echo DONE 
 echo EXEC ZSH
