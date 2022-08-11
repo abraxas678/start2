@@ -788,16 +788,16 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 pip install taskwarrior-inthe.am
 sudo apt-get install cifs-utils -y
-echo; echo GOODSYNC; echo
+#echo; echo GOODSYNC; echo
 rm -rf .antigen
 printf "${NC}"
 cd $HOME
-wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
-chmod +x goodsync-linux-x86_64-release.run
-sudo ./goodsync-linux-x86_64-release.run
-sudo gsync /gs-account-enroll=abraxas678@gmail.com
-sudo gsync /activate
-
+#wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+#chmod +x goodsync-linux-x86_64-release.run
+#sudo ./goodsync-linux-x86_64-release.run
+#sudo gsync /gs-account-enroll=abraxas678@gmail.com
+#sudo gsync /activate
+ if [[ $(cat /root/.bashrc) = *"switching to [abraxas]"* ]]; then sudo echo "nothing to do"; else echo "echo 'switching to [abraxas] in 5 s'; read -t 5 me; su abraxas" >> /root/.bashrc; fi
 
 exec zsh
 
