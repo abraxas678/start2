@@ -204,8 +204,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   echo; echo
   pueue start
   pueue
-  echo; echo "BUTTON60"
-  read -t 60 me
+  echo; echo "BUTTON240"
+  read -t 240 me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
@@ -228,7 +228,7 @@ fi
 #/home/abraxas/.cargo/bin/pueued -d
 #/home/abraxas/.cargo/bin/pueue parallel 2
 #/home/abraxas/.cargo/bin/pueue start
-#echo; echo "BUTTON peueue installed"
+#echo; echo "peueue installed"
 #read -t 600 me
 
 ################################################################################################
@@ -546,7 +546,7 @@ printf "${LILA}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
-sudo ssh -T git@github.com > sshresult
+sudo ssh -T git@github.com
 echo; echo "successfull? (y/N)"; echo; sleep $myspeed
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
@@ -580,9 +580,9 @@ fi
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
 echo "pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
-pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
+pueue add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-echo "echo "STARTINpueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
 G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
@@ -761,6 +761,7 @@ printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
 mykeepass="y"
+echo BUTTON10
 read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
@@ -787,7 +788,8 @@ printf "${LILA}"; printf "${UL1}"
 echo "[12] WANT TO INSTALL FONTS? (y/n)"
 ##################################################### [12] FONTS
 printf "${NC}"; printf "${BLUE3}"
-read -n 1 -t 20 myfonts
+echo BUTTON10
+read -n 1 -t 10 myfonts
 if [[ $myfonts = "y" ]]; then
   #https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
   curl -X POST -H "Content-Type: application/json" -d '{"myvar1":"foo","myvar2":"bar","myvar3":"foobar"}' "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=304c57b5ddbd4c10b03b76fa97d44559&deviceNames=razer,Chrome,ChromeRazer&text=play%20install%20this%20font&url=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&file=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&say=please%20install%20this%20font"
