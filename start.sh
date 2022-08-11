@@ -30,6 +30,8 @@ tput cup 1 0 && tput ed;
 tput cup 5 0 && tput ed
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 sudo apt-get install git -y
+git config --global user.name abraxas678
+git config --global user.email abraxas678@gmail.com
  printf "${NC}"; printf "${BLUE3}"
 cd $HOME
 sleep $myspeed
