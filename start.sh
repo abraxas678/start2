@@ -3,9 +3,9 @@ clear
 cd $HOME
 ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
-myspeed="2"
+myspeed="0.5"
 #######################################################
-echo "version 121"; sleep $myspeed
+echo "version 154"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -13,19 +13,33 @@ if [[ -d start2 ]]
 then
   mv start2 start2-backup-$ts
 fi
-if [[ ! -f color.dat ]]
+if [[ ! -f $HOME/color.dat ]]
 then
+  echo "load color.dat"
+  cd $HOME
   wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
 fi
+export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
 source $HOME/color.dat
 tput cup 1 0 && tput ed; 
-echo "[1] DEFINE USER DETAILS"
-echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
-echo "[3] CLONE REPOSITORY"
-echo "[4] SETUP RCLONE"
-echo "[5] SETUP GPG"
-tput cup 10 0 && tput ed
- #  [1] DEFINE USERNAME
+#echo "[1] DEFINE USER DETAILS"
+#echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
+#echo "[3] CLONE REPOSITORY"
+#echo "[4] SETUP RCLONE"
+#echo "[5] SETUP GPG"
+tput cup 5 0 && tput ed
+echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
+sudo apt-get install git -y
+git config --global user.name abraxas678
+git config --global user.email abraxas678@gmail.com
+ printf "${NC}"; printf "${BLUE3}"
+cd $HOME
+sleep $myspeed
+sudo ls >/dev/null
+git clone https://github.com/abraxas678/start2.git; echo
+source $HOME/start2/color.dat
+source $HOME/start2/path.dat
+ #  [1] CHECK USERNAME
  #################################################### [1] DEFINE USERNAME
   printf "${NC}"; printf "${BLUE2}"
   echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
@@ -33,34 +47,52 @@ tput cup 10 0 && tput ed
   echo $USER; echo; sleep 1; id
   printf "${NC}"; printf "${BLUE2}"; 
   echo
-  printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
-  read -n 1 myanswer
-  echo; echo "[x3] CLONE REPOSITORY"; sleep $myspeed
-  printf "${NC}"; printf "${BLUE3}"
-######################################################################## [3] CLONE REPOSITORY
-cd $HOME
-sleep $myspeed
-git clone https://github.com/abraxas678/start2.git; echo
-  if [[ $myanswer != "y" ]]
+  sleep 2; 
+  if [[ $USER != "abraxas" ]]
   then
-    echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
-    if [[ $mynewanswer = "y" ]]
+    su abraxas
+    printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
+    read -n 1 myanswer
+  ######################################################################## [3] CLONE REPOSITORY
+    if [[ $myanswer != "y" ]]
     then
-      $HOME/start2/setup-new-user.sh
-    else
-    echo; echo; printf "USERNAME TO USE: >>> "; read myuser
-    printf "${NC}"; printf "${BLUE3}"
-    echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
-    echo; echo "sudo chown $myuser:1000 $HOME -R"
-     echo "sudo chmod 700 -R $HOME"
-    sudo chown $myuser:100 $HOME -R
-    sudo chmod 700 -R $HOME
-    fi
-  fi 
+      echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
+      if [[ $mynewanswer = "y" ]]
+      then
+        $HOME/start2/setup-new-user.sh
+      else
+      echo; echo; printf "USERNAME TO USE: >>> "; read myuser
+      printf "${NC}"; printf "${BLUE3}"
+      echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+      echo; echo "sudo chown $myuser:1000 $HOME -R"
+      echo "sudo chmod 700 -R $HOME"
+      sudo chown $myuser: $HOME -R
+      sudo chmod 700 -R $HOME
+      fi
+    fi 
+  fi
+if [[ $USER = "abraxas" ]]; then
+  sudo chown abraxas: -R /home
+  sudo chown abraxas: -R /run/user/
+  sudo chown abraxas: -R /usr/share/taskwarrior
+fi
+echo; printf "password for abraxas? (y/n) >>> "
+read -t 10 -n 1 mypassw
+if [[ $mypassw = "y" ]]
+then
+  sudo passwd abraxas
+fi
+sudo usermod -aG sudo abraxas
+
+cd $HOME
+myuser=$(whoami)
+sudo chown $myuser: /home/ -R
+sudo chmod +x $HOME/bin/* -R
 echo; echo "CURRENT USER: $USER"
 echo
 printf "${NC}"; printf "${BLUE2}"; 
-echo; printf "DEFINE SPEED (default=2): "; read -n 1 myspeed; echo
+myspeed=2
+echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 printf "${NC}"; printf "${BLUE3}"
 echo "speed [$myspeed]"
 myspeed1=$(($myspeed-1))
@@ -70,18 +102,27 @@ then
 fi
 myspeed2=$(($myspeed+5))
 echo "lower speed [$myspeed1]"
-printf "${NC}"; printf "${BLUE2}"; 
-echo; printf "restic password: >>> "
-printf "${NC}"; printf "${BLUE3}"
-read -n 4 mresticpw
-echo
+MY_RESTIC_PW_SET=$(echo $RESTIC_PASSWORD | wc -c)
+if [[ $MY_RESTIC_PW_SET -lt 2 ]]; then
+  printf "${NC}"; printf "${BLUE2}"; 
+  echo; printf "restic password: >>> "
+  printf "${NC}"; printf "${BLUE3}"
+  read -n 4 myresticpw
+  echo
+  export RESTIC_PASSWORD=$myresticpw
+fi
 export RESTIC_REPOSITORY=rclone:gd:restic
-export RESTIC_PASSWORD=$myresticpw
 tput cup 15 0 && tput ed
 echo
-printf "rclone password: >>> " 
-read -n 12 RCLONE_CONFIG_PASS
-export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+MY_RCLONE_PW_SET=$(echo $RCLONE_CONFIG_PASS | wc -c)
+if [[ $MY_RCLONE_PW_SET -lt 2 ]]; then
+if [[ $RCLONE_CONFIG_PASS = "" ]]
+  then
+  printf "rclone password: >>> " 
+  read -n 12 RCLONE_CONFIG_PASS
+  export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
+fi
+fi
 if [[ $(hostname) = "snas" ]]; then mysnas=1; else mysnas=0; fi
 echo; echo "mysnas= $msnas"; sleep 1
 source $HOME/color.dat
@@ -101,39 +142,98 @@ tput cup 10 0 && tput ed
 #  cd $HOME
 #  rm -rf 
 #fi
-if [[ $mysnas = "0" ]]; then
-sudo apt install cargo -y
-cargo install pueue
-export PATH="$PATH:/home/abraxas/.cargo/bin"
-sudo chown abraxas: -R /run/user/0/
-/home/abraxas/.cargo/bin/pueued -d
-/home/abraxas/.cargo/bin/pueue parallel 2
-/home/abraxas/.cargo/bin/pueue start
-echo; echo "BUTTON peueue installed"
-read -t 600 me
-# if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
-#  then
-  echo
+echo; echo install git; echo
+sudo apt install -y git
+echo
   printf "${LILA}"; printf "${UL1}"
   echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
   ##########################################  [1] SYSTEM UPATE AND UPGRADE
   printf "${NC}"; printf "${BLUE3}"
   echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
-  read -n 1 myanswer
-    if [[ $myanswer -ne "n" ]]
+  myanswer="y"
+  read -n 1 -t 5 myanswer
+    if [[ $myanswer = "y" ]]
     then
+      echo
       echo "sudo apt-get update && sudo apt-get upgrade -y"
-      echo; sleep 1
+      echo
       sudo apt-get update && sudo apt-get upgrade -y
-      x=0
-      while [[ x = "0" ]]
-      do
-      clear
+   #   x=0
+   #   while [[ x = "0" ]]
+   #   do
+   #   clear
       #pueue status 
-      sleep 2
-      done 
+   #   sleep 2
+   #   done 
     fi
+########################################## BREW ##########################################
+printf "${NC}"; printf "${BLUE3}"
+brewsetup="y"
+printf "${NC}"; printf "${LILA}"
+echo
+echo; echo "START BREW SETUP?  (y/n)"
+echo
+printf "${NC}"; printf "${BLUE3}"
+brewsetup="y"
+echo BUTTON20
+read -t 20 -n 1 brewsetup
+echo
+if [[ $brewsetup != "n" ]]; then
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shelle /home/linuxbrew/.linuxbrew/binnv)"' >> /home/abrax/.zprofile
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  sudo apt-get install build-essential -y
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+  brew install gcc 
+  ########################################## CARGO NEW ################################################
+  #echo; echo CARGO
+  #brew install cargo
+  echo; echo "PUEUE INSTALL"
+  brew install pueue
+  sudo chown -R abraxas: /run/user/
+  sudo chown -R abraxas: /home
+  sudo chmod +x /home/abraxas/.cargo/bin/pueue
+  sudo chmod +x /home/abraxas/.cargo/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueuedd
+  source $HOME/start2/path.dat
+  echo; echo; echo "pueued -d"
+  pueued -d 
+  pueue add -- ls
+  echo; echo
+  pueue start
+  pueue
+  echo; echo "BUTTON240"
+  read -t 240 me
+  ######################################## BREW BASED SOFTWARE ########################################
+  printf "${LILA}"; printf "${UL1}"
+  echo "[17] INSTALL BREW BASED SOFTWARE"
+  printf "${NC}"; printf "${BLUE3}"
+  pueue parallel 1
+  pueue add -- brew install thefuck
+  pueue add -- brew install gcalcli
+  pueue add -- brew install fzf
+  pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
+  echo; pueue
+  echo; echo BUTTON10; read -t 10 me
 fi
+
+########################################## CARGO - PUEUE OLD ##########################################
+#if [[ $mysnas = "0" ]]; then
+#sudo apt install cargo -y
+#cargo install pueue
+#export PATH="$PATH:/home/abraxas/.cargo/bin"
+#sudo chown abraxas: -R /run/user/0/
+#/home/abraxas/.cargo/bin/pueued -d
+#/home/abraxas/.cargo/bin/pueue parallel 2
+#/home/abraxas/.cargo/bin/pueue start
+#echo; echo "peueue installed"
+#read -t 600 me
+
+################################################################################################
+# if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
+#  then
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
 if [[ $mysnas = "0" ]]; then
@@ -147,17 +247,20 @@ if [[ $mysnas = "0" ]]; then
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL ZSH
   printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
-   sudo apt install -y zsh php
+  pueue add --  sudo apt install -y zsh php nodejs npm
   printf "${NC}"; printf "${BLUE2}"
   echo; echo INSTALL OH MY ZSH
   printf "${NC}"; printf "${BLUE3}"
   sleep $myspeed; echo
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
 fi
-  curl -L git.io/antigen > antigen.zsh
+  pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
   echo
   printf "${LILA}"; printf "${UL1}"
-
+  
+echo; pueue; echo
+echo BUTTON10; read -t 10 me
+sudo apt-get install unzip jq -y
 #echo $ts > mylastupdate.log
 #else
 #printf "${NC}"; printf "${RED}"
@@ -287,6 +390,8 @@ else
   RCLONE_COMPLETE=0
 ### >>> IF 1 c
 fi
+
+echo; echo BUTTON5; read -t 5 me
 printf "${UL1}"; printf "${LILA}"
 echo; echo "INSTALL AND SETUP"; sleep $myspeed
 ########################################## INSTALL & SETUP ===============================
@@ -302,10 +407,11 @@ if [[ $RCLONE_INSTALL = "0" ]]
   cd $HOME/start2
   echo PWD: $PWD
   echo; sleep $myspeed
-  sudo apt install rclone -y
+  #sudo apt install rclone -y
+  curl https://rclone.org/install.sh | sudo bash
 fi
 
-if [[ $RCLONE_CONFIG = "0" || RCLONE_GD=0 = "0" ]]
+if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
   then
     printf "${NC}"; printf "${BLUE2}"
     echo; echo "SETUP GD ON RCLONE NOW PLEASE:"; printf "${NC}"; printf "${BLUE3}"; echo; sleep $myspeed
@@ -333,7 +439,7 @@ then
   printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES"; echo 
   printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
-  echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+  echo; printf "${YELLOW}"; echo BUTTON20; printf "${BLUE3}"; read -t 20 me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
   if [[ $mykey > 1 ]] 
@@ -341,7 +447,7 @@ then
     GPG_KEY_ASC=2
     printf "${NC}"; printf "${RED}"
     echo; echo "MORE THAN ONE key.asc FOUND. PLEASE PROVIDE ONLY ONE FILE ON GD: AND RESTART SCRIPT"; echo; sleep $myspeed
-    printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
+    printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read -t 10 me
     printf "${NC}"; printf "${BLUE3}"
   elif [[ $mykey < 1 ]] 
   then
@@ -378,6 +484,7 @@ then
       printf "${NC}"; printf "${BLUE3}"
     fi
   fi
+  echo GPG_KEY_RKO $GPG_KEY_RKO GPG_KEY_ASC $GPG_KEY_ASC
 if [[ $GPG_KEY_RKO = "1" || $GPG_KEY_ASC = "1" ]]
 then
   sleep $myspeed; echo; echo 'rclone copy gd:sec $HOME/tmpgpginstall  --include "rko-*" --include="key.asc" --max-depth 1 --fast-list --skip-links'; echo; sleep $myspeed
@@ -392,7 +499,7 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   sudo gpg --import *
-  printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}" 60
+  printf "${YELLOW}"; echo BUTTON60; printf "${BLUE3}" 60
   read -t 60 me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
@@ -418,10 +525,13 @@ then
       echo; echo RCLONESETUP VIA SCRIPT STARTING; echo; sleep $myspeed
       printf "${NC}"; printf "${BLUE3}"
       ./rclonesetup.sh
+      rclone copy ./rclonesetup.sh gdsec: -P
       rm rclonesetup.sh
       sleep $myspeed
 fi  
-
+rclone copy gd:dotfiles/.bashrc $HOME -P
+rclone copy gd:dotfiles/.zshrc $HOME -P
+rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -429,14 +539,14 @@ echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y";
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic python3-pip -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-sudo apt-get install restic python3-pip -y
+pueue add -- sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
 echo
 printf "${LILA}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
-sudo ssh -T git@github.com > sshresult
+sudo ssh -T git@github.com
 echo; echo "successfull? (y/N)"; echo; sleep $myspeed
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
@@ -450,7 +560,7 @@ else
   echo; echo $sshresult; echo; printf "${LILA}"; printf "${UL1}"
   echo "STARTING SHH SETUP"; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
-  echo "rclone copy gdsec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
+  echo "rclone copy gd:sec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
   rclone copy gd:sec/supersec/sshkeys/id_rsa . -P
   echo
@@ -469,9 +579,11 @@ fi
   printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
-
+echo "pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-echo "STARTING SSH AGENT"; sleep $myspeed
+pueue add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
+G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
 printf "${NC}"; printf "${BLUE2}"
@@ -648,18 +760,18 @@ mykeepass="n"
 printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
-read -n 1 -t 40 mykeepass
+mykeepass="y"
+echo BUTTON10
+read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
-  /home/abraxas/.cargo/bin/pueued -d
-  /home/abraxas/.cargo/bin/pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
-  sudo chown abraxas: -R /run/user/0/
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get update
-  /home/abraxas/.cargo/bin/pueue parallel 1
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get dist-upgrade -y
+#  /home/abraxas/.cargo/bin/pueued -d
+  pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  pueue add -- sudo apt-get update
+  pueue parallel 1
+  pueue add -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  /home/abraxas/.cargo/bin/pueue wait
-  /home/abraxas/.cargo/bin/pueue add -- sudo apt-get install -y keepassxc
+  pueue add -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -668,7 +780,7 @@ echo "[11] SOFTWARE INSTALLATION"
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
-sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find
+pueue add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
@@ -676,7 +788,8 @@ printf "${LILA}"; printf "${UL1}"
 echo "[12] WANT TO INSTALL FONTS? (y/n)"
 ##################################################### [12] FONTS
 printf "${NC}"; printf "${BLUE3}"
-read -n 1 -t 20 myfonts
+echo BUTTON10
+read -n 1 -t 10 myfonts
 if [[ $myfonts = "y" ]]; then
   #https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
   curl -X POST -H "Content-Type: application/json" -d '{"myvar1":"foo","myvar2":"bar","myvar3":"foobar"}' "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=304c57b5ddbd4c10b03b76fa97d44559&deviceNames=razer,Chrome,ChromeRazer&text=play%20install%20this%20font&url=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&file=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&say=please%20install%20this%20font"
@@ -708,12 +821,15 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
+echo
+echo "NTFY SETUP >>> DONE"
+echo
 printf "${NC}"; printf "${BLUE2}"
 echo; echo "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 printf "${NC}"; printf "${BLUE3}"
-pip install apprise; sleep $myspeed
-pip install paho-mqtt; sleep $myspeed
+pueue add -- pip install apprise; sleep $myspeed
+pueue add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 printf "${LILA}"; printf "${UL1}"
 echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
@@ -723,42 +839,17 @@ then
   printf "${RED}"
   echo; echo "SKIPPING DOCKER INSTALLATION ON $HOST"; sleep $myspeed; printf "${NC}"; printf "${BLUE3}"
 else 
-  sudo apt-get install docker.io docker-compose -y
+  pueue add -- sudo apt-get install docker.io docker-compose -y
 fi
 #################################################### docker compose
 echo
 printf "${NC}"; printf "${BLUE2}"
-echo; echo "[16] INSTALL BREW"; sleep $myspeed
-################################################################# [16] BREW
-printf "${NC}"; printf "${BLUE3}"
-brewsetup="n"
-printf "${NC}"; printf "${LILA}"
-echo "START BREW SETUP?  (y/n)              --------------timeouut 20 n"
-echo
-printf "${NC}"; printf "${BLUE3}"
-read -t 20 -n 1 brewsetup
-echo
-if [[ $brewsetup != "n" ]]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/abrax/.zprofile
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  sudo apt-get install build-essential -y
-  brew install gcc  
 
-printf "${LILA}"; printf "${UL1}"
-echo "[17] INSTALL BREW BASED SOFTWARE"
-printf "${NC}"; printf "${BLUE3}"
-################################################################### [17] BREW BASED SOFTWARE
-brew install thefuck
-brew install gcalcli
-brew install fzf
-$(brew --prefix)/opt/fzf/install
-fi
 echo; echo "RESTIC:"; echo
 #restic snapshots
-curl -d "restic snapshot ready to choose" ntfy.sh/rkorkorko-main
-echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
-restic restore $myrestic --target="$HOME" --include=".zshrc"
+#curl -d "restic snapshot ready to choose" https://n.dmw.zone/main
+#echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
+#restic restore $myrestic --target="$HOME" --include=".zshrc"
 printf "${LILA}"; printf "${UL1}"; echo
 echo "[18] AUTOREMOVE"; sleep $myspeed
 fi
@@ -778,8 +869,6 @@ rm -rf $HME/start2
 #rm -rf /tmp-restic-restore
 echo
 printf "${GREEN}"; printf "${UL1}"
-echo DONE 
-echo EXEC ZSH
 printf "${NC}"
 sleep $myspeed
 echo
@@ -799,5 +888,46 @@ cd $HOME
 #sudo gsync /activate
  if [[ $(cat /root/.bashrc) = *"switching to [abraxas]"* ]]; then sudo echo "nothing to do"; else echo "echo 'switching to [abraxas] in 5 s'; read -t 5 me; su abraxas" >> /root/.bashrc; fi
 
+pueue add -- pip install taskwarrior-inthe.am
+pueue add -- sudo apt-get install cifs-utils -y
+rm -rf $HOME/.antigen
+#echo; echo GOODSYNC; echo
+printf "${NC}"
+cd $HOME
+#echo; echo "INSTALL GOODSYNC? (y/n)"
+#mychoice="n"
+#read -n 1 -t 5 mychoice
+#if [[ $mychoice = "y" ]]
+#then
+#  wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+#  chmod +x goodsync-linux-x86_64-release.run
+#  sudo ./goodsync-linux-x86_64-release.run
+#  sudo gsync /gs-account-enroll=abraxas678@gmail.com
+#  sudo gsync /activate
+#fi
+echo INSTALL AGE
+rclone copy gd:dotfiles/myfilter.txt $HOME -P
+rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
+sudo chmod +x $HOME/bin/*
+/bin/bash $HOME/bin/install-age.sh
+#echo "copy files from gd:dotfiles"
+#read -t 10 me
+#rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
+#read -t 10 me
+#rclone copy gd:dotfiles/bin $HOME/bin --filter-from="$HOME/myfilter.txt" -P
+#read -t 10 me
+#rclone copy gd:dotfiles/docker $HOME/docker --filter-from="$HOME/myfilter.txt" -P
+#read -t 10 me
+#rclone copy gd:dotfiles $HOME --filter-from="$HOME/myfilter.txt" -P
+#echo "RCLONE BISYNC DOTFILES (-1)"
+#touch $HOME/RCLONE_TEST
+#rclone copy RCLONE_TEST gd:dotfiles -P
+#rclone copy gd:dotfiles/bin $HOME/bin -P
+#rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
+#rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
+rclone copy df:.config $HOME/.config --update -Pv 
+sudo chown $user: -R /home
+echo DONE 
+echo EXEC ZSH
 exec zsh
 
