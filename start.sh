@@ -76,12 +76,12 @@ if [[ $USER = "abraxas" ]]; then
   sudo chown abraxas: -R /run/user/
   sudo chown abraxas: -R /usr/share/taskwarrior
 fi
-echo; printf "password for abraxas? (y/n) >>> "
-read -t 10 -n 1 mypassw
-if [[ $mypassw = "y" ]]
-then
-  sudo passwd abraxas
-fi
+#echo; printf "password for abraxas? (y/n) >>> "
+#read -t 10 -n 1 mypassw
+#if [[ $mypassw = "y" ]]
+#then
+#  sudo passwd abraxas
+#fi
 sudo usermod -aG sudo abraxas
 
 cd $HOME
