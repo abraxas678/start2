@@ -168,13 +168,14 @@ echo
     fi
 ########################################## BREW ##########################################
 printf "${NC}"; printf "${BLUE3}"
-brewsetup="n"
+brewsetup="y"
 printf "${NC}"; printf "${LILA}"
 echo
 echo; echo "START BREW SETUP?  (y/n)"
 echo
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="y"
+echo BUTTON20
 read -t 20 -n 1 brewsetup
 echo
 if [[ $brewsetup != "n" ]]; then
@@ -194,6 +195,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
   sudo chmod +x /home/abraxas/.cargo/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueuedd
   source $HOME/start2/path.dat
   echo; echo; echo "pueued -d"
   pueued -d 
