@@ -5,7 +5,7 @@ ts=$(date +"%s")
 sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
-echo "version 153"; sleep $myspeed
+echo "version 154"; sleep $myspeed
 #######################################################
 cd $HOME
 ts=$(date +"%s")
@@ -30,6 +30,8 @@ tput cup 1 0 && tput ed;
 tput cup 5 0 && tput ed
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 sudo apt-get install git -y
+git config --global user.name abraxas678
+git config --global user.email abraxas678@gmail.com
  printf "${NC}"; printf "${BLUE3}"
 cd $HOME
 sleep $myspeed
@@ -74,12 +76,12 @@ if [[ $USER = "abraxas" ]]; then
   sudo chown abraxas: -R /run/user/
   sudo chown abraxas: -R /usr/share/taskwarrior
 fi
-echo; printf "password for abraxas? (y/n) >>> "
-read -t 10 -n 1 mypassw
-if [[ $mypassw = "y" ]]
-then
-  sudo passwd abraxas
-fi
+#echo; printf "password for abraxas? (y/n) >>> "
+#read -t 10 -n 1 mypassw
+#if [[ $mypassw = "y" ]]
+#then
+#  sudo passwd abraxas
+#fi
 sudo usermod -aG sudo abraxas
 
 cd $HOME
@@ -166,13 +168,14 @@ echo
     fi
 ########################################## BREW ##########################################
 printf "${NC}"; printf "${BLUE3}"
-brewsetup="n"
+brewsetup="y"
 printf "${NC}"; printf "${LILA}"
 echo
 echo; echo "START BREW SETUP?  (y/n)"
 echo
 printf "${NC}"; printf "${BLUE3}"
 brewsetup="y"
+echo BUTTON20
 read -t 20 -n 1 brewsetup
 echo
 if [[ $brewsetup != "n" ]]; then
@@ -192,6 +195,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
   sudo chmod +x /home/abraxas/.cargo/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueuedd
   source $HOME/start2/path.dat
   echo; echo; echo "pueued -d"
   pueued -d 
@@ -199,8 +204,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   echo; echo
   pueue start
   pueue
-  echo; echo "BUTTON60"
-  read -t 60 me
+  echo; echo "BUTTON240"
+  read -t 240 me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
@@ -223,7 +228,7 @@ fi
 #/home/abraxas/.cargo/bin/pueued -d
 #/home/abraxas/.cargo/bin/pueue parallel 2
 #/home/abraxas/.cargo/bin/pueue start
-#echo; echo "BUTTON peueue installed"
+#echo; echo "peueue installed"
 #read -t 600 me
 
 ################################################################################################
@@ -541,7 +546,7 @@ printf "${LILA}"; printf "${UL1}"
 echo "[7] SETUP SSH"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 ###############################################################################  [7] SETUP SSH
-sudo ssh -T git@github.com > sshresult
+sudo ssh -T git@github.com
 echo; echo "successfull? (y/N)"; echo; sleep $myspeed
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
@@ -575,9 +580,9 @@ fi
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
 echo "pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
-pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
+pueue add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-echo "echo "STARTINpueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
 G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
@@ -756,6 +761,7 @@ printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
 mykeepass="y"
+echo BUTTON10
 read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
@@ -782,7 +788,8 @@ printf "${LILA}"; printf "${UL1}"
 echo "[12] WANT TO INSTALL FONTS? (y/n)"
 ##################################################### [12] FONTS
 printf "${NC}"; printf "${BLUE3}"
-read -n 1 -t 20 myfonts
+echo BUTTON10
+read -n 1 -t 10 myfonts
 if [[ $myfonts = "y" ]]; then
   #https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
   curl -X POST -H "Content-Type: application/json" -d '{"myvar1":"foo","myvar2":"bar","myvar3":"foobar"}' "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=304c57b5ddbd4c10b03b76fa97d44559&deviceNames=razer,Chrome,ChromeRazer&text=play%20install%20this%20font&url=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&file=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&say=please%20install%20this%20font"
@@ -868,6 +875,19 @@ echo
 echo "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
+pip install taskwarrior-inthe.am
+sudo apt-get install cifs-utils -y
+#echo; echo GOODSYNC; echo
+rm -rf .antigen
+printf "${NC}"
+cd $HOME
+#wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+#chmod +x goodsync-linux-x86_64-release.run
+#sudo ./goodsync-linux-x86_64-release.run
+#sudo gsync /gs-account-enroll=abraxas678@gmail.com
+#sudo gsync /activate
+ if [[ $(cat /root/.bashrc) = *"switching to [abraxas]"* ]]; then sudo echo "nothing to do"; else echo "echo 'switching to [abraxas] in 5 s'; read -t 5 me; su abraxas" >> /root/.bashrc; fi
+
 pueue add -- pip install taskwarrior-inthe.am
 pueue add -- sudo apt-get install cifs-utils -y
 rm -rf $HOME/.antigen
