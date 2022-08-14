@@ -185,7 +185,7 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  brew install gcc 
+  brew install gcc
   ########################################## CARGO NEW ################################################
   #echo; echo CARGO
   #brew install cargo
@@ -214,6 +214,7 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   pueue add -- brew install thefuck
   pueue add -- brew install gcalcli
   pueue add -- brew install fzf
+  pueue add --  brew install just 
   pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue
   echo; echo BUTTON10; read -t 10 me
