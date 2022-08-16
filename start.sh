@@ -29,7 +29,7 @@ echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
 
 ###   df /home grösser 50GB?
-[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && $HOME/start2/new-disk.sh
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -53,13 +53,13 @@ echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
 
-echo; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; 
+echo; printf "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 5 
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install python3-pip -y
 
 echo; echo "BREW SETUP"; echo
-countdown 20
+countdown 5
   
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -100,7 +100,7 @@ brew install rich
 
   ######################################## BREW BASED SOFTWARE ########################################
   
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --print "[17] INSTALL BREW BASED SOFTWARE"
+  /home/abraxas/.local/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
   pueue -g sytem-setup parallel 1
   pueue -g sytem-setup add -- brew install thefuck
