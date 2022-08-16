@@ -26,7 +26,7 @@ echo "CURRENT USER: $USER"
 read -t 1 me
 [[ $USER != "abraxas" ]] && [[ $(su abraxas) = *"does not exist"* ]] && useradd abraxas && passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
 echo "CURRENT USER: $USER"
-[[ $USER != "abraxas" ]] && echo BUTTON; read me || echo button2 && read -t 2 me
+[[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
 
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -83,6 +83,8 @@ echo; echo "PUEUE INSTALL"
 
 x=0
 while [[ $x -eq 0 ]]; do
+/home/abraxas/.local/bin/rich
+/home/abraxas/.local/bin/rich --print "PUEUE SETUP" --panel rounded --style blue
 pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 [[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
 [[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
