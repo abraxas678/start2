@@ -19,8 +19,7 @@ pp() {
   rich --print "$(pueue status | grep Success |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Success/\[green\]Success\[\/green\]/')"
   rich --print "$(pueue status | grep Queue |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Queue/\[Yellow\]Queue\[\/Yellow\]/')"
   rich --print "$(pueue status | grep Failure |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Failure/\[red\]Failure\[\/red\]/')"
-  /home/linuxbrew/.linuxbrew/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status -g system-setup)"
-}
+ }
 
 trenner() {
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
@@ -31,7 +30,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 180"; sleep $myspeed
+echo "version 181"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
