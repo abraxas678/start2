@@ -234,7 +234,7 @@ sudo chmod +x $HOME/bin/*
 /home/linuxbrew/.linuxbrew/bin/rich -u --print ".config copy"
 rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "dotfiles --max-depth 1 copy"
-rclone copy df: $HOME -P --max-depth 1--update --password-command="cat /home/abraxas/rcpw"
+rclone copy df: $HOME -P --max-depth 1 --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print ".ssh copy"
 rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
 rm -f ~/rcpw
