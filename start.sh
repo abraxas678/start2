@@ -79,6 +79,8 @@ countdown 5
 echo; echo "PUEUE INSTALL"
   countdown 3
   brew install pueue
+  echo; echo "INSTALL RICH-CLI"
+  brew install rich
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
@@ -102,8 +104,6 @@ pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 sleep 1
 done
 /home/linuxbrew/.linuxbrew/bin/pueue status
-echo; echo "INSTALL RICH-CLI"
-brew install rich
 
   ######################################## BREW BASED SOFTWARE ########################################
   pp  
