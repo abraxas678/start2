@@ -23,6 +23,20 @@ pp() {
   rich -a rounded --print "$(pueue status | grep Failure |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Failure/\[red\]Failure\[\/red\]/')" )"
 }
 
+pueue-init() {
+  sudo chown -R abraxas: /run/user
+  sudo chown -R abraxas: /home
+  sudo chmod +x /home/abraxas/.cargo/bin/pueue
+  sudo chmod +x /home/abraxas/.cargo/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
+  source $HOME/start2/path.dat
+  echo; echo "pueued -d"
+  /home/linuxbrew/.linuxbrew/bin/pueued -d
+  /home/linuxbrew/.linuxbrew/bin/pueue start
+  /home/linuxbrew/.linuxbrew/bin/pueue
+}
+
 trenner() {
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 }
@@ -79,7 +93,8 @@ echo;
 countdown 10
 [[ $(/home/linuxbrew/.linuxbrew/bin/pueue -V) = *"Pueue client"* ]] && MY_PUEUE_INST=1 || MY_PUEUE_INST=0
 echo; echo MY_PUEUE_INST $MY_PUEUE_INST
-countdown 10
+countdown 5
+[[ $MY_PUEUE_INST -eq 1 ]] && pueue-init
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue parallel 1
