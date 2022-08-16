@@ -27,7 +27,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 163"; sleep $myspeed
+echo "version 164"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -65,12 +65,12 @@ echo "speed [$myspeed]"
 export RESTIC_REPOSITORY=rclone:gd:restic
 
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
-countdown 5 
+countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install python3-pip -y
 
 echo; echo "BREW SETUP"; echo
-countdown 5
+countdown 3
   
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -114,7 +114,6 @@ done
 /home/linuxbrew/.linuxbrew/bin/pueue status
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
-  pp  
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded ---panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
   countdown 2
   pueue group add system-setup
@@ -125,24 +124,24 @@ countdown 2
   pueue add -g system-setup --  brew install just 
   pueue add -g system-setup -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue status -g system-setup 
-  pp
-  countdown 5
+  countdown 3
  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 ################################################################################################
 
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install -y tmux tmuxinator) 
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "$(sudo apt-get install -y tmux tmuxinator)" 
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm firefox-esr plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)
+  /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm firefox-esr plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
 echo;/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
-countdown 5
+countdown 3
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
+trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
 
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
