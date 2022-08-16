@@ -64,6 +64,8 @@ echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
 curl -fsSL https://tailscale.com/install.sh | sh
+tailscaled &
+sudo tailscale up
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
@@ -694,10 +696,6 @@ printf "${GREEN}"; printf "${UL1}"
 printf "${NC}"
 sleep $myspeed
 echo
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL TAILSCALE"
-curl -fsSL https://tailscale.com/install.sh | sh
-tailscaled &
-sudo tailscale up
 pip install taskwarrior-inthe.am
 sudo apt-get install cifs-utils -y
 #echo; echo GOODSYNC; echo
