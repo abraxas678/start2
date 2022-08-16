@@ -186,7 +186,7 @@ countdown 2
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "zsh php nodejs npm plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
-countdown 5
+countdown 3
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
 trenner
