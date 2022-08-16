@@ -15,7 +15,7 @@ countdown() {
 }
 
 pp(){
-    /home/abraxas/.local/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
+    /home/linuxbrew/.linuxbrew/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
 }
 
 clear
@@ -23,7 +23,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 159"; sleep $myspeed
+echo "version 160"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -82,7 +82,7 @@ echo; echo "PUEUE INSTALL"
   echo; echo "INSTALL RICH-CLI"
   brew install rich
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --print rich installed -u
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print rich installed -u
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
@@ -97,7 +97,7 @@ echo; echo "PUEUE INSTALL"
 
 x=0
 while [[ $x -eq 0 ]]; do
-/home/abraxas/.local/bin/rich
+/home/linuxbrew/.linuxbrew/bin/rich
 echo "PUEUE SETUP"
 pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 [[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
@@ -109,7 +109,7 @@ done
 
   ######################################## BREW BASED SOFTWARE ########################################
   pp  
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
   pueue -g system-setup parallel 1
   pueue -g system-setup add -- brew install thefuck
@@ -119,25 +119,25 @@ done
   pueue -g system-setup add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue -g system-setup status
   countdown 5
- /home/abraxas/.local/bin/rich --panel rounded --style blue -u
+ /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 ################################################################################################
 
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-   /home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install tmux tmuxinator) 
+   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install tmux tmuxinator) 
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
-   /home/abraxas/.local/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
+   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
   pueue add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
   pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
-echo;/home/abraxas/.local/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
+echo;/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
 countdown 5
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
-/home/abraxas/.local/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
 
-/home/abraxas/.local/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
 
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
@@ -656,19 +656,19 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
 echo
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
 
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 pueue add -- pip install apprise; sleep $myspeed
 pueue add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
 pueue add -- sudo apt-get install docker.io docker-compose -y
-/home/abraxas/.local/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
  status)"
 #################################################### docker compose
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
 rm -f $HOME/color.dat
 sudo apt autoremove -y
@@ -687,7 +687,7 @@ printf "${GREEN}"; printf "${UL1}"
 printf "${NC}"
 sleep $myspeed
 echo
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL TAILSCALE"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscaled &
 sudo tailscale up
@@ -730,7 +730,7 @@ cd $HOME
 #  sudo gsync /gs-account-enroll=abraxas678@gmail.com
 #  sudo gsync /activate
 #fi
-/home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
 sudo chmod +x $HOME/bin/*
@@ -750,7 +750,7 @@ sudo chmod +x $HOME/bin/*
 #rclone copy gd:dotfiles/bin $HOME/bin -P
 #rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
-/home/home/abraxas/.local/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
+/home/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
 sudo chown $user: -R 
 echo DONE 
 echo EXEC ZSH
