@@ -160,6 +160,7 @@ pueue-init
 #done
 rm -f $HOME/tmp/pueuestatus.txt
 /home/linuxbrew/.linuxbrew/bin/pueue status | tails -n 10
+trenner Pueue initialized
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded ---panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
