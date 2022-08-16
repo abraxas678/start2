@@ -23,7 +23,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 162"; sleep $myspeed
+echo "version 163"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -112,6 +112,7 @@ countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
   pp  
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded ---panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
+  countdown 2
   pueue group add system-setup
   pueue parallel 1 -g system-setup 
   pueue add -g system-setup -- brew install thefuck
@@ -126,9 +127,9 @@ countdown 2
 
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install tmux tmuxinator) 
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install -y tmux tmuxinator) 
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
-   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
   pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
