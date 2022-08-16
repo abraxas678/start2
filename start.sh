@@ -211,7 +211,7 @@ echo "MYKEYCHECK $mykeycheck"
   else
     echo "GPG_KEYS=0"; sleep $myspeed1
     GPG_KEYS=0
-### >>> IF 2 C
+### >>> IF 2 C 
   fi
 ### >>> IF 1 E
 else
