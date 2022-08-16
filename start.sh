@@ -143,7 +143,6 @@ countdown 3
 
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
-
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
 
 ### >>> IF 1 O
@@ -154,15 +153,15 @@ then
 ### >>> IF 2 O
 mykeycheck=$(sudo gpg --list-secret-keys)
 echo "MYKEYCHECK $mykeycheck"
-   if [[ $mykeycheck -gt "0" ]]
-   then
-     echo "GPG_KEYS=1"; sleep $myspeed1
-     GPG_KEYS=1
-   else
-     echo "GPG_KEYS=0"; sleep $myspeed1
-     GPG_KEYS=0
+  if [[ $mykeycheck -gt "0" ]]
+  then
+    echo "GPG_KEYS=1"; sleep $myspeed1
+    GPG_KEYS=1
+  else
+    echo "GPG_KEYS=0"; sleep $myspeed1
+    GPG_KEYS=0
 ### >>> IF 2 C
-   fi
+  fi
 ### >>> IF 1 E
 else
   echo "GPG_INSTALLED=0"; sleep $myspeed1
@@ -171,11 +170,8 @@ else
   GPG_KEYS=0
 ### >>> IF 1 C
 fi
-
-printf "${LILA}"; 
-echo; echo "RCLONE"; echo; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
-
+trenner
+ /home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
