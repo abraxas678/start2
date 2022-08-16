@@ -238,7 +238,7 @@ rclone copy df: $HOME -P --max-depth 1--update --password-command="cat /home/abr
 /home/linuxbrew/.linuxbrew/bin/rich -u --print ".ssh copy"
 rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
 rm -f ~/rcpw
-zsh
+exec zsh
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
