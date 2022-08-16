@@ -142,7 +142,7 @@ echo; echo "PUEUE INSTALL"
   echo; echo "pueued -d"
   /home/linuxbrew/.linuxbrew/bin/pueued -d
   /home/linuxbrew/.linuxbrew/bin/pueue start
-  /home/linuxbrew/.linuxbrew/bin/pueue
+  #/home/linuxbrew/.linuxbrew/bin/pueue
 
 x=0
 rm -f $HOME/tmp/pueuestatus.txt
