@@ -64,6 +64,8 @@ echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
+echo "RC PW:"; read rcpw 
+echo $rcpw > ~/.ssh/rcpw
 sudo apt install lsof -y
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo systemctl start tailscaled
@@ -181,8 +183,6 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 echo; sudo tailscale file get ~/.config/rclone/
 countdown 10
-echo "RC PW:"; read rcpw 
-echo $rcpw > ~/.ssh/rcpw
 rclone copy df: ~ --include=".zsh.env" -P --password-command="cat ~/.ssh/rcpw"
 source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
