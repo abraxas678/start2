@@ -28,6 +28,9 @@ read -t 1 me
 echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
 
+###   df /home grösser 50GB?
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && $HOME/start2/new-disk.sh
+
 ts=$(date +"%s")
 if [[ -d start2 ]]
 then
