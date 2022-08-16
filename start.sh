@@ -16,6 +16,9 @@ countdown() {
 }
 
 pp() {
+  rich --print "$(pueue status | grep Success |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Success/\[green\]Success\[\/green\]/')"
+  rich --print "$(pueue status | grep Queue |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Queue/\[Yellow\]Queue\[\/Yellow\]/')"
+  rich --print "$(pueue status | grep Failure |awk '{ print $2,"  " $3,"  " $5," " $6 }' |sed 's/Failure/\[red\]Failure\[\/red\]/')"
   /home/linuxbrew/.linuxbrew/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status -g system-setup)"
 }
 
