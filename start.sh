@@ -457,7 +457,7 @@ couuntdown 2
 ###############################################################################  [7] SETUP SSH
 /home/linuxbrew/.linuxbrew/bin/rich -u --panel rounded --title "sudo ssh -T git@github.com" --print "$(sudo ssh -T git@github.com)"
 #sudo ssh -T git@github.com
-echo; trenner "successfull? (y/N)"
+echo; trenner "successfull? (y/N)" --style red 
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
 then
@@ -482,7 +482,6 @@ else
   #printf "${NC}"; printf "${BLUE2}"; 
   #gpg --decrypt id_rsa.asc > id_rsa
   #rm id*.asc
-fi
 fi
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
