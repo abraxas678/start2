@@ -1,209 +1,100 @@
 #!/bin/bash
+
+# $1 = # of seconds
+# $@ = What to print after "Waiting n seconds"
+countdown() {
+  secs=$1
+  shift
+  msg=$@
+  while [ $secs -gt 0 ]
+  do
+    printf "\r\033[KWaiting %.d seconds $msg" $((secs--))
+    sleep 1
+  done
+  echo
+}
+
 clear
 cd $HOME
 ts=$(date +"%s")
-sudo rm -rf /tmp-restic-restore
 myspeed="0.5"
 #######################################################
 echo "version 154"; sleep $myspeed
 #######################################################
 cd $HOME
+echo "CURRENT USER: $USER"
+read -t 1 me
+[[ $USER != "abraxas" ]] && [[ $(su abraxas) = *"does not exist"* ]] && useradd abraxas && passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
+echo "CURRENT USER: $USER"
+[[ $USER != "abraxas" ]] && echo BUTTON; read me || echo button2 && read -t 2 me
+
 ts=$(date +"%s")
 if [[ -d start2 ]]
 then
   mv start2 start2-backup-$ts
 fi
-if [[ ! -f $HOME/color.dat ]]
-then
-  echo "load color.dat"
-  cd $HOME
-  wget https://raw.githubusercontent.com/abraxas678/start2/main/color.dat
-fi
 export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
-source $HOME/color.dat
-tput cup 1 0 && tput ed; 
-#echo "[1] DEFINE USER DETAILS"
-#echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
-#echo "[3] CLONE REPOSITORY"
-#echo "[4] SETUP RCLONE"
-#echo "[5] SETUP GPG"
-tput cup 5 0 && tput ed
+
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 sudo apt-get install git -y
 git config --global user.name abraxas678
 git config --global user.email abraxas678@gmail.com
- printf "${NC}"; printf "${BLUE3}"
-cd $HOME
 sleep $myspeed
 sudo ls >/dev/null
+cd $HOME
 git clone https://github.com/abraxas678/start2.git; echo
 source $HOME/start2/color.dat
 source $HOME/start2/path.dat
- #  [1] CHECK USERNAME
- #################################################### [1] DEFINE USERNAME
-  printf "${NC}"; printf "${BLUE2}"
-  echo; echo; echo "CURRENT USER DETAILS:"; echo; sleep 1
-  printf "${NC}"; printf "${BLUE3}"
-  echo $USER; echo; sleep 1; id
-  printf "${NC}"; printf "${BLUE2}"; 
-  echo
-  sleep 2; 
-  if [[ $USER != "abraxas" ]]
-  then
-    su abraxas
-    printf "${NC}"; printf "${BLUE2}USE "; printf "${RED}$USER"; printf "${BLUE2} AS USERNAME? (y/n)"
-    read -n 1 myanswer
-  ######################################################################## [3] CLONE REPOSITORY
-    if [[ $myanswer != "y" ]]
-    then
-      echo; echo; printf "create user? (y/n) >>> "; read -n 1 mynewuser
-      if [[ $mynewanswer = "y" ]]
-      then
-        $HOME/start2/setup-new-user.sh
-      else
-      echo; echo; printf "USERNAME TO USE: >>> "; read myuser
-      printf "${NC}"; printf "${BLUE3}"
-      echo; echo "USING $myuser"; echo; printf "${YELLOW}"; echo BUTTON; printf "${BLUE3}"; read me
-      echo; echo "sudo chown $myuser:1000 $HOME -R"
-      echo "sudo chmod 700 -R $HOME"
-      sudo chown $myuser: $HOME -R
-      sudo chmod 700 -R $HOME
-      fi
-    fi 
-  fi
-if [[ $USER = "abraxas" ]]; then
-  sudo chown abraxas: -R /home
-  sudo chown abraxas: -R /run/user/
-  sudo chown abraxas: -R /usr/share/taskwarrior
-fi
-#echo; printf "password for abraxas? (y/n) >>> "
-#read -t 10 -n 1 mypassw
-#if [[ $mypassw = "y" ]]
-#then
-#  sudo passwd abraxas
-#fi
-sudo usermod -aG sudo abraxas
-
-cd $HOME
-myuser=$(whoami)
-sudo chown $myuser: /home/ -R
-sudo chmod +x $HOME/bin/* -R
-echo; echo "CURRENT USER: $USER"
-echo
-printf "${NC}"; printf "${BLUE2}"; 
-myspeed=2
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
-printf "${NC}"; printf "${BLUE3}"
 echo "speed [$myspeed]"
-myspeed1=$(($myspeed-1))
-if [[ $myspeed1 -lt "0" ]]
-then
-  myspeed1=0
-fi
-myspeed2=$(($myspeed+5))
-echo "lower speed [$myspeed1]"
-MY_RESTIC_PW_SET=$(echo $RESTIC_PASSWORD | wc -c)
-if [[ $MY_RESTIC_PW_SET -lt 2 ]]; then
-  printf "${NC}"; printf "${BLUE2}"; 
-  echo; printf "restic password: >>> "
-  printf "${NC}"; printf "${BLUE3}"
-  read -n 4 myresticpw
-  echo
-  export RESTIC_PASSWORD=$myresticpw
-fi
+[[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
-tput cup 15 0 && tput ed
-echo
-MY_RCLONE_PW_SET=$(echo $RCLONE_CONFIG_PASS | wc -c)
-if [[ $MY_RCLONE_PW_SET -lt 2 ]]; then
-if [[ $RCLONE_CONFIG_PASS = "" ]]
-  then
-  printf "rclone password: >>> " 
-  read -n 12 RCLONE_CONFIG_PASS
-  export RCLONE_CONFIG_PASS=$RCLONE_CONFIG_PASS
-fi
-fi
-if [[ $(hostname) = "snas" ]]; then mysnas=1; else mysnas=0; fi
-echo; echo "mysnas= $msnas"; sleep 1
-source $HOME/color.dat
-tput cup 1 0 && tput ed; 
-echo "["; printf "${CHECK}] DEFINE USER DETAILS"
-echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"
-echo "[3] CLONE REPOSITORY"
-echo "[4] SETUP RCLONE"
-echo "[5] SETUP GPG"
-tput cup 10 0 && tput ed
-#tput cup 10 10
-#delstart="n"
-#echo; echo "DELETE FOLDER START? (y/n)"; echo
-#read -n 1 -t 5 delstart
-#if [[ $delstart = "y" ]]
-#then
-#  cd $HOME
-#  rm -rf 
-#fi
-echo; echo install git; echo
-sudo apt install -y git
-echo
-  printf "${LILA}"; printf "${UL1}"
-  echo; echo "[1] SYSTEM UPATE AND UPGRADE"; sleep $myspeed
-  ##########################################  [1] SYSTEM UPATE AND UPGRADE
-  printf "${NC}"; printf "${BLUE3}"
-  echo; printf "${NC}"; printf "${BLUE2}PERFORM "; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; printf "${BLUE2}? (y/n)"
-  myanswer="y"
-  read -n 1 -t 5 myanswer
-    if [[ $myanswer = "y" ]]
-    then
-      echo
-      echo "sudo apt-get update && sudo apt-get upgrade -y"
-      echo
-      sudo apt-get update && sudo apt-get upgrade -y
-   #   x=0
-   #   while [[ x = "0" ]]
-   #   do
-   #   clear
-      #pueue status 
-   #   sleep 2
-   #   done 
-    fi
-########################################## BREW ##########################################
-printf "${NC}"; printf "${BLUE3}"
-brewsetup="y"
-printf "${NC}"; printf "${LILA}"
-echo
-echo; echo "START BREW SETUP?  (y/n)"
-echo
-printf "${NC}"; printf "${BLUE3}"
-brewsetup="y"
-echo BUTTON20
-read -t 20 -n 1 brewsetup
-echo
-if [[ $brewsetup != "n" ]]; then
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+
+echo; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; 
+countdown 5 
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install python-pip -y
+
+echo; echo "BREW SETUP"; echo
+countdown 20
+  
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shelle /home/linuxbrew/.linuxbrew/binnv)"' >> /home/abrax/.zprofile
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   sudo apt-get install build-essential -y
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   brew install gcc
-  ########################################## CARGO NEW ################################################
-  #echo; echo CARGO
-  #brew install cargo
-  echo; echo "PUEUE INSTALL"
+  
+echo; echo "PUEUE INSTALL"
+  countdown 3
   brew install pueue
-  sudo chown -R abraxas: /run/user/
+  sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
   sudo chmod +x /home/abraxas/.cargo/bin/pueued
+  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue
   sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
-  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueuedd
   source $HOME/start2/path.dat
-  echo; echo; echo "pueued -d"
-  pueued -d 
-  pueue add -- ls
-  echo; echo
-  pueue start
-  pueue
+  echo; echo "pueued -d"
+  /home/linuxbrew/.linuxbrew/bin/pueued -d
+  /home/linuxbrew/.linuxbrew/bin/pueue start
+  /home/linuxbrew/.linuxbrew/bin/pueue
+
+x=0
+while [[ $x -eq 0 ]]; do
+pueue status >> pueuestatus.txt 2>> pueuestatus.txt
+[[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
+sleep 1
+done
+/home/linuxbrew/.linuxbrew/bin/pueue status
+echo; echo "INSTALL RICH-CLI"
+brew install rich
+
+exit
+
   echo; echo "BUTTON240"
   read -t 240 me
   ######################################## BREW BASED SOFTWARE ########################################
@@ -536,9 +427,9 @@ rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
-echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic python3-pip -y"; echo; sleep $myspeed
+echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep $myspeed
 printf "${NC}"; printf "${BLUE2}"
-echo "sudo apt-get install restic python3-pip -y"; sleep $myspeed
+echo "sudo apt-get install restic -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 pueue add -- sudo apt-get install restic python3-pip -y
 ###############################################################################  [6]
