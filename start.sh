@@ -361,7 +361,7 @@ echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-pueue add -- sudo apt-get install restic python3-pip -y
+pueue add -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -709,6 +709,15 @@ cd $HOME
 #sudo gsync /gs-account-enroll=abraxas678@gmail.com
 #sudo gsync /activate
  if [[ $(cat /root/.bashrc) = *"switching to [abraxas]"* ]]; then sudo echo "nothing to do"; else echo "echo 'switching to [abraxas] in 5 s'; read -t 5 me; su abraxas" >> /root/.bashrc; fi
+
+curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
+sudo apt install apt-transport-https
+sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' > /etc/apt/sources.list.d/archive.heckel.io.list"  
+sudo apt update
+sudo apt install pcopy
+sudo pcopy setup
+sudo systemctl enable pcopy
+sudo systemctl start pcopy
 
 pueue add -- pip install taskwarrior-inthe.am
 pueue add -- sudo apt-get install cifs-utils -y
