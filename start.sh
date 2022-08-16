@@ -225,8 +225,9 @@ source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "myfilter.txt copy"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
+rclone copy gd:dotfiles/bin/ $HOME/bin -P --include="install-age.sh" --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "bin copy"
-rclone copy gd:dotfiles/bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- rclone copy gd:dotfiles/bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
 sudo chmod +x $HOME/bin/*
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "INSTALL AGE"
 /bin/bash $HOME/bin/install-age.sh
