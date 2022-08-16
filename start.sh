@@ -134,7 +134,7 @@ countdown 2
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
 countdown 5
@@ -171,7 +171,7 @@ else
 ### >>> IF 1 C
 fi
 trenner
-/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
@@ -231,7 +231,7 @@ fi
 trenner
 countdown 3
 
-/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
 countdown 2
 ########################################## INSTALL & SETUP ===============================
 printf "${NC}"; printf "${BLUE3}"
@@ -260,7 +260,7 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
 fi
 
 printf "${LILA}"; printf "${UL1}"
-/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print "[5] setup GPG encryption"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "[5] setup GPG encryption"
 countdown 2
 #################################################################### [5] SETUP GPG 
 echo
