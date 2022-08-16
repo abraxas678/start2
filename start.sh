@@ -35,7 +35,7 @@ pueue-init() {
    /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
-  [[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
+  [[ $(cat pueuestatus.txt | head -n1) = *"Group"* ]] && x=1
   sleep 1
   done
   rm -f pueuestatus.txt
