@@ -28,9 +28,9 @@ pp() {
 
 pueue-init() {
   x=0
-  rm -f $HOME/tmp/pueuestatus.txt
   while [[ $x -eq 0 ]]; do
   echo "PUEUE INIT"
+  rm -f $HOME/tmp/pueuestatus.txt
   countdown 3
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /home/linuxbrew/.linuxbrew/bin/pueue status >> $HOME/tmp/pueuestatus.txt 2>> $HOME/tmp/pueuestatus.txt
