@@ -237,10 +237,8 @@ else
 fi
 
 trenner
-countdown 3
-
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
-countdown 2
+countdown 3
 ########################################## INSTALL & SETUP ===============================
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE3}"
