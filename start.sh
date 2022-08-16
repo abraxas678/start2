@@ -68,7 +68,7 @@ sudo apt install lsof -y
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo systemctl start tailscaled
 sudo tailscale up
-echo; echo "tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
+echo; echo "sudo tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
 echo;
 countdown 20
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
