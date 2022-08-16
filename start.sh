@@ -218,16 +218,16 @@ fi
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 echo; sudo tailscale file get ~/.config/rclone/
-countdown 10
-rclone copy df: ~ --include=".zsh.env" -P --password-command="  "
+countdown 5
+rclone copy df: ~ --include=".zsh.env" -P --update --password-command="  "
 source ~/.zsh.env
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
-rclone copy gd:dotfiles/myfilter.txt $HOME -P --password-command="cat /home/abraxas/rcpw"
-rclone copy gd:dotfiles/bin/ $HOME/bin -P  --password-command="cat /home/abraxas/rcpw"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
+rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
+rclone copy gd:dotfiles/bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
 sudo chmod +x $HOME/bin/*
 /bin/bash $HOME/bin/install-age.sh
-rclone copy df:.config ~/.config -P  --password-command="cat /home/abraxas/rcpw"
-rclone copy df:.ssh ~/.ssh -P  --password-command="cat /home/abraxas/rcpw"
+rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw"
+rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
 rm -f ~/.ssh/rcpw
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
