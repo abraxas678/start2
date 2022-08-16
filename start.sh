@@ -177,7 +177,7 @@ countdown 2
  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 ################################################################################################
 
-  echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
+  #echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "$(sudo apt-get install -y tmux tmuxinator)" 
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
