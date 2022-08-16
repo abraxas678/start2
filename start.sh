@@ -37,7 +37,7 @@ pueue-init() {
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Please stop the daemon beforehand or delete the file manually"* ]] && rm -f /home/abraxas/.local/share/pueue/pueue.pid 
-  [[ $(cat $HOME/tmp/pueuestatus.txt | head -n1) = *"Group"* ]] && x=1
+  [[ $(cat $HOME/tmp/pueuestatus.txt | head -n1) = *"Group"* ]] && x=1 || sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued && /home/linuxbrew/.linuxbrew/bin/pueued -d && /home/linuxbrew/.linuxbrew/bin/pueued -d
   sleep 1
   done
   rm -f $HOME/tmp/pueuestatus.txt
