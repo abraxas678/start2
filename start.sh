@@ -181,6 +181,7 @@ countdown 2
   #echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "$(sudo apt-get install -y tmux tmuxinator)" 
+  countdown 3
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
