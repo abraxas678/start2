@@ -217,12 +217,13 @@ echo "MYKEYCHECK $mykeycheck"
 else
   echo "GPG_INSTALLED=0"; sleep $myspeed1
   echo "GPG_KEYS=0"; sleep $myspeed1
-  GPG_INSTALLED=0
-  GPG_KEYS=0
+  trenner GPG_INSTALLED=0
+  trenner GPG_KEYS=0
+  countdown 3
 ### >>> IF 1 C
 fi
 trenner
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE -u
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "tailscale get file"
 echo; sudo tailscale file get ~/.config/rclone/
 countdown 5
