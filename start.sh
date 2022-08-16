@@ -171,7 +171,7 @@ else
 ### >>> IF 1 C
 fi
 trenner
- /home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
+/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
@@ -228,9 +228,11 @@ else
 ### >>> IF 1 c
 fi
 
-echo; echo BUTTON5; read -t 5 me
-printf "${UL1}"; printf "${LILA}"
-echo; echo "INSTALL AND SETUP"; sleep $myspeed
+trenner
+countdown 3
+
+/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
+countdown 2
 ########################################## INSTALL & SETUP ===============================
 printf "${NC}"; printf "${BLUE3}"
 printf "${NC}"; printf "${BLUE3}"
@@ -258,7 +260,8 @@ if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
 fi
 
 printf "${LILA}"; printf "${UL1}"
-echo; echo "[5] setup GPG encryption"; sleep $myspeed
+/home/abraxas/.local/bin/rich --panel rounded --style green --panel-style blue --print "[5] setup GPG encryption"
+countdown 2
 #################################################################### [5] SETUP GPG 
 echo
 if [[ $GPG_INSTALLED = "0" ]]
