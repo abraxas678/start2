@@ -349,7 +349,7 @@ then
   printf "PLEASE LOCATE RKO-FILES OR KEY.ASC  IN GD:SEC"; printf "${RED} -- SCRIPT WILL REMOVE AND DELETE THOSE FILES"; echo 
   printf "${NC}"; printf "${BLUE2}"
   echo "(echo 'gpg -a --export-secret-keys [key-id] >key.asc')"
-  echo; printf "${YELLOW}"; echo BUTTON20; printf "${BLUE3}"; read -t 20 me
+  echo; printf "${YELLOW}"; echo BUTTON3; printf "${BLUE3}"; read -t 3 me
   
   mykey=$(rclone ls gd:sec --max-depth 1 --include="key.asc" | wc -l)
   if [[ $mykey > 1 ]] 
@@ -440,21 +440,24 @@ then
       sleep $myspeed
 fi  
 
-trenner
+trenner "RCLONE DONE"
+countdown 2
 
 rclone copy gd:dotfiles/.bashrc $HOME -P
 rclone copy gd:dotfiles/.zshrc $HOME -P
 rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 
 trenner SOFTWARE INSTALL
+countdown 2
 pueue add -g system-setup -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
 trenner SSH SETUP
+couuntdown 2
 ###############################################################################  [7] SETUP SSH
 /home/linuxbrew/.linuxbrew/bin/rich -u --panel rounded --title "sudo ssh -T git@github.com" --print "$(sudo ssh -T git@github.com)"
 #sudo ssh -T git@github.com
-trenner "successfull? (y/N)"
+echo; trenner "successfull? (y/N)"
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
 then
