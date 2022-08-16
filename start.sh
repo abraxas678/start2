@@ -105,7 +105,7 @@ echo; echo "PUEUE INSTALL"
   echo; echo "INSTALL RICH-CLI"
   brew install rich
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print rich installed -u
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "rich installed" -u
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
