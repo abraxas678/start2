@@ -27,7 +27,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 165"; sleep $myspeed
+echo "version 166"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -67,7 +67,7 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install python3-pip -y
+sudo apt-get install python3-pip firefox-esr -y
 
 echo; echo "BREW SETUP"; echo
 countdown 3
@@ -134,7 +134,7 @@ countdown 2
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm firefox-esr plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
+  /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
 countdown 5
