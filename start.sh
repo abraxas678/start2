@@ -23,7 +23,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 157"; sleep $myspeed
+echo "version 158"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -31,10 +31,6 @@ read -t 1 me
 [[ $USER != "abraxas" ]] && [[ ! $(id -u abraxas) ]] && sudo adduser abraxas && sudo passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
 echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
-
-###   df /home grösser 50GB?
-chmod +x $HOME/start2/*.sh
-[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 ts=$(date +"%s")
 if [[ -d start2 ]]
@@ -53,6 +49,11 @@ cd $HOME
 git clone https://github.com/abraxas678/start2.git; echo
 source $HOME/start2/color.dat
 source $HOME/start2/path.dat
+
+###   df /home grösser 50GB?
+chmod +x $HOME/start2/*.sh
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && /bin/bash $HOME/start2/new-disk.sh
+
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
