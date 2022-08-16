@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 175"; sleep $myspeed
+echo "version 177"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -181,8 +181,17 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 echo; sudo tailscale file get ~/.config/rclone/
 countdown 10
-rclone copy df:.config ~/.config -P
-rclone copy df:.ssh ~/.ssh -P
+echo "RC PW:"; read rcpw 
+echo $rcpw > ~/.ssh/rcpw
+rclone copy df: ~ --include=".zsh.env" -P --password-command="cat ~/.ssh/rcpw"
+source ~/.zsh.env
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
+rclone copy gd:dotfiles/myfilter.txt $HOME -P --password-command="cat ~/.ssh/rcpw"
+rclone copy gd:dotfiles/bin/ $HOME/bin -P  --password-command="cat ~/.ssh/rcpw"
+sudo chmod +x $HOME/bin/*
+/bin/bash $HOME/bin/install-age.sh
+rclone copy df:.config ~/.config -P  --password-command="cat ~/.ssh/rcpw"
+rclone copy df:.ssh ~/.ssh -P  --password-command="cat ~/.ssh/rcpw"
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
@@ -742,11 +751,6 @@ cd $HOME
 #  sudo gsync /gs-account-enroll=abraxas678@gmail.com
 #  sudo gsync /activate
 #fi
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
-rclone copy gd:dotfiles/myfilter.txt $HOME -P
-rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
-sudo chmod +x $HOME/bin/*
-/bin/bash $HOME/bin/install-age.sh
 #echo "copy files from gd:dotfiles"
 #read -t 10 me
 #rclone copy gd:dotfiles $HOME --max-depth 1 --filter-from="$HOME/myfilter.txt" -P
