@@ -81,6 +81,7 @@ echo; echo "PUEUE INSTALL"
   brew install pueue
   echo; echo "INSTALL RICH-CLI"
   brew install rich
+  /home/abraxas/.local/bin/rich --panel rounded --style blue --print rich installed -u
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
