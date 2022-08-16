@@ -34,7 +34,7 @@ pueue-init() {
   countdown 3
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /home/linuxbrew/.linuxbrew/bin/pueue status >> $HOME/tmp/pueuestatus.txt 2>> $HOME/tmp/pueuestatus.txt
-   /home/linuxbrew/.linuxbrew/bin/pueue status
+  # /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
   [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Please stop the daemon beforehand or delete the file manually"* ]] && x=1
