@@ -43,7 +43,7 @@ pueue-init() {
 }
 
 trenner() {
-  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u --print "$@"
 }
 ################################## SCRIPT ###########################################
 clear
@@ -441,7 +441,6 @@ rclone copy gd:dotfiles/.bashrc $HOME -P
 rclone copy gd:dotfiles/.zshrc $HOME -P
 rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 
-if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep $myspeed
