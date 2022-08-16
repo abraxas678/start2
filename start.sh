@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 168"; sleep $myspeed
+echo "version 169"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -67,6 +67,7 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscaled &
 sudo tailscale up
+echo; echo "tailscale file cp ~/.config/rclone/rclone.conf $(hostname)"
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
