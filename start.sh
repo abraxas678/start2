@@ -142,8 +142,8 @@ countdown 3
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
 trenner
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "CHECKING ENVIRONMENT CONDITION:"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue  --print "GPG"; echo; sleep $myspeed
 
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
