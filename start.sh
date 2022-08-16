@@ -113,7 +113,7 @@ done
   pp  
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
-  pueue -g system-setup parallel 1
+  pueue parallel 1 -g system-setup 
   pueue add -g system-setup -- brew install thefuck
   pueue add -g system-setup -- brew install gcalcli
   pueue add -g system-setup -- brew install fzf
