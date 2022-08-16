@@ -658,7 +658,6 @@ pueue add -- sudo apt-get install docker.io docker-compose -y
 #################################################### docker compose
 /home/abraxas/.local/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
-echo; printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
 sudo apt autoremove -y
 
@@ -739,8 +738,8 @@ sudo chmod +x $HOME/bin/*
 #rclone copy gd:dotfiles/bin $HOME/bin -P
 #rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
-rclone copy df:.config $HOME/.config --update -Pv 
-sudo chown $user: -R /home
+/home/home/abraxas/.local/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
+sudo chown $user: -R 
 echo DONE 
 echo EXEC ZSH
 exec zsh
