@@ -100,7 +100,7 @@ echo;
 countdown 10
 [[ $(/home/linuxbrew/.linuxbrew/bin/pueue -V) = *"Pueue client"* ]] && MY_PUEUE_INST=1 || MY_PUEUE_INST=0
 echo; echo MY_PUEUE_INST $MY_PUEUE_INST
-countdown 5
+countdown 3
 [[ $MY_PUEUE_INST -eq 1 ]] && pueue-init
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
