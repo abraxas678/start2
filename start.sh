@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 179"; sleep $myspeed
+echo "version 180"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -691,8 +691,7 @@ pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
 pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
- status)"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
 #################################################### docker compose
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
@@ -767,7 +766,7 @@ cd $HOME
 #rclone copy gd:dotfiles/bin $HOME/bin -P
 #rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
-/home/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
 sudo chown $user: -R 
 echo DONE 
 echo EXEC ZSH
