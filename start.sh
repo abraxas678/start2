@@ -718,7 +718,7 @@ cd $HOME
 #  sudo gsync /gs-account-enroll=abraxas678@gmail.com
 #  sudo gsync /activate
 #fi
-echo INSTALL AGE
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P
 rclone copy gd:dotfiles/bin/install-age.sh $HOME/bin -P
 sudo chmod +x $HOME/bin/*
