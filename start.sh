@@ -84,7 +84,7 @@ echo; echo "PUEUE INSTALL"
 x=0
 while [[ $x -eq 0 ]]; do
 /home/abraxas/.local/bin/rich
-/home/abraxas/.local/bin/rich --print "PUEUE SETUP" --panel rounded --style blue
+echo "PUEUE SETUP"
 pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 [[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
 [[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
@@ -96,18 +96,18 @@ echo; echo "INSTALL RICH-CLI"
 brew install rich
 
   ######################################## BREW BASED SOFTWARE ########################################
-  printf "${LILA}"; printf "${UL1}"
-  echo "[17] INSTALL BREW BASED SOFTWARE"
-  printf "${NC}"; printf "${BLUE3}"
-  pueue parallel 1
-  pueue add -- brew install thefuck
-  pueue add -- brew install gcalcli
-  pueue add -- brew install fzf
-  pueue add --  brew install just 
-  pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
-  echo; pueue
+  
+  /home/abraxas/.local/bin/rich --panel rounded --style blue --print "[17] INSTALL BREW BASED SOFTWARE"
+  pueue group add system-setup
+  pueue -g sytem-setup parallel 1
+  pueue -g sytem-setup add -- brew install thefuck
+  pueue -g sytem-setup add -- brew install gcalcli
+  pueue -g sytem-setup add -- brew install fzf
+  pueue -g sytem-setup add --  brew install just 
+  pueue -g sytem-setup add -- 'yes | $(brew --prefix)/opt/fzf/install'
+  echo; pueue -g sytem-setup status
   countdown 5
-
+ /home/abraxas/.local/bin/rich --panel rounded --style blue -u
 ################################################################################################
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
 #  then
