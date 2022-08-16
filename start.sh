@@ -192,6 +192,7 @@ sudo chmod +x $HOME/bin/*
 /bin/bash $HOME/bin/install-age.sh
 rclone copy df:.config ~/.config -P  --password-command="cat ~/.ssh/rcpw"
 rclone copy df:.ssh ~/.ssh -P  --password-command="cat ~/.ssh/rcpw"
+rm -f ~/.ssh/rcpw
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
