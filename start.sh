@@ -24,17 +24,18 @@ pp() {
 }
 
 pueue-init() {
-  sudo chown -R abraxas: /run/user
-  sudo chown -R abraxas: /home
-  sudo chmod +x /home/abraxas/.cargo/bin/pueue
-  sudo chmod +x /home/abraxas/.cargo/bin/pueued
-  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue
-  sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueued
-  source $HOME/start2/path.dat
-  echo; echo "pueued -d"
-  /home/linuxbrew/.linuxbrew/bin/pueued -d
-  /home/linuxbrew/.linuxbrew/bin/pueue start
-  /home/linuxbrew/.linuxbrew/bin/pueue
+x=0
+while [[ $x -eq 0 ]]; do
+/home/linuxbrew/.linuxbrew/bin/rich
+echo "PUEUE INIT"
+countdown 3
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+pueue status >> pueuestatus.txt 2>> pueuestatus.txt
+[[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
+sleep 1
+done
 }
 
 trenner() {
@@ -122,6 +123,7 @@ echo; echo "PUEUE INSTALL"
   brew install rich
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "rich installed" -u
+  countdown 3
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
   sudo chmod +x /home/abraxas/.cargo/bin/pueue
@@ -137,7 +139,7 @@ echo; echo "PUEUE INSTALL"
 x=0
 while [[ $x -eq 0 ]]; do
 /home/linuxbrew/.linuxbrew/bin/rich
-echo "PUEUE SETUP"
+echo "PUEUE INIT"
 countdown 3
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 pueue status >> pueuestatus.txt 2>> pueuestatus.txt
