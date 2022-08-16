@@ -79,6 +79,8 @@ countdown 20
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 [[ $(/home/linuxbrew/.linuxbrew/bin/pueue -V) = *"Pueue client"* ]] && MY_PUEUE_INST=1 || MY_PUEUE_INST=0
+echo; echo MY_PUEUE_INST $MY_PUEUE_INST
+countdown 10
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue parallel 1
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue start
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -- sudo apt-get update && sudo apt-get upgrade -y ||  sudo apt-get update && sudo apt-get upgrade -y
