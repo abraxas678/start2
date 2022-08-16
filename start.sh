@@ -644,37 +644,20 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
 echo
-echo "NTFY SETUP >>> DONE"
-echo
-printf "${NC}"; printf "${BLUE2}"
-echo; echo "[14] PIP INSTALLS"; sleep $myspeed
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
+
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 printf "${NC}"; printf "${BLUE3}"
 pueue add -- pip install apprise; sleep $myspeed
 pueue add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
-printf "${LILA}"; printf "${UL1}"
-echo; echo "[15] INSTALL DOCKER"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
-if [[ $HOST = *"LAPTOP"* ]]
-then
-  printf "${RED}"
-  echo; echo "SKIPPING DOCKER INSTALLATION ON $HOST"; sleep $myspeed; printf "${NC}"; printf "${BLUE3}"
-else 
-  pueue add -- sudo apt-get install docker.io docker-compose -y
-fi
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
+pueue add -- sudo apt-get install docker.io docker-compose -y
+/home/abraxas/.local/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
+ status)"
 #################################################### docker compose
-echo
-printf "${NC}"; printf "${BLUE2}"
-
-echo; echo "RESTIC:"; echo
-#restic snapshots
-#curl -d "restic snapshot ready to choose" https://n.dmw.zone/main
-#echo; printf "choose the latest restcic snapshot for .zshrc: >>> "; read myrestic
-#restic restore $myrestic --target="$HOME" --include=".zshrc"
-printf "${LILA}"; printf "${UL1}"; echo
-echo "[18] AUTOREMOVE"; sleep $myspeed
-fi
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
 echo; printf "${NC}"; printf "${BLUE3}"
 rm -f $HOME/color.dat
@@ -694,8 +677,9 @@ printf "${GREEN}"; printf "${UL1}"
 printf "${NC}"
 sleep $myspeed
 echo
-echo "INSTALL TAILSCALE"
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL TAILSCALE"
 curl -fsSL https://tailscale.com/install.sh | sh
+tailscaled &
 sudo tailscale up
 pip install taskwarrior-inthe.am
 sudo apt-get install cifs-utils -y
