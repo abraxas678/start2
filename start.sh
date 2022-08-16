@@ -3,6 +3,7 @@
 # $@ = What to print after "Waiting n seconds"
 pueue clean -g system-setup >/dev/null 2>/dev/null 
 pueue clean -g system-setup >/dev/null 2>/dev/null 
+################################## FUNCTIONS ###########################################
 countdown() {
   secs=$1
   shift
@@ -44,14 +45,16 @@ pueue-init() {
 trenner() {
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 }
-
+################################## SCRIPT ###########################################
 clear
 cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
+
 #######################################################
 echo "version 195"; sleep $myspeed
 #######################################################
+
 cd $HOME
 echo "CURRENT USER: $USER" 
 read -t 1 me
@@ -111,7 +114,7 @@ echo; echo "BREW SETUP"; echo
 countdown 3
   
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo; countdown 5
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shelle /home/linuxbrew/.linuxbrew/binnv)"' >> /home/abrax/.zprofile
   [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" || eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
