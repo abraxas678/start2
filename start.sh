@@ -460,28 +460,25 @@ rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 
 trenner SOFTWARE INSTALL
 countdown 2
-pueue add -g system-setup -- sudo apt-get install restic SS-y
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install restic SS -y
 ###############################################################################  [6]
 echo
 trenner SSH SETUP
-couuntdown 2
+countdown 2
 ###############################################################################  [7] SETUP SSH
-/home/linuxbrew/.linuxbrew/bin/rich -u --panel rounded --title "sudo ssh -T git@github.com" --print "$(sudo ssh -T git@github.com)"
+/home/linuxbrew/.linuxbrew/bin/rich -u --style green --panel-style blue --panel rounded --title "sudo ssh -T git@github.com" --print "$(sudo ssh -T git@github.com)"
 #sudo ssh -T git@github.com
+countdown 3
 echo; trenner "successfull? (y/N)" --style red 
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
 then
-printf "${GREEN}"
   echo; echo $sshresult; echo
-  echo; echo "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+  echo; trenner "SSH SETUP DONE - GITHUB ACCESS SUCCESSFULL"; sleep $myspeed
 else
-  printf "${RED}"
-  echo; echo $sshresult; echo; printf "${LILA}"; printf "${UL1}"
-  echo "STARTING SHH SETUP"; sleep $myspeed
-  printf "${NC}"; printf "${BLUE3}"
-  echo "rclone copy gd:sec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
+  echo; echo $sshresult; echo; 
+  trenner "STARTING SHH SETUP"; sleep $myspeed
+  trenner "rclone copy gd:sec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
   echo
   rclone copy gd:sec/supersec/sshkeys/id_rsa . -P
   echo
@@ -494,7 +491,7 @@ else
   #gpg --decrypt id_rsa.asc > id_rsa
   #rm id*.asc
 fi
-  sudo mkdir $HOME/.ssh
+  sudo mkdir $HOME/.ssh >/dev/null 2>/dev/null
   mv id_rsa $HOME/.ssh
   trenner "SETUP SSH FOLDER RIGHTS"
   echo; sleep $myspeed
@@ -665,64 +662,40 @@ echo
 #curl -s "https://maker.ifttt.com/trigger/tts/with/key/4q38KZvz7CwD5_QzdUZHq?value1=$mytext"
 #printf "${LILA}"; printf "${UL1}"
 #fi
-echo; echo; echo "[10] INSTALL KEEPASSXC"
+trenner
+echo;  trenner "INSTALL KEEPASSXC"
 ########################################## KEEPASSXC [10]
-printf "${NC}"; printf "${BLUE3}"
-echo
-mykeepass="n"
-printf "${NC}"; printf "${BLUE2}"
-echo "WANT TO INSTALL KEEPASSXC? (y/n)"
-printf "${NC}"; printf "${BLUE3}"
-mykeepass="y"
-echo BUTTON3
-read -n 1 -t 3 mykeepass
-
-if [[ $mykeepass = "y" ]]; then
 #  /home/abraxas/.cargo/bin/pueued -d
-  pueue add -g system-setup -- sudo add-apt-repository ppa:phoerious/keepassxc -y
-  pueue add -g system-setup -- sudo apt-get update
-  pueue parallel 1
-  pueue add -g system-setup -- sudo apt-get dist-upgrade -y
-  #printf "${LILA}"
-  pueue add -g system-setup -- sudo apt-get install -y keepassxc
-fi
+  pueue parallel 1 -g system-setup
+  pueue add -g system-setup -- sudo add-apt-repository ppa:phoerious/keepassxc -y | tail -f -n5
+  pueue add -g system-setup -- sudo apt-get update | tail -f -n5
+  pueue add -g system-setup -- sudo apt-get dist-upgrade -y | tail -f -n5
+  pueue add -g system-setup -- sudo apt-get install -y keepassxc | tail -f -n5
 echo
-printf "${LILA}"; printf "${UL1}"
 trenner "[11] SOFTWARE INSTALLATION"
 ################################################ [11] SOFTWARE INSTALLATION
-printf "${NC}"; printf "${BLUE4}"
-echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
-printf "${NC}"; printf "${BLUE3}"; echo
-pueue add -g system-setup -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
-echo
-printf "${NC}"; printf "${BLUE3}"
-myfonts="y"
-printf "${LILA}"; printf "${UL1}"
-echo "[12] WANT TO INSTALL FONTS? (y/n)"
+
+/home/linuxbrew/.linuxbrew/bin/rich --panel square --print "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
+trenner "INSTALL FONTS"
 ##################################################### [12] FONTS
-printf "${NC}"; printf "${BLUE3}"
-echo BUTTON2
-read -n 1 -t 2 myfonts
-if [[ $myfonts = "y" ]]; then
   #https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
   curl -X POST -H "Content-Type: application/json" -d '{"myvar1":"foo","myvar2":"bar","myvar3":"foobar"}' "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=304c57b5ddbd4c10b03b76fa97d44559&deviceNames=razer,Chrome,ChromeRazer&text=play%20install%20this%20font&url=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&file=https%3A%2F%2Fgithub.com%2Fromkatv%2Fpowerlevel10k-media%2Fraw%2Fmaster%2FMesloLGS%2520NF%2520Regular.ttf&say=please%20install%20this%20font"
   sudo apt update && sudo apt install -y zsh fonts-powerline xz-utils wget plocate
   ###mlocate  -----> in tmu aufsetzen
   ###### https://github.com/suin/git-remind
   # sleep $myspeed1
-fi
-printf "${NC}"; printf "${LILA}"
-echo; echo "[13] SETUP NTFY"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+
+echo; trenner "SETUP NTFY" --paynel heavy; sleep $myspeed
 ######################################################################### [13] NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
-sudo apt install apt-transport-https -y
+sudo apt install apt-transport-https -y | tail -f -n5
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
-    > /etc/apt/sources.list.d/archive.heckel.io.list"  
-sudo apt update
-sudo apt install ntfy -y
-sudo systemctl enable ntfy
-sudo systemctl start ntfy
+    > /etc/apt/sources.list.d/archive.heckel.io.list"  | tail -f -n5
+sudo apt update | tail -f -n5
+sudo apt install ntfy -y | tail -f -n5
+sudo systemctl enable ntfy | tail -f -n5
+sudo systemctl start ntfy | tail -f -n5
 
 sudo mkdir /etc/systemd/system/ntfy-client.service.d
 sudo sh -c 'cat > /etc/systemd/system/ntfy-client.service.d/override.conf' <<EOF
@@ -735,12 +708,12 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart ntfy-client
 echo
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
+/home/linuxbrew/.linuxbrew/bin/rich -up --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
 
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
-pueue add -g system-setup -- pip install apprise; sleep $myspeed
-pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install apprise; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
 pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
@@ -759,14 +732,9 @@ sudo apt autoremove -y
 echo
 rm -rf $HOME/start
 rm -rf $HME/start2
-#rm -rf /tmp-restic-restore
 echo
-printf "${GREEN}"; printf "${UL1}"
-printf "${NC}"
-sleep $myspeed
-echo
-pip install taskwarrior-inthe.am
-sudo apt-get install cifs-utils -y
+pip install taskwarrior-inthe.am | tail -f -n5
+sudo apt-get install cifs-utils -y | tail -f -n5
 #echo; echo GOODSYNC; echo
 rm -rf .antigen
 printf "${NC}"
@@ -779,16 +747,16 @@ cd $HOME
  if [[ $(cat /root/.bashrc) = *"switching to [abraxas]"* ]]; then sudo echo "nothing to do"; else echo "echo 'switching to [abraxas] in 5 s'; read -t 5 me; su abraxas" >> /root/.bashrc; fi
 
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
-sudo apt install apt-transport-https
+sudo apt install apt-transport-https | tail -f -n5
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' > /etc/apt/sources.list.d/archive.heckel.io.list"  
-sudo apt update
-sudo apt install pcopy
-sudo pcopy setup
+sudo apt update | tail -f -n5
+sudo apt install pcopy | tail -f -n5
+#sudo pcopy setup
 sudo systemctl enable pcopy
 sudo systemctl start pcopy
 
-pueue add -g system-setup -- pip install taskwarrior-inthe.am
-pueue add -g system-setup -- sudo apt-get install cifs-utils -y
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install taskwarrior-inthe.am
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install cifs-utils -y
 rm -rf $HOME/.antigen
 #echo; echo GOODSYNC; echo
 printf "${NC}"
