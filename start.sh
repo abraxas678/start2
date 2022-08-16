@@ -441,19 +441,15 @@ rclone copy gd:dotfiles/.bashrc $HOME -P
 rclone copy gd:dotfiles/.zshrc $HOME -P
 rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 
-echo
-printf "${LILA}"; printf "${UL1}"
-echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep $myspeed
-echo "sudo apt-get install restic -y"
+trenner SOFTWARE INSTALL
 pueue add -g system-setup -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
-printf "${LILA}"; printf "${UL1}"
-echo "[7] SETUP SSH"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+trenner SSH SETUP
 ###############################################################################  [7] SETUP SSH
-sudo ssh -T git@github.com
-echo; echo "successfull? (y/N)"; echo; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich -u --panel rounded --title "sudo ssh -T git@github.com" --print "$(sudo ssh -T git@github.com)"
+#sudo ssh -T git@github.com
+trenner "successfull? (y/N)"
 read -n 1 sshresult 
 if [[ $sshresult = "y" ]]
 then
@@ -482,7 +478,8 @@ fi
 fi
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
-  echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
+  trenner "SETUP SSH FOLDER RIGHTS"
+  echo; sleep $myspeed
 
 echo "pueue add -g system-setup --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
 pueue add -g system-setup -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
