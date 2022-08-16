@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "format new disk? (y/n)"
 read -n 1 my_answer
+echo ok 
 [[ $my_answer = "y" ]] && sudo lsblk && printf "device-name: "; read DEVICE_NAME && sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/$DEVICE_NAME
  
  ts=$(date +"%s")
