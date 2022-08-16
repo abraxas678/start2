@@ -193,7 +193,7 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "CHECKING ENVIRONMENT CONDITION:"; sleep $myspeed
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue  --print "GPG"; echo; sleep $myspeed
 trenner
-countdown 5
+countdown 3
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
