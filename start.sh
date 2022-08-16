@@ -109,71 +109,20 @@ brew install rich
   countdown 5
  /home/abraxas/.local/bin/rich --panel rounded --style blue -u
 ################################################################################################
-# if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
-#  then
+
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-if [[ $mysnas = "0" ]]; then
-#  sudo apt-get install tmux tmuxinator
+  sudo apt-get install tmux tmuxinator
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
-  echo
-  printf "${LILA}"; printf "${UL1}"
-  echo "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
+   /home/abraxas/.local/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  printf "${NC}"; printf "${BLUE3}"
-  printf "${NC}"; printf "${BLUE2}"
-  echo; echo INSTALL ZSH
-  printf "${NC}"; printf "${BLUE3}"echo; cd $HOME
   pueue add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
-  printf "${NC}"; printf "${BLUE2}"
-  echo; echo INSTALL OH MY ZSH
-  printf "${NC}"; printf "${BLUE3}"
-  sleep $myspeed; echo
   pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-fi
   pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
-  echo
-  printf "${LILA}"; printf "${UL1}"
-  
 echo; pueue; echo
-echo BUTTON10; read -t 10 me
+countdown 5
 sudo apt-get install unzip jq -y
-#echo $ts > mylastupdate.log
-#else
-#printf "${NC}"; printf "${RED}"
-#echo "last update was $(($($ts-cat mylastupdate.log))) seconds ago. skipping two steps."; sleep $myspeed
-#echo
-#printf "${NC}"; printf "${BLUE3}"
-#fi
-
-############################################################# weg
-#if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
-#then
-#  echo; echo gpg INSTALLED
-#  sleep $myspeed
-#else
-#  echo; echo INSTALL gpg
-#  sleep $myspeed
-#  apt install gpg -y
-#  echo
-  #echo SETUP GPG MANUALLY VIA OD VAULT
-  #echo gpg --import
-#  echo
-#  echo "gpg -a --export-secret-keys [key-id] >key.asc"
-#  echo "gpg --import"
-#  echo
-#  echo rko files to gd:sec please
-#  echo
-#  echo START IMPORT
-#  read me
-#  rclone copy gd:sec ./tempinstall --include="rko-p*" -Pc --max-depth 1
-#  gpg --import ./tempinstall/rko-p*
-#  rm -f ./tempinstall/rko-p*
-#  echo; echo REMOVE rko files from gd:sec now; echo
-#  echo; echo 
-#  read me
-#fi
-############################################################################ weg nach oben
+exit
 
 echo
 printf "${LILA}"; printf "${UL1}"
