@@ -81,6 +81,7 @@ echo; echo "PUEUE INSTALL"
   brew install pueue
   echo; echo "INSTALL RICH-CLI"
   brew install rich
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   /home/abraxas/.local/bin/rich --panel rounded --style blue --print rich installed -u
   sudo chown -R abraxas: /run/user
   sudo chown -R abraxas: /home
@@ -110,13 +111,13 @@ done
   pp  
   /home/abraxas/.local/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
-  pueue -g sytem-setup parallel 1
-  pueue -g sytem-setup add -- brew install thefuck
-  pueue -g sytem-setup add -- brew install gcalcli
-  pueue -g sytem-setup add -- brew install fzf
-  pueue -g sytem-setup add --  brew install just 
-  pueue -g sytem-setup add -- 'yes | $(brew --prefix)/opt/fzf/install'
-  echo; pueue -g sytem-setup status
+  pueue -g system-setup parallel 1
+  pueue -g system-setup add -- brew install thefuck
+  pueue -g system-setup add -- brew install gcalcli
+  pueue -g system-setup add -- brew install fzf
+  pueue -g system-setup add --  brew install just 
+  pueue -g system-setup add -- 'yes | $(brew --prefix)/opt/fzf/install'
+  echo; pueue -g system-setup status
   countdown 5
  /home/abraxas/.local/bin/rich --panel rounded --style blue -u
 ################################################################################################
