@@ -677,7 +677,7 @@ if [[ $mykeepass = "y" ]]; then
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
-echo "[11] SOFTWARE INSTALLATION"
+trenner "[11] SOFTWARE INSTALLATION"
 ################################################ [11] SOFTWARE INSTALLATION
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
