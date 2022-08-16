@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 178"; sleep $myspeed
+echo "version 179"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -58,7 +58,7 @@ source $HOME/start2/path.dat
 
 ###   df /home grösser 50GB?
 chmod +x $HOME/start2/*.sh
-[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') -lt 15 ]] && /bin/bash $HOME/start2/new-disk.sh
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 echo "speed [$myspeed]"
