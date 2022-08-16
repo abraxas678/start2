@@ -138,6 +138,7 @@ echo; echo "PUEUE INSTALL"
   /home/linuxbrew/.linuxbrew/bin/pueue
 
 x=0
+rm -f pueuestatus.txt
 while [[ $x -eq 0 ]]; do
 /home/linuxbrew/.linuxbrew/bin/rich --print "PUEUE INIT"
 countdown 3
