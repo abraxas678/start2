@@ -48,7 +48,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 191"; sleep $myspeed
+echo "version 192"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
