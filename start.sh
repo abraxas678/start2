@@ -226,7 +226,7 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE -u
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "tailscale get file"
 echo; sudo tailscale file get ~/.config/rclone/
-countdown 5
+countdown 3
 rclone copy df: $HOME --max-depth 1 --include=".zsh.env" -P --update --password-command="cat /home/abraxas/rcpw"
 source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
@@ -268,13 +268,16 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
 ### >>> IF 4 O
         if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
         then
-          echo "RCLONE_GD=1"; sleep $myspeed1
+          trenner "RCLONE_GD=1"; sleep $myspeed1
+          countdown 1
           RCLONE_GD=1
         else
           echo "RCLONE_GD=0"; sleep $myspeed1
           RCLONE_GD=0
-          echo "RCLONE_COMPLETE=0"; sleep $myspeed1
-          echo; echo "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
+          trenner  "RCLONE_COMPLETE=0"; sleep $myspeed1
+          countdown 1
+          echo; trenner "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
+          countdown 1
           RCLONE_COMPLETE=0
           rclone config
         fi 
@@ -283,18 +286,24 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
     then
       RCLONE_GD=1
       RCLONE_COMPLETE=1
-      echo "RCLONE_GD=1"; sleep $myspeed1
-      echo "RCLONE_COMPLETE=1"; sleep $myspeed1
+      trenner "RCLONE_GD=1"; sleep $myspeed1
+      countdown 1
+      trenner "RCLONE_COMPLETE=1"; sleep $myspeed1
+      countdown 1
     fi
  ### >>> IF 3 C
 ### >>> IF 2 C
   fi
 ### >>> IF 1 E
 else
-  echo "RCLONE_INSTALL=0"; sleep $myspeed1
-  echo "RCLONE_CONFIG=0"; sleep $myspeed1
-  echo "RCLONE_GD=0"; sleep $myspeed1
-  eccho "RCLONE_COMPLETE=0"; sleep $myspeed1
+  trenner "RCLONE_INSTALL=0"; sleep $myspeed1
+  countdown 1
+  trenner "RCLONE_CONFIG=0"; sleep $myspeed1
+  countdown 1
+  trenner "RCLONE_GD=0"; sleep $myspeed1
+  countdown 1
+  trenner "RCLONE_COMPLETE=0"; sleep $myspeed1
+  countdown 1
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
   RCLONE_GD=0
