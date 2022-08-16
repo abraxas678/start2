@@ -27,7 +27,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 166"; sleep $myspeed
+echo "version 167"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -63,7 +63,7 @@ echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
-
+curl -fsSL https://tailscale.com/install.sh | sh
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
