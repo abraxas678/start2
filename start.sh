@@ -149,7 +149,7 @@ pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 [[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
 sleep 1
 done
-pueuestatus.txt
+rm -f pueuestatus.txt
 /home/linuxbrew/.linuxbrew/bin/pueue status
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
