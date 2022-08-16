@@ -27,7 +27,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 164"; sleep $myspeed
+echo "version 165"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -418,7 +418,6 @@ fi
 fi
   sudo mkdir $HOME/.ssh
   mv id_rsa $HOME/.ssh
-  printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
 echo "pueue add -g system-setup --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
