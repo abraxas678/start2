@@ -108,10 +108,10 @@ pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 sleep 1
 done
 /home/linuxbrew/.linuxbrew/bin/pueue status
-
+countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
   pp  
-  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded ---panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
   pueue parallel 1 -g system-setup 
   pueue add -g system-setup -- brew install thefuck
