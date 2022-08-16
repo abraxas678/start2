@@ -27,19 +27,19 @@ pp() {
 
 pueue-init() {
   x=0
-  rm -f pueuestatus.txt
+  rm -f $HOME/tmp/pueuestatus.txt
   while [[ $x -eq 0 ]]; do
   echo "PUEUE INIT"
   countdown 3
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  /home/linuxbrew/.linuxbrew/bin/pueue status >> pueuestatus.txt 2>> pueuestatus.txt
+  /home/linuxbrew/.linuxbrew/bin/pueue status >> $HOME/tmp/pueuestatus.txt 2>> $HOME/tmp/pueuestatus.txt
    /home/linuxbrew/.linuxbrew/bin/pueue status
-  [[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
-  [[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
-  [[ $(cat pueuestatus.txt | head -n1) = *"Group"* ]] && x=1
+  [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+  [[ $(cat $HOME/tmp/pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+  [[ $(cat $HOME/tmp/pueuestatus.txt | head -n1) = *"Group"* ]] && x=1
   sleep 1
   done
-  rm -f pueuestatus.txt
+  rm -f $HOME/tmp/pueuestatus.txt
 }
 
 trenner() {
@@ -143,19 +143,19 @@ echo; echo "PUEUE INSTALL"
   /home/linuxbrew/.linuxbrew/bin/pueue
 
 x=0
-rm -f pueuestatus.txt
+rm -f $HOME/tmp/pueuestatus.txt
 while [[ $x -eq 0 ]]; do
 echo "PUEUE INIT"
 countdown 3
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 /home/linuxbrew/.linuxbrew/bin/pueue status >>pueuestatus.txt 2>>pueuestatus.txt
-[[ $(cat pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
-[[ $(cat pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
-[[ $(cat pueuestatus.txt) = *"Group"* ]] && x=1
-printf pueuestatus.txt; cat pueuestatus.txt
+[[ $(cat $HOME/tmp/pueuestatus.txt) = *"Failed to initialize client"* ]] &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat $HOME/tmp/pueuestatus.txt) = *"Permission denied"* ]] && sudo chown -R abraxas: /run/user && sudo chmod +x /home/linuxbrew/.linuxbrew/bin/pueue &&  /home/linuxbrew/.linuxbrew/bin/pueued -d && sleep 2 &&  /home/linuxbrew/.linuxbrew/bin/pueue status
+[[ $(cat $HOME/tmp/pueuestatus.txt) = *"Group"* ]] && x=1
+printf $HOME/tmp/pueuestatus.txt; cat $HOME/tmp/pueuestatus.txt
 sleep 1
 done
-rm -f pueuestatus.txt
+rm -f $HOME/tmp/pueuestatus.txt
 /home/linuxbrew/.linuxbrew/bin/pueue status
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
