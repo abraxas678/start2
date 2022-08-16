@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/bash 
 # $1 = # of seconds
 # $@ = What to print after "Waiting n seconds"
 pueue clean -g system-setup >/dev/null 2>/dev/null 
