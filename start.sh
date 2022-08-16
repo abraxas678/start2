@@ -668,8 +668,8 @@ printf "${NC}"; printf "${BLUE2}"
 echo "WANT TO INSTALL KEEPASSXC? (y/n)"
 printf "${NC}"; printf "${BLUE3}"
 mykeepass="y"
-echo BUTTON10
-read -n 1 -t 10 mykeepass
+echo BUTTON3
+read -n 1 -t 3 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
 #  /home/abraxas/.cargo/bin/pueued -d
