@@ -15,7 +15,7 @@ countdown() {
 }
 
 pp() {
-  /home/linuxbrew/.linuxbrew/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
+  /home/linuxbrew/.linuxbrew/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status -g system-setup)"
 }
 
 trenner() {
