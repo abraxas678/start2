@@ -2,6 +2,7 @@
 # $1 = # of seconds
 # $@ = What to print after "Waiting n seconds"
 pueue clean -g system-setup >/dev/null 2>/dev/null 
+mkdir ~/.ssh
 countdown() {
   secs=$1
   shift
@@ -31,7 +32,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 185"; sleep $myspeed
+echo "version 186"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
