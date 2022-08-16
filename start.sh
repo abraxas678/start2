@@ -59,7 +59,7 @@ echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
 
-echo; printf "sudo apt-get update && sudo apt-get upgrade -y"; 
+echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 5 
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install python3-pip -y
