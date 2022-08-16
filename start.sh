@@ -73,13 +73,13 @@ fi
 export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
 
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
-sudo apt-get install git -y
+sudo apt-get install git -y | tail -f -n5
 git config --global user.name abraxas678
 git config --global user.email abraxas678@gmail.com
 sleep $myspeed
 sudo ls >/dev/null
 cd $HOME
-git clone https://github.com/abraxas678/start2.git; echo
+git clone https://github.com/abraxas678/start2.git | tail -f -n5; echo
 source $HOME/start2/color.dat
 source $HOME/start2/path.dat
 
@@ -94,9 +94,9 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 echo; echo "RC PW:"; read rcpw 
 echo $rcpw > ~/rcpw
 sudo apt install lsof -y
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo systemctl start tailscaled
-sudo tailscale up
+curl -fsSL https://tailscale.com/install.sh | sh | tail -f -n5
+sudo systemctl start tailscaled | tail -f -n5
+sudo tailscale up | tail -f -n5
 echo; echo "sudo tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
 echo;
 countdown 10
@@ -104,6 +104,7 @@ countdown 10
 echo; echo MY_PUEUE_INST $MY_PUEUE_INST
 countdown 3
 [[ $MY_PUEUE_INST -eq 1 ]] && pueue-init
+[[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- rclone copy df:bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue parallel 1 -g system-setup
