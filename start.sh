@@ -108,8 +108,7 @@ exit
   pueue add --  brew install just 
   pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue
-  echo; echo BUTTON10; read -t 10 me
-fi
+  countdown 5
 
 ########################################## CARGO - PUEUE OLD ##########################################
 #if [[ $mysnas = "0" ]]; then
