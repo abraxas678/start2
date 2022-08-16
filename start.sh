@@ -54,7 +54,7 @@ ts=$(date +"%s")
 myspeed="0.5"
 
 #######################################################
-echo "version 204"; sleep $myspeed
+echo "version 205"; sleep $myspeed
 #######################################################
 
 cd $HOME
@@ -488,16 +488,10 @@ fi
   trenner "SETUP SSH FOLDER RIGHTS"
   echo; sleep $myspeed
 
-echo "pueue add -g system-setup --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
-pueue add -g system-setup -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
-printf "${NC}"; printf "${BLUE2}"
-pueue add -g system-setup --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
-G SSH AGENT"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+trenner "G SSH AGENT"
+sleep $myspeed
 eval `ssh-agent -s`
-printf "${NC}"; printf "${BLUE2}"
-echo; echo "SETTING FOLDER PERMISSIONS"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+trenner "SETTING FOLDER PERMISSIONS"; sleep $myspeed
 sudo chmod 400 ~/.ssh/* -R
 ssh-add ~/.ssh/id_rsa
 sudo chmod 700 ~/.ssh
