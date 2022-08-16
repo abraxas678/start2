@@ -145,6 +145,8 @@ echo; echo "PUEUE INSTALL"
 
 x=0
 rm -f $HOME/tmp/pueuestatus.txt
+pueue-init
+
 while [[ $x -eq 0 ]]; do
 echo "PUEUE INIT"
 countdown 3
