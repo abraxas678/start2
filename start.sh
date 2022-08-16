@@ -128,9 +128,9 @@ done
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
    /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  pueue add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
-  pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-  pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
+  pueue -g system-setup add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
+  pueue -g system-setup add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  pueue -g system-setup add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
 echo;/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
 countdown 5
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
@@ -373,7 +373,7 @@ echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-pueue add -- sudo apt-get install restic SS-y
+pueue -g system-setup add -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -413,10 +413,10 @@ fi
   printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
-echo "pueue add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
-pueue add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
+echo "pueue -g system-setup add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue -g system-setup add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-pueue add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
+pueue -g system-setup add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
 G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
@@ -600,12 +600,12 @@ read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
 #  /home/abraxas/.cargo/bin/pueued -d
-  pueue add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
-  pueue add -- sudo apt-get update
+  pueue -g system-setup add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  pueue -g system-setup add -- sudo apt-get update
   pueue parallel 1
-  pueue add -- sudo apt-get dist-upgrade -y
+  pueue -g system-setup add -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  pueue add -- sudo apt-get install -y keepassxc
+  pueue -g system-setup add -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -614,7 +614,7 @@ echo "[11] SOFTWARE INSTALLATION"
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
-pueue add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
+pueue -g system-setup add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
@@ -660,11 +660,11 @@ echo
 
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
-pueue add -- pip install apprise; sleep $myspeed
-pueue add -- pip install paho-mqtt; sleep $myspeed
+pueue -g system-setup add -- pip install apprise; sleep $myspeed
+pueue -g system-setup add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
-pueue add -- sudo apt-get install docker.io docker-compose -y
+pueue -g system-setup add -- sudo apt-get install docker.io docker-compose -y
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
  status)"
 #################################################### docker compose
@@ -713,8 +713,8 @@ sudo pcopy setup
 sudo systemctl enable pcopy
 sudo systemctl start pcopy
 
-pueue add -- pip install taskwarrior-inthe.am
-pueue add -- sudo apt-get install cifs-utils -y
+pueue -g system-setup add -- pip install taskwarrior-inthe.am
+pueue -g system-setup add -- sudo apt-get install cifs-utils -y
 rm -rf $HOME/.antigen
 #echo; echo GOODSYNC; echo
 printf "${NC}"
