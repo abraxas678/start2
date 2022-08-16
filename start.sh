@@ -58,7 +58,7 @@ source $HOME/start2/path.dat
 
 ###   df /home grösser 50GB?
 chmod +x $HOME/start2/*.sh
-[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && /bin/bash $HOME/start2/new-disk.sh
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') -lt 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
 echo "speed [$myspeed]"
