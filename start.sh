@@ -33,6 +33,7 @@ echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
 
 ###   df /home grösser 50GB?
+chmod +x $HOME/start2/*.sh
 [[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//') < 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 ts=$(date +"%s")
