@@ -124,7 +124,7 @@ countdown 2
   pueue add -g system-setup --  brew install just 
   pueue add -g system-setup -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue status -g system-setup 
-  countdown 3
+  countdown 5
  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 ################################################################################################
 
@@ -137,14 +137,14 @@ countdown 2
   /home/abraxas/.local/bin/rich --panel rounded --style blue --titel "zsh php nodejs npm firefox-esr plocate" --print "$(pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate)"
   pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
-echo;/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
-countdown 3
+countdown 5
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "CHECKING ENVIRONMENT CONDITION:"; sleep $myspeed
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue  --print "GPG"; echo; sleep $myspeed
-
+trenner
+countdown 5
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
