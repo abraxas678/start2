@@ -230,7 +230,7 @@ echo; sudo tailscale file get ~/.config/rclone/
 countdown 3
 rclone copy df: $HOME --max-depth 1 --include=".zsh.env" -P --update --password-command="cat /home/abraxas/rcpw"
 source ~/.zsh.env
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
+#/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "myfilter.txt copy"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
 rclone copy gd:dotfiles/bin/ $HOME/bin -P --include="install-age.sh" --update --password-command="cat /home/abraxas/rcpw"
@@ -304,7 +304,7 @@ else
   trenner "RCLONE_GD=0"; sleep $myspeed1
   countdown 1
   trenner "RCLONE_COMPLETE=0"; sleep $myspeed1
-  countdown 1
+  countdown 5
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
   RCLONE_GD=0
@@ -316,29 +316,28 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
 countdown 3
 ########################################## INSTALL & SETUP ===============================
-printf "${NC}"; printf "${BLUE3}"
-printf "${NC}"; printf "${BLUE3}"
 sleep $myspeed
 if [[ $RCLONE_INSTALL = "0" ]]
   then
   echo
-  echo "[4] SETUP RCLONE"; echo; sleep $myspeed; echo
+  trenner "[4] SETUP RCLONE" --panel heavy
+  countdown 3
   ################################################### [4] SETUP RCLONE
   echo
   cd $HOME/start2
   echo PWD: $PWD
   echo; sleep $myspeed
   #sudo apt install rclone -y
-  curl https://rclone.org/install.sh | sudo bash
+  curl https://rclone.org/install.sh | sudo bash | tail -f -n5
 fi
 
 if [[ $RCLONE_CONFIG = "0" || RCLONE_GD = "0" ]]
   then
     printf "${NC}"; printf "${BLUE2}"
-    echo; echo "SETUP GD ON RCLONE NOW PLEASE:"; printf "${NC}"; printf "${BLUE3}"; echo; sleep $myspeed
+    echo; /home/linuxbrew/.linuxbrew/bin/rich --panel heavy -u "SETUP GD ON RCLONE NOW PLEASE:"; printf "${NC}"; printf "${BLUE3}"; echo; sleep $myspeed
     rclone config
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
-    printf "${RED}"; echo; echo rclone.conf size $rclonesize; echo
+    printf "${RED}"; echo; trenner $rclonesize --panel square --title "rclone config size"; echo
 fi
 
 printf "${LILA}"; printf "${UL1}"
