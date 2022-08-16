@@ -9,7 +9,8 @@ countdown() {
   msg=$@
   while [ $secs -gt 0 ]
   do
-    printf "\r\033[KWaiting %.d seconds $msg" $((secs--))
+    printf "\r\033[K %.d $msg" $((secs--))
+#    printf "\r\033[KWaiting %.d seconds $msg" $((secs--))
     sleep 1
   done
   echo
