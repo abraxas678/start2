@@ -23,7 +23,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 161"; sleep $myspeed
+echo "version 162"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -114,11 +114,11 @@ done
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
   pueue -g system-setup parallel 1
-  pueue -g system-setup add -- brew install thefuck
-  pueue -g system-setup add -- brew install gcalcli
-  pueue -g system-setup add -- brew install fzf
-  pueue -g system-setup add --  brew install just 
-  pueue -g system-setup add -- 'yes | $(brew --prefix)/opt/fzf/install'
+  pueue add -g system-setup -- brew install thefuck
+  pueue add -g system-setup -- brew install gcalcli
+  pueue add -g system-setup -- brew install fzf
+  pueue add -g system-setup --  brew install just 
+  pueue add -g system-setup -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue -g system-setup status
   countdown 5
  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
@@ -130,9 +130,9 @@ done
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
    /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
-  pueue -g system-setup add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
-  pueue -g system-setup add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-  pueue -g system-setup add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
+  pueue add -g system-setup --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
+  pueue add -g system-setup -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  pueue add -g system-setup -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
 echo;/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
 countdown 5
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
@@ -375,7 +375,7 @@ echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep
 printf "${NC}"; printf "${BLUE2}"
 echo "sudo apt-get install restic -y"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
-pueue -g system-setup add -- sudo apt-get install restic SS-y
+pueue add -g system-setup -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -415,10 +415,10 @@ fi
   printf "${LILA}"; printf "${UL1}" 
   echo; echo "SETUP SSH FOLDER RIGHTS"; echo; sleep $myspeed
 
-echo "pueue -g system-setup add --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
-pueue -g system-setup add -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
+echo "pueue add -g system-setup --rclone copy gd:dotfiles/bin $HOME/bin --update -L -P"
+pueue add -g system-setup -- rclone copy gd:dotfiles/bin $HOME/bin --update -L -P
 printf "${NC}"; printf "${BLUE2}"
-pueue -g system-setup add --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
+pueue add -g system-setup --rclone copy gd:dotfiles $HOME --max-depth 1 --update -L -P"
 G SSH AGENT"; sleep $myspeed
 printf "${NC}"; printf "${BLUE3}"
 eval `ssh-agent -s`
@@ -602,12 +602,12 @@ read -n 1 -t 10 mykeepass
 
 if [[ $mykeepass = "y" ]]; then
 #  /home/abraxas/.cargo/bin/pueued -d
-  pueue -g system-setup add -- sudo add-apt-repository ppa:phoerious/keepassxc -y
-  pueue -g system-setup add -- sudo apt-get update
+  pueue add -g system-setup -- sudo add-apt-repository ppa:phoerious/keepassxc -y
+  pueue add -g system-setup -- sudo apt-get update
   pueue parallel 1
-  pueue -g system-setup add -- sudo apt-get dist-upgrade -y
+  pueue add -g system-setup -- sudo apt-get dist-upgrade -y
   #printf "${LILA}"
-  pueue -g system-setup add -- sudo apt-get install -y keepassxc
+  pueue add -g system-setup -- sudo apt-get install -y keepassxc
 fi
 echo
 printf "${LILA}"; printf "${UL1}"
@@ -616,7 +616,7 @@ echo "[11] SOFTWARE INSTALLATION"
 printf "${NC}"; printf "${BLUE4}"
 echo "INSTALL sudo apt-get install -y nano curl nfs-common xclip ssh-askpass jq taskwarrior android-tools-adb conky-all fd-find"
 printf "${NC}"; printf "${BLUE3}"; echo
-pueue -g system-setup add -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
+pueue add -g system-setup -- sudo apt-get install -y nano curl nfs-common xclip ssh-askpass taskwarrior android-tools-adb conky-all fd-find
 echo
 printf "${NC}"; printf "${BLUE3}"
 myfonts="y"
@@ -662,11 +662,11 @@ echo
 
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
-pueue -g system-setup add -- pip install apprise; sleep $myspeed
-pueue -g system-setup add -- pip install paho-mqtt; sleep $myspeed
+pueue add -g system-setup -- pip install apprise; sleep $myspeed
+pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
-pueue -g system-setup add -- sudo apt-get install docker.io docker-compose -y
+pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue
  status)"
 #################################################### docker compose
@@ -715,8 +715,8 @@ sudo pcopy setup
 sudo systemctl enable pcopy
 sudo systemctl start pcopy
 
-pueue -g system-setup add -- pip install taskwarrior-inthe.am
-pueue -g system-setup add -- sudo apt-get install cifs-utils -y
+pueue add -g system-setup -- pip install taskwarrior-inthe.am
+pueue add -g system-setup -- sudo apt-get install cifs-utils -y
 rm -rf $HOME/.antigen
 #echo; echo GOODSYNC; echo
 printf "${NC}"
