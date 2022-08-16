@@ -223,11 +223,16 @@ countdown 5
 rclone copy df: $HOME --max-depth 1 --include=".zsh.env" -P --update --password-command="cat /home/abraxas/rcpw"
 source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
+/home/linuxbrew/.linuxbrew/bin/rich -u --print "myfilter.txt copy"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
+/home/linuxbrew/.linuxbrew/bin/rich -u --print "bin copy"
 rclone copy gd:dotfiles/bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
 sudo chmod +x $HOME/bin/*
+/home/linuxbrew/.linuxbrew/bin/rich -u --print "INSTALL AGE"
 /bin/bash $HOME/bin/install-age.sh
+/home/linuxbrew/.linuxbrew/bin/rich -u --print ".config copy"
 rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw"
+/home/linuxbrew/.linuxbrew/bin/rich -u --print ".ssh copy"
 rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
 rm -f ~/rcpw
 ### >>> IF 1 O
