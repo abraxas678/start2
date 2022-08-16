@@ -31,7 +31,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 182"; sleep $myspeed
+echo "version 183"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -87,7 +87,7 @@ echo; echo "BREW SETUP"; echo
 countdown 3
   
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-  [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -- /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -- NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shelle /home/linuxbrew/.linuxbrew/binnv)"' >> /home/abrax/.zprofile
   [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -- eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" || eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -- sudo apt-get install build-essential -y || sudo apt-get install build-essential -y
