@@ -36,6 +36,7 @@ pueue-init() {
   [[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
   sleep 1
   done
+  rm -f pueuestatus.txt
 }
 
 trenner() {
@@ -148,6 +149,7 @@ pueue status >> pueuestatus.txt 2>> pueuestatus.txt
 [[ $(cat pueuestatus.txt) = *'Group "default"'* ]] && x=1
 sleep 1
 done
+pueuestatus.txt
 /home/linuxbrew/.linuxbrew/bin/pueue status
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
