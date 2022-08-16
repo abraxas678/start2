@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 173"; sleep $myspeed
+echo "version 174"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -179,7 +179,7 @@ else
 fi
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
-echo; tailscale file get ~/.config/rclone/
+echo; sudo tailscale file get ~/.config/rclone/
 countdown 10
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
