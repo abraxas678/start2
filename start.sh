@@ -3,6 +3,7 @@
 # $@ = What to print after "Waiting n seconds"
 pueue clean -g system-setup >/dev/null 2>/dev/null 
 pueue clean -g system-setup >/dev/null 2>/dev/null 
+mkdir $HOME/tmp
 ################################## FUNCTIONS ###########################################
 countdown() {
   secs=$1
