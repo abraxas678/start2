@@ -648,7 +648,6 @@ echo
 
 /home/abraxas/.local/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
-printf "${NC}"; printf "${BLUE3}"
 pueue add -- pip install apprise; sleep $myspeed
 pueue add -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
