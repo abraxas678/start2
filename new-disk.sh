@@ -3,18 +3,27 @@ echo "format new disk? (y/n)"
 read -n 1 my_answer
 [[ $my_answer = "y" ]] && sudo lsblk && printf "device-name: "; read DEVICE_NAME && sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/$DEVICE_NAME
  
- sudo mount -o discard,defaults /dev/sdb /home
+ ts=$(date +"%s")
 
- sudo chmod a+w /home
+ sudo mkdir /mnt/disk1
+ sudo mkdir /mnt/disk1/home
+ sudo mkdir /mnt/disk1/usr
 
- sudo cp /etc/fstab /etc/fstab.backup
+ sudo mount -o discard,defaults /dev/sdb /mnt/disk1
+
+ sudo chmod a+w /mnt/disk1
+
+ sudo cp /etc/fstab /etc/fstab-$ts.backup
 
  sudo blkid /dev/sdb
 
- printf "UUID:"; read UUID
+ printf "UUID: "; read UUID
 
  ## --> UUID
 
- sudo echo "UUID=$UUID /home ext4 discard,defaults,nofail 0 2" >> /etc/fstab
+ sudo echo "UUID=$UUID /mnt/disk1 ext4 discard,defaults,nofail 0 2" >> /etc/fstab
 
  cat /etc/fstab
+
+ echo "move /home to disk? (y/n)"
+[[ $my_answer = "y" ]] && cp -apx /home/* /mnt/newvar
