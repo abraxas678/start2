@@ -217,9 +217,10 @@ else
 fi
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
+/home/linuxbrew/.linuxbrew/bin/rich -u --print "tailscale get file"
 echo; sudo tailscale file get ~/.config/rclone/
 countdown 5
-rclone copy df: ~ --include=".zsh.env" -P --update --password-command="  "
+rclone copy df: $HOME --max-depth 1 --include=".zsh.env" -P --update --password-command="cat /home/abraxas/rcpw"
 source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
 rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
@@ -228,7 +229,7 @@ sudo chmod +x $HOME/bin/*
 /bin/bash $HOME/bin/install-age.sh
 rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw"
 rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
-rm -f ~/.ssh/rcpw
+rm -f ~/rcpw
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
