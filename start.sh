@@ -14,6 +14,10 @@ countdown() {
   echo
 }
 
+pp(){
+    /home/abraxas/.local/bin/rich --title "Pueue Status" --soft --width 50 --style yellow --panel double --panel-style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
+}
+
 clear
 cd $HOME
 ts=$(date +"%s")
@@ -99,7 +103,7 @@ echo; echo "INSTALL RICH-CLI"
 brew install rich
 
   ######################################## BREW BASED SOFTWARE ########################################
-  
+  pp  
   /home/abraxas/.local/bin/rich --panel rounded --style blue --print "INSTALL BREW BASED SOFTWARE"
   pueue group add system-setup
   pueue -g sytem-setup parallel 1
