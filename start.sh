@@ -369,16 +369,18 @@ then
       rm rclonesetup.sh
       sleep $myspeed
 fi  
+
+trenner
+
 rclone copy gd:dotfiles/.bashrc $HOME -P
 rclone copy gd:dotfiles/.zshrc $HOME -P
 rclone copy gd:dotfiles/.p10k.zsh $HOME -P
+
 if [[ $mysnas = "0" ]]; then
 echo
 printf "${LILA}"; printf "${UL1}"
 echo; echo "[6] SOFTWARE INSTALL -- sudo apt-get install restic -y"; echo; sleep $myspeed
-printf "${NC}"; printf "${BLUE2}"
-echo "sudo apt-get install restic -y"; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+echo "sudo apt-get install restic -y"
 pueue add -g system-setup -- sudo apt-get install restic SS-y
 ###############################################################################  [6]
 echo
