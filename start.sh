@@ -788,7 +788,10 @@ cd $HOME
 #rclone copy gd:dotfiles/bisync-filter.txt $HOME -P
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
-sudo chown $user: -R 
+sudo chown $user: -R /home
+mkdir $HOME/tmp
+mkdir $HOME/tmp/restic
+restic mount $HOME/tmp/restic &
 echo DONE 
 echo EXEC ZSH
 exec zsh
