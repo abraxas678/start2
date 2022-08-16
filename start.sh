@@ -23,12 +23,12 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 154"; sleep $myspeed
+echo "version 155"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER"
 read -t 1 me
-[[ $USER != "abraxas" ]] && [[ $(su abraxas) = *"does not exist"* ]] && useradd abraxas && passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
+[[ $USER != "abraxas" ]] && [[ ! $(id -u abraxas) ]] && useradd abraxas && passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
 echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
 
