@@ -140,7 +140,7 @@ echo; echo "PUEUE INSTALL"
 x=0
 rm -f pueuestatus.txt
 while [[ $x -eq 0 ]]; do
-/home/linuxbrew/.linuxbrew/bin/rich --print "PUEUE INIT"
+echo --print "PUEUE INIT"
 countdown 3
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 /home/linuxbrew/.linuxbrew/bin/pueue status >> pueuestatus.txt 2>> pueuestatus.txt
