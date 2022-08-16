@@ -53,7 +53,7 @@ export RESTIC_REPOSITORY=rclone:gd:restic
 echo; printf "${RED}sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 5 
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install python-pip -y
+sudo apt-get install python3-pip -y
 
 echo; echo "BREW SETUP"; echo
 countdown 20
@@ -93,10 +93,6 @@ done
 echo; echo "INSTALL RICH-CLI"
 brew install rich
 
-exit
-
-  echo; echo "BUTTON240"
-  read -t 240 me
   ######################################## BREW BASED SOFTWARE ########################################
   printf "${LILA}"; printf "${UL1}"
   echo "[17] INSTALL BREW BASED SOFTWARE"
@@ -109,18 +105,6 @@ exit
   pueue add -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue
   countdown 5
-
-########################################## CARGO - PUEUE OLD ##########################################
-#if [[ $mysnas = "0" ]]; then
-#sudo apt install cargo -y
-#cargo install pueue
-#export PATH="$PATH:/home/abraxas/.cargo/bin"
-#sudo chown abraxas: -R /run/user/0/
-#/home/abraxas/.cargo/bin/pueued -d
-#/home/abraxas/.cargo/bin/pueue parallel 2
-#/home/abraxas/.cargo/bin/pueue start
-#echo; echo "peueue installed"
-#read -t 600 me
 
 ################################################################################################
 # if [[ -f mylastupdate.log &&  "$(($ts-$(cat mylastupdate.log)))" > "86400" ]]
