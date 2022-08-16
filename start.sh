@@ -2,7 +2,6 @@
 # $1 = # of seconds
 # $@ = What to print after "Waiting n seconds"
 pueue clean -g system-setup >/dev/null 2>/dev/null 
-[[ ! -d ~/.ssh ]] && mkdir ~/.ssh
 countdown() {
   secs=$1
   shift
@@ -69,7 +68,7 @@ echo "speed [$myspeed]"
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
 echo; echo "RC PW:"; read rcpw 
-echo $rcpw > ~/.ssh/rcpw
+echo $rcpw > ~/rcpw
 sudo apt install lsof -y
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo systemctl start tailscaled
@@ -194,15 +193,15 @@ trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print RCLONE
 echo; sudo tailscale file get ~/.config/rclone/
 countdown 10
-rclone copy df: ~ --include=".zsh.env" -P --password-command="cat ~/.ssh/rcpw"
+rclone copy df: ~ --include=".zsh.env" -P --password-command="cat ~/rcpw"
 source ~/.zsh.env
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title tmux tmuxiator --print "INSTALL AGE"
-rclone copy gd:dotfiles/myfilter.txt $HOME -P --password-command="cat ~/.ssh/rcpw"
-rclone copy gd:dotfiles/bin/ $HOME/bin -P  --password-command="cat ~/.ssh/rcpw"
+rclone copy gd:dotfiles/myfilter.txt $HOME -P --password-command="cat ~/rcpw"
+rclone copy gd:dotfiles/bin/ $HOME/bin -P  --password-command="cat ~/rcpw"
 sudo chmod +x $HOME/bin/*
 /bin/bash $HOME/bin/install-age.sh
-rclone copy df:.config ~/.config -P  --password-command="cat ~/.ssh/rcpw"
-rclone copy df:.ssh ~/.ssh -P  --password-command="cat ~/.ssh/rcpw"
+rclone copy df:.config ~/.config -P  --password-command="cat ~/rcpw"
+rclone copy df:.ssh ~/.ssh -P  --password-command="cat ~/rcpw"
 rm -f ~/.ssh/rcpw
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
