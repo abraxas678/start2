@@ -119,7 +119,7 @@ done
   pueue add -g system-setup -- brew install fzf
   pueue add -g system-setup --  brew install just 
   pueue add -g system-setup -- 'yes | $(brew --prefix)/opt/fzf/install'
-  echo; pueue -g system-setup status
+  echo; pueue status -g system-setup 
   countdown 5
  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u
 ################################################################################################
