@@ -310,7 +310,7 @@ else
   RCLONE_COMPLETE=0
 ### >>> IF 1 c
 fi
-
+countdown 10
 trenner
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style green --panel-style blue --print "INSTALL AND SETUP RCLONE"
 countdown 3
