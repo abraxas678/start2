@@ -28,7 +28,7 @@ cd $HOME
 ts=$(date +"%s")
 myspeed="0.5"
 #######################################################
-echo "version 172"; sleep $myspeed
+echo "version 173"; sleep $myspeed
 #######################################################
 cd $HOME
 echo "CURRENT USER: $USER" 
@@ -66,11 +66,11 @@ echo "speed [$myspeed]"
 export RESTIC_REPOSITORY=rclone:gd:restic
 sudo apt install lsof -y
 curl -fsSL https://tailscale.com/install.sh | sh
-tailscaled &
+sudo systemctl start tailscaled
 sudo tailscale up
 echo; echo "tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
 echo;
-countdown 15
+countdown 20
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 sudo apt-get update && sudo apt-get upgrade -y
