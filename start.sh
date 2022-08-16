@@ -112,24 +112,20 @@ brew install rich
 
   echo "$EDITOR=/usr/bin/nano" >> $HOME/.bashrc
   source $HOME/.bashrc
-  sudo apt-get install tmux tmuxinator
+   /home/abraxas/.local/bin/rich --panel rounded --style blue --title tmux tmuxiator --print $(sudo apt-get install tmux tmuxinator) 
   ############  >>>>>>>>>>>>>>>>>>>>>>>   tmux new-session -d -s "Start2" $HOME/main_script.sh
    /home/abraxas/.local/bin/rich --panel rounded --style blue --print "[2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK"; sleep $myspeed
   #############################################  [2] INSTALL ZSH -- Oh-my-Zsh -- Antigen FRAMEWORK
   pueue add --  sudo apt install -y zsh php nodejs npm firefox-esr plocate
   pueue add -- 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   pueue add -- 'curl -L git.io/antigen > $HOME/antigen.zsh'
-echo; pueue; echo
+echo;/home/abraxas/.local/bin/rich --panel rounded --style blue --print "$(pueue)"; echo
 countdown 5
-sudo apt-get install unzip jq -y
-exit
+/home/abraxas/.local/bin/rich --panel rounded --style blue --title unzip jq --print "$(sudo apt-get install unzip jq -y)"
 
-echo
-printf "${LILA}"; printf "${UL1}"
-echo "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
-printf "${NC}"; printf "${LILA}"; 
-echo "GPG"; echo; sleep $myspeed
-printf "${NC}"; printf "${BLUE3}"
+/home/abraxas/.local/bin/rich --panel rounded --style blue --print "CHECKING ENVIRONMENT CONDITION:"; echo; sleep $myspeed
+
+/home/abraxas/.local/bin/rich --panel rounded --style blue --print "GPG"; echo; sleep $myspeed
 
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
