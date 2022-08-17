@@ -58,6 +58,10 @@ echo "version 207"; sleep $myspeed
 #######################################################
 
 cd $HOME
+echo "#####################################################################"
+echo "                      CHECKING USER DETAILS"
+echo "#####################################################################"
+echo
 echo "CURRENT USER: $USER" 
 read -t 1 me
 [[ $USER != "abraxas" ]] && [[ ! $(id -u abraxas) ]] && sudo adduser abraxas && sudo passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
@@ -71,7 +75,10 @@ then
   mv start2 start2-backup-$ts
 fi
 export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
-
+echo "#####################################################################"
+echo "                     CLONE START2 REPOSITORY   "
+echo "#####################################################################"
+echo
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 sudo apt-get install git -y | tail -f -n5
 git config --global user.name abraxas678
