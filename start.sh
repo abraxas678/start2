@@ -67,8 +67,8 @@ read -t 1 me
 [[ $USER != "abraxas" ]] && [[ ! $(id -u abraxas) ]] && sudo adduser abraxas && sudo passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
 [[ $USER != "abraxas" ]] && su abraxas
 echo "CURRENT USER: $USER"
-[[ $USER != "abraxas" ]] && echo BUTTON && read me || echo button2 && read -t 2 me
-
+[[ $USER != "abraxas" ]] && echo BUTTON && read me || echo BUTTON2 && read -t 2 me
+BU
 ts=$(date +"%s")
 if [[ -d start2 ]]
 then
@@ -459,8 +459,8 @@ then
   echo; echo "IMPORTING GPG FILES"; echo; sleep $myspeed
   printf "${NC}"; printf "${BLUE3}"
   sudo gpg --import *
-  printf "${YELLOW}"; echo BUTTON60; printf "${BLUE3}" 60
-  read -t 60 me 
+  printf "${YELLOW}"; echo BUTTON10; 
+  read -t 10 me 
   rm -rf $HOME/tmpgpginstall
   cd $HOME  
 else
