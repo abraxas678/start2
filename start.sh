@@ -516,9 +516,9 @@ then
 else
   echo; echo $sshresult; echo; 
   trenner "STARTING SHH SETUP"; sleep $myspeed
-  trenner "rclone copy gd:sec/supersec/sshkeys/id_rsa . -P"; sleep $myspeed
+  trenner "rclone copy gd:sec/supersec/sshkeys/ . -P --include="id_*""; sleep $myspeed
   echo
-  rclone copy gd:sec/supersec/sshkeys/id_rsa . -P
+  rclone copy gd:sec/supersec/sshkeys/ . -P --include="id_*"
   echo
   sleep $myspeed
   #echo "gpg --decrypt id_rsa.asc > id_rsa"; sleep $myspeed
