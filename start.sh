@@ -832,6 +832,7 @@ cd $HOME
 sudo chown $user: -R /home
 mkdir $HOME/tmp
 mkdir $HOME/tmp/restic
+trenner "RESTIC MOUNT" --style red
 restic mount $HOME/tmp/restic &
 echo DONE 
 echo EXEC ZSH
