@@ -753,13 +753,14 @@ echo
 /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install apprise; sleep $myspeed
 /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
 ########################################################### [15] DOCKER
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "INSTALL DOCKER"; sleep $myspeed
 pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status | tail -f 10)"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status | tail -f -n10)"
 #################################################### docker compose
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "clean up" --print "AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
 rm -f $HOME/color.dat
+trenner AUTOREMOVE
 sudo apt autoremove -y
 
 #p $HOME/start2/dotfiles/.zshrc $HOME/
@@ -771,6 +772,7 @@ echo
 rm -rf $HOME/start
 rm -rf $HME/start2
 echo
+trenner "INSTALL TASKWARRIOR"
 pip install taskwarrior-inthe.am | tail -f -n5
 sudo apt-get install cifs-utils -y | tail -f -n5
 #echo; echo GOODSYNC; echo
@@ -788,6 +790,7 @@ curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
 sudo apt install apt-transport-https | tail -f -n5
 sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' > /etc/apt/sources.list.d/archive.heckel.io.list"  
 sudo apt update | tail -f -n5
+trenner "INSTALL PCOPY"
 sudo apt install pcopy | tail -f -n5
 #sudo pcopy setup
 sudo systemctl enable pcopy
