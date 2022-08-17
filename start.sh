@@ -61,7 +61,7 @@ cd $HOME
 echo "#####################################################################"
 echo "                      CHECKING USER DETAILS"
 echo "#####################################################################"
-echo
+echo; sleep 2
 echo "CURRENT USER: $USER" 
 read -t 1 me
 [[ $USER != "abraxas" ]] && [[ ! $(id -u abraxas) ]] && sudo adduser abraxas && sudo passwd abraxas && sudo usermod -aG sudo abraxas && su abraxas
@@ -78,7 +78,7 @@ export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/u
 echo "#####################################################################"
 echo "                     CLONE START2 REPOSITORY   "
 echo "#####################################################################"
-echo
+echo; sleep 2
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 sudo apt-get install git -y | tail -f -n5
 git config --global user.name abraxas678
@@ -90,6 +90,10 @@ git clone https://github.com/abraxas678/start2.git | tail -f -n5; echo
 source $HOME/start2/color.dat
 source $HOME/start2/path.dat
 
+echo "#####################################################################"
+echo "                      CHECKING HARDWARE"
+echo "#####################################################################"
+echo; sleep 2
 ###   df /home grösser 50GB?
 chmod +x $HOME/start2/*.sh
 [[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 15 ]] && /bin/bash $HOME/start2/new-disk.sh
