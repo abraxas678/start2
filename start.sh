@@ -830,8 +830,8 @@ cd $HOME
 #rclone bisync /home/abraxas/ gd:dotfiles --filters-file /home/abraxas/bisync-filter.txt -Pvvv --check-access --resync --skip-links
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "rclone copy df:.config $HOME/.config --update -Pv" --print "$(rclone copy df:.config $HOME/.config --update -Pv)"
 sudo chown $user: -R /home
-mkdir $HOME/tmp
-mkdir $HOME/tmp/restic
+mkdir $HOME/tmp >/dev/null 2>/dev/null
+mkdir $HOME/tmp/restic >/dev/null 2>/dev/null
 trenner "RESTIC MOUNT" --style red
 restic mount $HOME/tmp/restic &
 echo DONE 
