@@ -127,7 +127,7 @@ sudo systemctl start tailscaled | tail -f -n5
 sudo tailscale up | tail -f -n5
 echo; echo "sudo tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
 echo;
-countdown 10
+countdown 20
 [[ $(/home/linuxbrew/.linuxbrew/bin/pueue -V) = *"Pueue client"* ]] && MY_PUEUE_INST=1 || MY_PUEUE_INST=0
 echo; echo MY_PUEUE_INST $MY_PUEUE_INST
 countdown 3
