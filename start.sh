@@ -733,19 +733,19 @@ sudo sh -c "echo 'deb [arch=amd64] https://archive.heckel.io/apt debian main' \
     > /etc/apt/sources.list.d/archive.heckel.io.list"  | tail -f -n5
 sudo apt update | tail -f -n5
 sudo apt install ntfy -y | tail -f -n5
-sudo systemctl enable ntfy | tail -f -n5
-sudo systemctl start ntfy | tail -f -n5
+#sudo systemctl enable ntfy | tail -f -n5
+#sudo systemctl start ntfy | tail -f -n5
 
-sudo mkdir /etc/systemd/system/ntfy-client.service.d
-sudo sh -c 'cat > /etc/systemd/system/ntfy-client.service.d/override.conf' <<EOF
-[Service]
-User=$USER
-Group=$USER
-Environment="DISPLAY=:0" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus"
-EOF
+#sudo mkdir /etc/systemd/system/ntfy-client.service.d
+#sudo sh -c 'cat > /etc/systemd/system/ntfy-client.service.d/override.conf' <<EOF
+#[Service]
+#User=$USER
+#Group=$USER
+#Environment="DISPLAY=:0" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus"
+#EOF
 
-sudo systemctl daemon-reload
-sudo systemctl restart ntfy-client
+#sudo systemctl daemon-reload
+#sudo systemctl restart ntfy-client
 echo
 /home/linuxbrew/.linuxbrew/bin/rich -up --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
 
