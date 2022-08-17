@@ -134,6 +134,10 @@ echo; echo MY_PUEUE_INST $MY_PUEUE_INST
 countdown 3
 [[ $MY_PUEUE_INST -eq 1 ]] && pueue-init
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- rclone copy df:bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
+echo "#####################################################################"
+echo "                   SYSTEM UPDATE AND UPGRADE"
+echo "#####################################################################"
+echo; sleep 2
 echo; echo "sudo apt-get update && sudo apt-get upgrade -y"; 
 countdown 3 
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue parallel 1 -g system-setup
@@ -142,7 +146,10 @@ countdown 3
 echo; countdown 2
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install python3-pip firefox-esr -y || sudo apt-get install python3-pip firefox-esr -y
 echo; countdown 2
-echo; echo "BREW SETUP"; echo
+echo "#####################################################################"
+echo "                          INSTALL BREW"
+echo "#####################################################################"
+echo; sleep 2
 countdown 3
   
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
@@ -153,8 +160,10 @@ countdown 3
   [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install build-essential -y || sudo apt-get install build-essential -y | tail -f -n5
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
   [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- brew install gcc || brew install gcc | tail -f -n5
-  
-echo; echo "PUEUE INSTALL"
+echo "#####################################################################"
+echo "                           INSTALL PUEUE"
+echo "#####################################################################"
+echo; sleep 2
   countdown 3
   brew install pueue | tail -f -n5
   echo; echo "INSTALL RICH-CLI"
