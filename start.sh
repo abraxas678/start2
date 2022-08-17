@@ -748,7 +748,7 @@ sudo systemctl restart ntfy-client
 echo
 /home/linuxbrew/.linuxbrew/bin/rich -up --panel rounded --style blue --title NTFY --print "NTFY SETUP >>> DONE"
 
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "[14] PIP INSTALLS"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title PIP --print "PIP INSTALLS"; sleep $myspeed
 ############################################################## [14] PIP INSTALLS
 /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install apprise; sleep $myspeed
 /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- pip install paho-mqtt; sleep $myspeed
@@ -757,7 +757,7 @@ echo
 pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status | tail -f 10)"
 #################################################### docker compose
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title "clean up" --print "AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
 rm -f $HOME/color.dat
 sudo apt autoremove -y
