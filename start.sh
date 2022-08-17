@@ -228,24 +228,24 @@ countdown 3
 ### >>> IF 1 O
 if [[ $(which gpg) = *"/usr/bin/gpg"* ]]
 then
-  echo GPG_INSTALLED=1; sleep $myspeed1
+  echo GPG_INSTALLED=1; sleep $myspeed
   GPG_INSTALLED=1
 ### >>> IF 2 O
 mykeycheck=$(sudo gpg --list-secret-keys)
 echo "MYKEYCHECK $mykeycheck"
   if [[ $mykeycheck -gt "0" ]]
   then
-    echo "GPG_KEYS=1"; sleep $myspeed1
+    echo "GPG_KEYS=1"; sleep $myspeed
     GPG_KEYS=1
   else
-    echo "GPG_KEYS=0"; sleep $myspeed1
+    echo "GPG_KEYS=0"; sleep $myspeed
     GPG_KEYS=0
 ### >>> IF 2 C 
   fi
 ### >>> IF 1 E
 else
-  echo "GPG_INSTALLED=0"; sleep $myspeed1
-  echo "GPG_KEYS=0"; sleep $myspeed1
+  echo "GPG_INSTALLED=0"; sleep $myspeed
+  echo "GPG_KEYS=0"; sleep $myspeed
   trenner GPG_INSTALLED=0
   trenner GPG_KEYS=0
   countdown 3
@@ -278,15 +278,15 @@ source $HOME/.zsh.env
 ### >>> IF 1 O
 if [[ $(which rclone) = *"/usr/bin/rclone"* ]]
 then
-  echo "RCLONE_INSTALL=1"; sleep $myspeed1
+  echo "RCLONE_INSTALL=1"; sleep $myspeed
   RCLONE_INSTALL=1
 ### >>> IF 2 O
 if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
-    echo "RCLONE_CONFIG=0"; sleep $myspeed1
+    echo "RCLONE_CONFIG=0"; sleep $myspeed
     RCLONE_CONFIG=0
  ### >>> IF 2 E
   else
-    echo "RCLONE_CONFIG=1"; sleep $myspeed1
+    echo "RCLONE_CONFIG=1"; sleep $myspeed
     RCLONE_CONFIG=1
     rclonesize=$(rclone size ~/.config/rclone/rclone.conf --json | jq .bytes)
     #echo "rlone.conf SIZE: $rclonesize"
@@ -297,13 +297,13 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
 ### >>> IF 4 O
         if [[ $(rclone listremotes | grep gd:) = "gd:" ]]
         then
-          trenner "RCLONE_GD=1"; sleep $myspeed1
+          trenner "RCLONE_GD=1"; sleep $myspeed
           countdown 1
           RCLONE_GD=1
         else
-          echo "RCLONE_GD=0"; sleep $myspeed1
+          echo "RCLONE_GD=0"; sleep $myspeed
           RCLONE_GD=0
-          trenner  "RCLONE_COMPLETE=0"; sleep $myspeed1
+          trenner  "RCLONE_COMPLETE=0"; sleep $myspeed
           countdown 1
           echo; trenner "SETUP GOOGLE DRIVE NOW"; echo; sleep $myspeed
           countdown 1
@@ -315,9 +315,9 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
     then
       RCLONE_GD=1
       RCLONE_COMPLETE=1
-      trenner "RCLONE_GD=1"; sleep $myspeed1
+      trenner "RCLONE_GD=1"; sleep $myspeed
       countdown 1
-      trenner "RCLONE_COMPLETE=1"; sleep $myspeed1
+      trenner "RCLONE_COMPLETE=1"; sleep $myspeed
       countdown 1
     fi
  ### >>> IF 3 C
@@ -325,13 +325,13 @@ if [[ ! -f ~/.config/rclone/rclone.conf ]]; then
   fi
 ### >>> IF 1 E
 else
-  trenner "RCLONE_INSTALL=0"; sleep $myspeed1
+  trenner "RCLONE_INSTALL=0"; sleep $myspeed
   countdown 1
-  trenner "RCLONE_CONFIG=0"; sleep $myspeed1
+  trenner "RCLONE_CONFIG=0"; sleep $myspeed
   countdown 1
-  trenner "RCLONE_GD=0"; sleep $myspeed1
+  trenner "RCLONE_GD=0"; sleep $myspeed
   countdown 1
-  trenner "RCLONE_COMPLETE=0"; sleep $myspeed1
+  trenner "RCLONE_COMPLETE=0"; sleep $myspeed
   countdown 5
   RCLONE_INSTALL=0
   RCLONE_CONFIG=0
@@ -712,7 +712,7 @@ trenner "INSTALL FONTS"
   sudo apt update && sudo apt install -y zsh fonts-powerline xz-utils wget plocate
   ###mlocate  -----> in tmu aufsetzen
   ###### https://github.com/suin/git-remind
-  # sleep $myspeed1
+  # sleep $myspeed
 
 echo; trenner "SETUP NTFY" --paynel heavy; sleep $myspeed
 ######################################################################### [13] NTFY
