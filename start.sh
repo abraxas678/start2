@@ -98,8 +98,15 @@ echo; sleep 2
 chmod +x $HOME/start2/*.sh
 [[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 15 ]] && /bin/bash $HOME/start2/new-disk.sh
 
-echo; printf "DEFINE SPEED (default=2): "; read -n 1 -t 5 myspeed; echo
-echo "speed [$myspeed]"
+echo "#####################################################################"
+echo "              COLLECTING INSTALLATION PREFERENCES"
+echo "#####################################################################"
+echo; sleep 2
+x=0; tput sc; while [[ $x -eq 0 ]]; do
+  echo; printf "DEFINE SPEED (default=2): "; read myspeed; echo
+  echo "speed [$myspeed]"
+  [[ ${#myspeed} -gt 0 ]] && x=1 || tput rc
+done
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 export RESTIC_REPOSITORY=rclone:gd:restic
 echo; echo "RC PW:"; read rcpw 
