@@ -499,7 +499,7 @@ rclone copy gd:dotfiles/.p10k.zsh $HOME -P
 
 trenner SOFTWARE INSTALL
 countdown 2
-/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install restic exa -y
+/home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install restic exa wget -y
 ###############################################################################  [6]
 echo
 trenner SSH SETUP
