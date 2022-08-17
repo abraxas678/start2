@@ -125,6 +125,7 @@ sudo apt install lsof -y
 curl -fsSL https://tailscale.com/install.sh | sh | tail -f -n5
 sudo systemctl start tailscaled | tail -f -n5
 sudo tailscale up | tail -f -n5
+sudo tailscale up --ssh
 echo; echo "sudo tailscale file cp ~/.config/rclone/rclone.conf $(hostname):"
 echo;
 curl "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey=304c57b5ddbd4c10b03b76fa97d44559&deviceNames=razer&clipboard=sudo%20tailscale%20file%20cp%20~%2F.config%2Frclone%2Frclone.conf%2$(hostname)%3A"
