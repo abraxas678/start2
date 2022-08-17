@@ -755,7 +755,7 @@ echo
 ########################################################### [15] DOCKER
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title docker --print "[15] INSTALL DOCKER"; sleep $myspeed
 pueue add -g system-setup -- sudo apt-get install docker.io docker-compose -y
-/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status)"
+/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "$(/home/linuxbrew/.linuxbrew/bin/pueue status | tail -f 10)"
 #################################################### docker compose
 /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --title clean up --print "[18] AUTOREMOVE"; sleep $myspeed
 ################################################################# [18] CLEAN UP
