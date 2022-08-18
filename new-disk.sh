@@ -37,4 +37,3 @@ echo ok
 #Replace /mnt/newvar with /var
 #Save and Close the file.
 #Note: The new partition is now configured to be mounted at /var on boot.
-#Restart the server
