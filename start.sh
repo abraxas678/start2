@@ -68,7 +68,6 @@ read -t 1 me
 [[ $USER != "abraxas" ]] && su abraxas
 echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo BUTTON2 && read -t 2 me
-BU
 ts=$(date +"%s")
 if [[ -d start2 ]]
 then
