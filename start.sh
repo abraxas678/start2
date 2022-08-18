@@ -217,7 +217,7 @@ countdown 2
   pueue add -g system-setup -- brew install thefuck
   pueue add -g system-setup -- brew install gcalcli
   pueue add -g system-setup -- brew install fzf
-  pueue add -g system-setup --  brew install just 
+  pueue add -g system-setup -- brew install just 
   pueue add -g system-setup -- 'yes | $(brew --prefix)/opt/fzf/install'
   echo; pueue status -g system-setup 
   countdown 5
