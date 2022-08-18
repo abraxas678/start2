@@ -100,7 +100,7 @@ echo "#####################################################################"
 echo; sleep 2
 ###   df /home grösser 50GB?
 chmod +x $HOME/start2/*.sh
-#[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 50 ]] && /bin/bash $HOME/start2/new-disk.sh
+[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 50 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 echo "#####################################################################"
 echo "              COLLECTING INSTALLATION PREFERENCES"
@@ -280,13 +280,13 @@ source ~/.zsh.env
 rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
 rclone copy gd:dotfiles/bin/ $HOME/bin -P --include="install-age.sh" --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "bin copy"
-rclone copy df:bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw"
+rclone copy df:bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw" --filter-from="$HOME/myfilter.txt"
 sudo chmod +x $HOME/bin/*
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "INSTALL AGE"
 /bin/bash $HOME/bin/install-age.sh
 /home/linuxbrew/.linuxbrew/bin/rich -u --print ".config copy"
-rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw"
-/home/linuxbrew/.linuxbrew/bin/rich -u --print "dotfiles --max-depth 1 copy"
+rclone copy df:.config ~/.config -P --update --password-command="cat /home/abraxas/rcpw" --filter-from="$HOME/myfilter.txt"
+/home/linuxbrew/.linuxbrew/bin/rich -u --print "dotfiles --max-depth 1 copy" 
 rclone copy df: $HOME -P --max-depth 1 --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print ".ssh copy"
 rclone copy df:.ssh ~/.ssh -P --update --password-command="cat /home/abraxas/rcpw"
