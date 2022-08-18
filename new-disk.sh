@@ -6,30 +6,31 @@ echo ok
  
  ts=$(date +"%s")
 
- sudo mkdir /mnt/disk1
- sudo mkdir /mnt/disk1/home
+sudo mkdir /mnt/disk1 >/dev/null 2>/dev/null
+sudo mkdir /mnt/disk1/home >/dev/null 2>/dev/null
+sudo mkdir /mnt/disk1/var >/dev/null 2>/dev/null
 
- sudo mount -o discard,defaults /dev/sdb /mnt/disk1/home
+ sudo mount -o discard,defaults /dev/$DEVICE_NAME /mnt/disk1/$MY_FOLDER
 
- sudo chmod a+w /mnt/disk1/home
+ sudo chmod a+w /mnt/disk1/$MY_FOLDER
 
  sudo cp /etc/fstab /etc/fstab-$ts.backup
 
- sudo blkid /dev/sdb
+ sudo blkid /dev/$DEVICE_NAME
 
  printf "UUID: "; read UUID
 
  ## --> UUID
 
- sudo echo "UUID=$UUID /home ext4 discard,defaults,nofail 0 2" >> /etc/fstab
- echo "UUID=$UUID /home ext4 discard,defaults,nofail 0 2        in /etc/fstab"
+ sudo echo "UUID=$UUID /$MY_FOLDER ext4 discard,defaults,nofail 0 2" >> /etc/fstab
+ echo "UUID=$UUID /$MY_FOLDER ext4 discard,defaults,nofail 0 2        in /etc/fstab"
  echo BUTTON; read me
  sudo nano /etc/fstab
 
  cat /etc/fstab
 
- echo "move /home to disk? (y/n)"
-[[ $my_answer = "y" ]] && sudo cp -apx /home/* /mnt/disk1/home && sudo mv /home /home.old && sudo mkdir /home
+ echo "move /$MY_FOLDER to disk? (y/n)"
+[[ $my_answer = "y" ]] && sudo cp -apx /$MY_FOLDER/* /mnt/disk1/$MY_FOLDER && sudo mv /$MY_FOLDER /$MY_FOLDER.old && sudo mkdir /$MY_FOLDER
 
 
 # https://www.suse.com/support/kb/doc/?id=000018399
