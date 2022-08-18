@@ -16,7 +16,7 @@ sudo mkdir /mnt/disk1 >/dev/null 2>/dev/null
 sudo mkdir /mnt/disk1/home >/dev/null 2>/dev/null
 sudo mkdir /mnt/disk1/var >/dev/null 2>/dev/null
 
-read -p "dev or home? " MY_FOLDER
+read -p "var or home? " MY_FOLDER
 
  sudo mount -o discard,defaults /dev/$DEVICE_NAME /mnt/disk1/$MY_FOLDER
 
