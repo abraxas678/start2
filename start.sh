@@ -731,7 +731,7 @@ trenner "INSTALL FONTS"
   ###### https://github.com/suin/git-remind
   # sleep $myspeed
 
-echo; trenner "SETUP NTFY" --paynel heavy; sleep $myspeed
+echo; trenner "SETUP NTFY" --panel heavy; sleep $myspeed
 ######################################################################### [13] NTFY
 curl -sSL https://archive.heckel.io/apt/pubkey.txt | sudo apt-key add -
 sudo apt install apt-transport-https -y | tail -f -n5
