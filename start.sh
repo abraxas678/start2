@@ -210,7 +210,7 @@ rm -f $HOME/tmp/pueuestatus.txt
 trenner Pueue initialized
 countdown 2
   ######################################## BREW BASED SOFTWARE ########################################
-  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded ---panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
+  /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --panel-style blue -style green --print "INSTALL BREW BASED SOFTWARE"
   countdown 2
   pueue group add system-setup
   pueue parallel 1 -g system-setup 
