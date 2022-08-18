@@ -148,6 +148,9 @@ countdown 3
 echo; countdown 2
 [[ $MY_PUEUE_INST -eq 1 ]] && /home/linuxbrew/.linuxbrew/bin/pueue add -g system-setup -- sudo apt-get install python3-pip firefox-esr -y || sudo apt-get install python3-pip firefox-esr -y
 echo; countdown 2
+sudo apt install wget -y
+wget https://github.com/wagoodman/bashful/releases/download/v0.0.10/bashful_0.0.10_linux_amd64.deb
+sudo apt install ./bashful_0.0.10_linux_amd64.deb -y
 echo "#####################################################################"
 echo "                          INSTALL BREW"
 echo "#####################################################################"
