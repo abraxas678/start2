@@ -1,6 +1,10 @@
 #!/bin/bash
-read -p "Setup Disks? (y/n)" MY_DISKS
-  [[ $MY_DISKS != "y" ]] && exit
+x=0; tput sc; while [[ $x -eq 0 ]]; do
+  read -p "Setup Disks? (y/n)" MY_DISKS
+  [[ $MY_DISKS != "y" ]] && x=1 && exit
+  [[ $MY_DISKS != "n" ]] && x=1
+  sleep 1
+done
 echo "format new disk? (y/n)"
 read -n 1 my_answer
 echo ok
