@@ -54,7 +54,7 @@ ts=$(date +"%s")
 myspeed="0.5"
 
 #######################################################
-echo "version 210"; sleep $myspeed
+echo "version 211"; sleep $myspeed
 #######################################################
 
 cd $HOME
@@ -100,7 +100,7 @@ echo "#####################################################################"
 echo; sleep 2
 ###   df /home grösser 50GB?
 chmod +x $HOME/start2/*.sh
-[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 50 ]] && /bin/bash $HOME/start2/new-disk.sh
+#[[ $(df -h /home  |awk '{ print $2 }' |tail -n1 | sed 's/G//' | sed 's/\./,/') -lt 50 ]] && /bin/bash $HOME/start2/new-disk.sh
 
 echo "#####################################################################"
 echo "              COLLECTING INSTALLATION PREFERENCES"
