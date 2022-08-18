@@ -780,7 +780,7 @@ rm -rf $HOME/start
 rm -rf $HME/start2
 echo
 trenner "INSTALL TASKWARRIOR"
-pip install taskwarrior-inthe.am | tail -f -n5
+pip3 install taskwarrior-inthe.am | tail -f -n5
 sudo apt-get install cifs-utils -y | tail -f -n5
 #echo; echo GOODSYNC; echo
 rm -rf .antigen
