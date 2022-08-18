@@ -74,9 +74,9 @@ then
   mv start2 start2-backup-$ts
 fi
 export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
-sudo apt install wget -y
+sudo apt-get install wget -y
 wget https://github.com/wagoodman/bashful/releases/download/v0.0.10/bashful_0.0.10_linux_amd64.deb
-sudo apt install ./bashful_0.0.10_linux_amd64.deb -y
+sudo apt-get install ./bashful_0.0.10_linux_amd64.deb -y
 echo "#####################################################################"
 echo "                     CLONE START2 REPOSITORY   "
 echo "#####################################################################"
