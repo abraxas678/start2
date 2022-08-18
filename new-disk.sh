@@ -1,4 +1,6 @@
 #!/bin/bash
+read -p "Setup Disks? (y/n)" MY_DISKS
+  [[ $MY_DISKS != "y" ]] && exit
 echo "format new disk? (y/n)"
 read -n 1 my_answer
 echo ok
