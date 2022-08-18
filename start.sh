@@ -108,7 +108,7 @@ x=0; tput sc; while [[ $x -eq 0 ]]; do
 done
 [[ $(echo $RESTIC_PASSWORD | md5sum) != *"81a8c96e402c1647469856787d5c8503"* ]] && echo && printf "restic password: >>> " && read -n 4 myresticpw && export RESTIC_PASSWORD=$myresticpw
 x=0; tput sc; while [[ $x -eq 0 ]]; do
-  [[ ${#myresticpw} -gt 0 ]] && x=1 || tput rc; read -p "restic pw: " myresticpw
+  [[ ${#myresticpw} -gt 0 ]] && x=1 || echo; tput rc; read -p "restic pw: " myresticpw
 done
 export RESTIC_REPOSITORY=rclone:gd:restic
 x=0; tput sc; while [[ $x -eq 0 ]]; do
