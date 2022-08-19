@@ -4,7 +4,7 @@
 
 myspeed="0.5"
 #######################################################
-echo "version 212"; sleep $myspeed
+echo "version 213"; sleep $myspeed
 #######################################################
 
 /home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
@@ -94,6 +94,9 @@ echo; sleep 2
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
 
 ##### BASH START
+wget https://raw.githubusercontent.com/abraxas678/start2/main/git-clone-start2.yml
+bashful run git-clone-start2.yml
+rm -f git-clone-start2.yml
 #sudo apt-get install git -y | tail -f -n5
 #git config --global user.name abraxas678
 #git config --global user.email abraxas678@gmail.com
