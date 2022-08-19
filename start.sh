@@ -4,7 +4,7 @@
 
 myspeed="0.5"
 #######################################################
-echo "version 211"; sleep $myspeed
+echo "version 212"; sleep $myspeed
 #######################################################
 
 /home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
@@ -92,6 +92,7 @@ echo "                     CLONE START2 REPOSITORY   "
 echo "#####################################################################"
 echo; sleep 2
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
+
 ##### BASH START
 #sudo apt-get install git -y | tail -f -n5
 #git config --global user.name abraxas678
