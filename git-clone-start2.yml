@@ -1,0 +1,49 @@
+$include: $HOME/bin/bashful/myconfig.yml
+
+config:
+    show-failure-report: true
+    show-summary-errors: true
+    max-parallel-commands: 1
+    show-task-times: true
+    collapse-on-completion: true
+
+tasks:
+  - name: git clone start2
+    tags: git-clone-start2
+    parallel-tasks:
+      - name: cd HOME
+        cmd: cd $HOME
+        tags: git-clone-start2
+
+      - name: check start2 folder
+        cmd: /home/abraxas/bin/bashful/start2-workfow/start2-folder-move.sh
+        tags: git-clone-start2
+
+      - name: /bin/bash $HOME/bin/sudo.sh apt-get install git -y
+        cmd: /bin/bash $HOME/bin/sudo.sh apt-get install git -y
+        tags: git-clone-start2
+
+      - name: git config --global user.name abraxas678
+        cmd: git config --global user.name abraxas678
+        tags: git-clone-start2
+
+      - name: git config --global user.email abraxas678@gmail.com
+        cmd: git config --global user.email abraxas678@gmail.com
+        tags: git-clone-start2
+
+      - name: cd $HOME
+        cmd: cd $HOME
+        tags: git-clone-start2
+
+      - name: git clone https://github.com/abraxas678/start2.git $HOME/start2
+        cmd: git clone https://github.com/abraxas678/start2.git $HOME/start2
+        tags: git-clone-start2
+
+      - name: source $HOME/start2/color.dat
+        cmd: source $HOME/start2/color.dat
+        tags: git-clone-start2
+
+      - name: source $HOME/start2/path.dat
+        cmd: source $HOME/start2/path.dat
+        tags: git-clone-start2
+
