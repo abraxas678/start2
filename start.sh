@@ -79,7 +79,12 @@ export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/u
 sudo apt-get install wget -y
 wget https://github.com/wagoodman/bashful/releases/download/v0.0.10/bashful_0.0.10_linux_amd64.deb
 sudo apt-get install ./bashful_0.0.10_linux_amd64.deb -y
-echo; bashful -v; echo
+echo; echo
+echo "###########################"
+bashful -v; 
+echo "###########################"
+echo; echo
+
 ############# BASHFUL READY
 countdown 3
 echo "#####################################################################"
