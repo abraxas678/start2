@@ -1,8 +1,14 @@
 #!/bin/bash 
 # $1 = # of seconds
 # $@ = What to print after "Waiting n seconds"
-pueue clean -g system-setup >/dev/null 2>/dev/null 
-pueue clean -g system-setup >/dev/null 2>/dev/null 
+
+myspeed="0.5"
+#######################################################
+echo "version 211"; sleep $myspeed
+#######################################################
+
+/home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
+/home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
 mkdir $HOME/tmp
 ################################## FUNCTIONS ###########################################
 countdown() {
@@ -51,11 +57,6 @@ trenner() {
 clear
 cd $HOME
 ts=$(date +"%s")
-myspeed="0.5"
-
-#######################################################
-echo "version 211"; sleep $myspeed
-#######################################################
 
 cd $HOME
 echo "#####################################################################"
@@ -84,6 +85,7 @@ echo "                     CLONE START2 REPOSITORY   "
 echo "#####################################################################"
 echo; sleep 2
 echo; echo "CLONE START2 REPOSITORY"; sleep $myspeed
+##### BASH START
 sudo apt-get install git -y | tail -f -n5
 git config --global user.name abraxas678
 git config --global user.email abraxas678@gmail.com
@@ -93,7 +95,7 @@ cd $HOME
 git clone https://github.com/abraxas678/start2.git | tail -f -n5; echo
 source $HOME/start2/color.dat
 source $HOME/start2/path.dat
-
+##### BASH END
 echo "#####################################################################"
 echo "                      CHECKING HARDWARE"
 echo "#####################################################################"
