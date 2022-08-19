@@ -10,6 +10,7 @@ echo "version 211"; sleep $myspeed
 /home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
 /home/linuxbrew/.linuxbrew/bin/pueue clean -g system-setup >/dev/null 2>/dev/null 
 mkdir $HOME/tmp
+
 ################################## FUNCTIONS ###########################################
 countdown() {
   secs=$1
@@ -53,11 +54,11 @@ pueue-init() {
 trenner() {
   /home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue -u --print "$@"
 }
+
 ################################## SCRIPT ###########################################
 clear
 cd $HOME
 ts=$(date +"%s")
-
 cd $HOME
 echo "#####################################################################"
 echo "                      CHECKING USER DETAILS"
@@ -69,16 +70,17 @@ read -t 1 me
 [[ $USER != "abraxas" ]] && su abraxas
 echo "CURRENT USER: $USER"
 [[ $USER != "abraxas" ]] && echo BUTTON && read me || echo BUTTON2 && read -t 2 me
-ts=$(date +"%s")
-if [[ -d start2 ]]
-then
-  mv start2 start2-backup-$ts
-fi
+#ts=$(date +"%s")
+#if [[ -d start2 ]]
+#then
+#  mv start2 start2-backup-$ts
+#fi
 export PATH=$PATH:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin:/usr/path:/volume2/docker/utils/path:$HOME/.local/bin:$HOME/bin:/home/markus/.cargo/bin:/home/abraxas/.cargo/bin:/home/abraxas/.local/bin/:/home/abraxas/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/volume1/homes/abraxas678/bin:/usr/local/bin:$PATH
 sudo apt-get install wget -y
 wget https://github.com/wagoodman/bashful/releases/download/v0.0.10/bashful_0.0.10_linux_amd64.deb
 sudo apt-get install ./bashful_0.0.10_linux_amd64.deb -y
 echo; bashful -v; echo
+############# BASHFUL READY
 countdown 3
 echo "#####################################################################"
 echo "                     CLONE START2 REPOSITORY   "
