@@ -9,8 +9,8 @@ echo "format new disk? (y/n)"
 read -n 1 my_answer
 echo ok
 [[ $my_answer = "y" ]] && sudo lsblk && printf "device-name: "; read DEVICE_NAME && sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/$DEVICE_NAME
- 
- ts=$(date +"%s")
+[[ $my_answer = "n" ]] && sudo lsblk && printf "device-name: "; read DEVICE_NAME
+ts=$(date +"%s")
 
 sudo mkdir /mnt/disk1 >/dev/null 2>/dev/null
 sudo mkdir /mnt/disk1/home >/dev/null 2>/dev/null
@@ -32,7 +32,7 @@ read -p "var or home? " MY_FOLDER
 
  sudo echo "UUID=$UUID /$MY_FOLDER ext4 discard,defaults,nofail 0 2" >> /etc/fstab
  echo "UUID=$UUID /$MY_FOLDER ext4 discard,defaults,nofail 0 2        in /etc/fstab"
- echo BUTTON; read me
+ echo BUTTON-copy above line; read me
  sudo nano /etc/fstab
 
  cat /etc/fstab
