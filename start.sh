@@ -290,7 +290,7 @@ rclone copy df: $HOME --max-depth 1 --include=".zsh.env" -P --update --password-
 source ~/.zsh.env
 #/home/linuxbrew/.linuxbrew/bin/rich --panel rounded --style blue --print "INSTALL AGE"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "myfilter.txt copy"
-rclone copy gd:dotfiles/myfilter.txt $HOME -P --update --password-command="cat /home/abraxas/rcpw"
+rclone copy gd:dotfiles/myfilter.txt $HOME -P --max-depth 1 --update --password-command="cat /home/abraxas/rcpw"
 rclone copy gd:dotfiles/bin/ $HOME/bin -P --include="install-age.sh" --update --password-command="cat /home/abraxas/rcpw"
 /home/linuxbrew/.linuxbrew/bin/rich -u --print "bin copy"
 rclone copy df:bin/ $HOME/bin -P --update --password-command="cat /home/abraxas/rcpw" --filter-from="$HOME/myfilter.txt"
